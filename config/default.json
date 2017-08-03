@@ -1,0 +1,15 @@
+{
+  // Customer module configs
+  "Customer": {
+    "websiteConfig": {
+      "secret": "meisutong"
+    },
+    "dbConfig": {
+      "dbName": "meisutong"
+    },
+    "backendConfig": {
+      "username": "meisutong",
+      "password": "meisutong"
+    }
+  }
+}

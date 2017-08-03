@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<!--[if IE 9]> <html lang="zxx" class="ie9"> <![endif]-->
+<!--[if gt IE 9]> <html lang="zxx" class="ie"> <![endif]-->
+<!--[if !IE]><!-->
+<html dir="ltr" lang="zxx">
+	<!--<![endif]-->
+
+  <head>
+    <meta charset="utf-8">
+    <title><%= title %></title>
+    <meta name="description" content="<%= description %>">
+    <meta name="author" content="abysmli@gmail.com">
+
+    <!-- Mobile Meta -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="/favicon.ico">
+
+    <!-- Web Fonts -->
+    <link href='http://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic,500,500italic,700,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Raleway:700,400,300' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=PT+Serif' rel='stylesheet' type='text/css'>
+
+    <!-- Bootstrap core CSS -->
+    <link href="/asset/bootstrap/css/bootstrap.css" rel="stylesheet">
+
+    <!-- Font Awesome CSS -->
+    <link href="/asset/fonts/font-awesome/css/font-awesome.css" rel="stylesheet">
+
+    <!-- Fontello CSS -->
+    <link href="/asset/fonts/fontello/css/fontello.css" rel="stylesheet">
+
+    <!-- Plugins -->
+    <link href="/asset/plugins/magnific-popup/magnific-popup.css" rel="stylesheet">
+    <link href="/asset/css/animations.css" rel="stylesheet">
+    <link href="/asset/plugins/owlcarousel2/assets/owl.carousel.min.css" rel="stylesheet">
+    <link href="/asset/plugins/owlcarousel2/assets/owl.theme.default.min.css" rel="stylesheet">
+    <link href="/asset/plugins/hover/hover-min.css" rel="stylesheet">		
+    
+    <!-- The Project's core CSS file -->
+    <!-- Use css/rtl_style.css for RTL version -->
+    <link href="/asset/css/style.css" rel="stylesheet" >
+    <!-- The Project's Typography CSS file, includes used fonts -->
+    <!-- Used font for body: Roboto -->
+    <!-- Used font for headings: Raleway -->
+    <!-- Use css/rtl_typography-default.css for RTL version -->
+    <link href="/asset/css/typography-default.css" rel="stylesheet" >
+    <!-- Color Scheme (In order to change the color scheme, replace the blue.css with the color scheme that you prefer)-->
+    <link href="/asset/css/skins/blue.css" rel="stylesheet">
+    
+
+    <!-- Custom css --> 
+    <link href="/asset/css/custom.css" rel="stylesheet">
+    
+    
+  </head>
+
+  <!-- body classes:  -->
+  <!-- "boxed": boxed layout mode e.g. <body class="boxed"> -->
+  <!-- "pattern-1 ... pattern-9": background patterns for boxed layout mode e.g. <body class="boxed pattern-1"> -->
+  <!-- "transparent-header": makes the header transparent and pulls the banner to top -->
+  <!-- "gradient-background-header": applies gradient background to header -->
+  <!-- "page-loader-1 ... page-loader-6": add a page loader to the page (more info @components-page-loaders.html) -->
+  <body class=" ">
+
+    <!-- scrollToTop -->
+    <!-- ================ -->
+    <div class="scrollToTop circle"><i class="icon-up-open-big"></i></div>
+
+    <!-- page wrapper start -->
+    <!-- ================ -->
+    <div class="page-wrapper">
+      <!-- header-container start -->
+      <div class="header-container">
+        <!-- header-top start -->
+        <!-- classes:  -->
+        <!-- "dark": dark version of header top e.g. class="header-top dark" -->
+        <!-- "colored": colored version of header top e.g. class="header-top colored" -->
+        <!-- ================ -->
+        <div class="header-top dark">
+
+          <div class="container">
+            <div class="row">
+              <div class="col-3 col-sm-6 col-lg-9">
+                <!-- header-top-first start -->
+                <!-- ================ -->
+                <div class="header-top-first clearfix">
+                  <ul class="list-inline hidden-md-down">
+                    <li class="list-inline-item"><i class="fa fa-phone pr-1 pl-2"></i> <strong class="pl-1">联系方式:</strong> 400-920-2955（中国）+49-7152-6100381（德国）</li>
+                  </ul>
+                </div>
+                <!-- header-top-first end -->
+              </div>
+              <div class="col-9 col-sm-6 col-lg-3">
+
+                <!-- header-top-second start -->
+                <!-- ================ -->
+                <div id="header-top-second"  class="clearfix">
+
+                  <!-- header top dropdowns start -->
+                  <!-- ================ -->
+                  <div class="header-top-dropdown text-right">
+                    <div class="btn-group">
+                      <button id="header-top-drop-1" type="button" class="btn dropdown-toggle btn-default btn-sm dropdown-toggle--no-caret" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-search pr-2"></i> 查询物流</button>
+                      <ul class="dropdown-menu dropdown-menu-right dropdown-animation" aria-labelledby="header-top-drop-1">
+                        <li>
+                          <form class="login-form margin-clear">
+                            <div class="form-group has-feedback">
+                              <label class="control-label">请输入查询号码</label>
+                              <textarea rows="4" class="form-control" placeholder="您可以输入多个查询号码，每个查询号码之间用[Enter]键隔开。"></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-gray btn-sm">查询</button>
+                          </form>
+                        </li>
+                      </ul>
+                    </div>
+                    <div class="btn-group">
+                      <button id="header-top-drop-2" type="button" class="btn dropdown-toggle btn-default btn-sm dropdown-toggle--no-caret" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-user pr-2"></i> 登陆美速通</button>
+                      <ul class="dropdown-menu dropdown-menu-right dropdown-animation" aria-labelledby="header-top-drop-2">
+                        <li>
+                          <form class="login-form margin-clear">
+                            <div class="form-group has-feedback">
+                              <label class="control-label">用户名</label>
+                              <input type="text" class="form-control" placeholder="">
+                              <i class="fa fa-user form-control-feedback"></i>
+                            </div>
+                            <div class="form-group has-feedback">
+                              <label class="control-label">密码</label>
+                              <input type="password" class="form-control" placeholder="">
+                              <i class="fa fa-lock form-control-feedback"></i>
+                            </div>
+                            <button type="submit" class="btn btn-gray btn-sm">登录</button>
+                            <span class="pl-1 pr-1">or</span>
+                            <button type="submit" class="btn btn-default btn-sm">在线注册</button>
+                            <ul>
+                              <li><a href="#">忘记密码</a></li>
+                            </ul>
+                          </form>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                  <!--  header top dropdowns end -->
+                </div>
+                <!-- header-top-second end -->
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- header start -->
+        <!-- classes:  -->
+        <!-- "fixed": enables fixed navigation mode (sticky menu) e.g. class="header fixed clearfix" -->
+        <!-- "fixed-desktop": enables fixed navigation only for desktop devices e.g. class="header fixed fixed-desktop clearfix" -->
+        <!-- "fixed-all": enables fixed navigation only for all devices desktop and mobile e.g. class="header fixed fixed-desktop clearfix" -->
+        <!-- "dark": dark version of header e.g. class="header dark clearfix" -->
+        <!-- "centered": mandatory class for the centered logo layout -->
+        <!-- ================ -->
+        <header class="header fixed fixed-desktop clearfix">
+          <div class="container">
+            <div class="row">
+              <div class="col-md-auto hidden-md-down pl-3">
+                <!-- header-first start -->
+                <!-- ================ -->
+                <div class="header-first clearfix">
+                  <!-- logo -->
+                  <div id="logo" class="logo">
+                    <a href="/"><img id="logo_img" src="/images/logo.png" alt="The Project"></a>
+                  </div>
+                </div>
+                <!-- header-first end -->
+
+              </div>
+              <div class="col-lg-8 col-xl-9">
+          
+                <!-- header-second start -->
+                <!-- ================ -->
+                <div class="header-second clearfix">
+                  
+                <!-- main-navigation start -->
+                <!-- classes: -->
+                <!-- "onclick": Makes the dropdowns open on click, this the default bootstrap behavior e.g. class="main-navigation onclick" -->
+                <!-- "animated": Enables animations on dropdowns opening e.g. class="main-navigation animated" -->
+                <!-- ================ -->
+                <div class="main-navigation  animated">
+                  <nav class="navbar navbar-toggleable-md navbar-light p-0">
+                    
+                    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbar-collapse-1" aria-controls="navbar-collapse-1" aria-expanded="false" aria-label="Toggle navigation">
+                      <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="navbar-brand clearfix hidden-lg-up">
+                      <!-- logo -->
+                      <div id="logo-mobile" class="logo">
+                        <a href="/"><img id="logo-img-mobile" src="/images/logo.png" alt="The Project"></a>
+                      </div>
+                    </div>
+
+                    <div class="collapse navbar-collapse" id="navbar-collapse-1">
+                      <!-- main-menu -->
+                      <ul class="navbar-nav ml-xl-auto">
+
+                        <!-- mega-menu start -->
+                        <li class="nav-item active">
+                          <a href="/" class="nav-link">首页</a>
+                        </li>
+                        <!-- mega-menu end -->
+                        <!-- mega-menu start -->
+                        <li class="nav-item dropdown">
+                          <a href="#" class="nav-link dropdown-toggle" id="second-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">转运资费</a>
+                          <ul class="dropdown-menu" aria-labelledby="second-dropdown">
+                            <% paths.forEach(function(path, index){ %>
+                            <li class="dropdown ">
+                              <a  class="dropdown-toggle" data-toggle="dropdown" href="#"><%= path %></a>
+                              <ul class="dropdown-menu">
+                                <% transfers.forEach(function(transfer, index){ %>
+                                <li ><a href="/transfer?id=<%= transfer._id %>"><%= transfer.title %></a></li>
+                                <% }) %>
+                              </ul>
+                            </li>
+                            <% }) %>
+                          </ul>
+                        </li>
+                        <!-- mega-menu end -->
+                        <li class="nav-item dropdown ">
+                          <a href="#" class="nav-link dropdown-toggle" id="third-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">操作指南</a>
+                          <ul class="dropdown-menu" aria-labelledby="sixth-dropdown">
+                            <% docs.forEach(function(doc, index){ %>
+                            <li ><a href="/doc?id=<%= doc._id %>"><%= doc.title %></a></li>
+                            <% }) %>
+                          </ul>
+                        </li>
+                        
+                        <li class="nav-item">
+                          <a href="/shoptutorial" class="nav-link">海淘教程</a>
+                        </li>
+
+                        <li class="nav-item">
+                          <a href="/shophelper" class="nav-link">购物助手</a>
+                        </li>
+
+                        <li class="nav-item">
+                          <a href="/aboutus" class="nav-link">关于我们</a>
+                        </li>
+                      </ul>
+                      <!-- main-menu end -->
+                    </div>
+                  </nav>
+                </div>
+                <!-- main-navigation end -->
+                </div>
+                <!-- header-second end -->
+
+              </div>
+            </div>
+          </div>
+        </header>
+        <!-- header end -->
+      </div>
+      <!-- breadcrumb start -->
+      <!-- ================ -->
+      <div class="breadcrumb-container">
+        <div class="container">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><i class="fa fa-home pr-2"></i><a href="/">首页</a></li>
+            <li class="breadcrumb-item active"><%= title %></li>
+          </ol>
+        </div>
+      </div>
+      <!-- breadcrumb end -->
+
+      <!-- main-container start -->
+      <!-- ================ -->
+      <section class="main-container">
+
+        <div class="container">
+          <div class="row">
+
+            <!-- main start -->
+            <!-- ================ -->
+            <div class="main col-lg-8">
+
+              <!-- page-title start -->
+              <!-- ================ -->
+              <h1 class="page-title"><%= title %></h1>
+              <!-- page-title end -->
+
+              <!-- blogpost start -->
+              <!-- ================ -->
+              <article class="blogpost full">
+                  <%- shoptutorial.content %>
+              </article>
+              <!-- blogpost end -->
+            </div>
+            <!-- sidebar start -->
+            <!-- ================ -->
+            <aside class="col-lg-4 col-xl-3 offset-xl-1">
+              <div class="sidebar">
+                <div class="block clearfix">
+                  <h3 class="title">菜单</h3>
+                  <div class="separator-2"></div>
+                  <nav>
+                    <ul class="nav flex-column">
+                      <li class="nav-item"><a class="nav-link" href="/">首页</a></li>
+                      <li class="nav-item"><a class="nav-link" href="/">服务</a></li>
+                      <li class="nav-item"><a class="nav-link" href="/">操作指南</a></li>
+                      <li class="nav-item"><a class="nav-link active" href="/">海淘教程</a></li>
+                      <li class="nav-item"><a class="nav-link" href="/">购物助手</a></li>
+                    </ul>
+                  </nav>
+                </div>         
+              </div>
+            </aside>
+            <!-- sidebar end -->
+          </div>
+        </div>
+      </section>
+      <!-- main-container end -->
+
+      <footer>
+        <!-- .subfooter start -->
+        <!-- ================ -->
+        <div class="subfooter">
+          <div class="container">
+            <div class="subfooter-inner">
+              <div class="row">
+                <div class="col-12">
+                  <p class="text-center"><span class="logo-font pr-10">MEISUTONG</span> 沪ICP备12040967号 Copyright © 2017 <a target="_blank" href="mailto:mst99com@163.com">Meisutong</a>. All Rights Reserved</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- .subfooter end -->
+
+      </footer>
+      <!-- footer end -->
+    </div>
+    <!-- page-wrapper end -->
+
+    <!-- JavaScript files placed at the end of the document so the pages load faster -->
+    <!-- ================================================== -->
+    <!-- Jquery and Bootstap core js files -->
+    <script type="text/javascript" src="/asset/plugins/jquery.min.js"></script>
+    <script type="text/javascript" src="/asset/plugins/tether.min.js"></script>
+    <script type="text/javascript" src="/asset/bootstrap/js/bootstrap.min.js"></script>
+    <!-- Modernizr javascript -->
+    <script type="text/javascript" src="/asset/plugins/modernizr.js"></script>
+    <!-- Magnific Popup javascript -->
+    <script type="text/javascript" src="/asset/plugins/magnific-popup/jquery.magnific-popup.min.js"></script>
+    <!-- Appear javascript -->
+    <script type="text/javascript" src="/asset/plugins/waypoints/jquery.waypoints.min.js"></script>
+    <script type="text/javascript" src="/asset/plugins/waypoints/sticky.min.js"></script>
+    <!-- Count To javascript -->
+    <script type="text/javascript" src="/asset/plugins/jquery.countTo.js"></script>
+    <!-- Parallax javascript -->
+    <script src="/asset/plugins/jquery.parallax-1.1.3.js"></script>
+    <!-- Contact form -->
+    <script src="/asset/plugins/jquery.validate.js"></script>
+    <!-- Owl carousel javascript -->
+    <script type="text/javascript" src="/asset/plugins/owlcarousel2/owl.carousel.min.js"></script>
+    <!-- Initialization of Plugins -->
+    <script type="text/javascript" src="/asset/js/template.js"></script>
+    <!-- Custom Scripts -->
+    <script type="text/javascript" src="/asset/js/custom.js"></script>
+
+  </body>
+</html>
