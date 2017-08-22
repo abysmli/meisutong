@@ -21,8 +21,11 @@
     "express-minify": "^0.2.0",
     "express-partials": "^0.3.0",
     "express-session": "^1.15.4",
+    "formidable": "^1.1.1",
     "mongoose": "^4.11.4",
     "morgan": "~1.7.0",
+    "mv": "^2.1.1",
+    "request": "^2.81.0",
     "serve-favicon": "~2.3.0"
   }
 }

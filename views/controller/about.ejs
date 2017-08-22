@@ -1,0 +1,30 @@
+<div class="page-header">
+        <h1><%= title %></h1>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <form method="post" id="about_form">
+                <h4>内容</h4>
+                <div id="summernote_content"><%- about.content || "" %></div>
+                <hr/>
+                <button type="submit" id="post_button" class="btn btn-default"><span class="glyphicon glyphicon-share-alt"></span> 确认</button>
+            </form>
+        </div>
+    </div>
+    <hr/>
+    <script>
+        $(document).ready(function() {
+            $("#about_page").addClass("active");
+            $('#about_form').submit(function(event) {
+                var data = {
+                    content: $('#summernote_content').summernote('code')
+                };
+                post(data, "about_form");
+            });
+            $('#summernote_content').summernote({
+                height: 500,                 // set editor height
+                minHeight: null,             // set minimum height of editor
+                maxHeight: null,             // set maximum height of editor
+            });
+        });
+    </script>

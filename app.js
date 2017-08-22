@@ -12,6 +12,7 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var flash = require('express-flash');
 var controller = require('./routes/controller');
+var showupload = require('./routes/showupload');
 var config = require('config');
 
 var index = require('./routes/index');
@@ -19,7 +20,7 @@ var index = require('./routes/index');
 var app = express();
 
 mongoose.Promise = require('bluebird');
-mongoose.connect('mongodb://localhost/' + config.get('Customer.dbConfig').dbName);
+mongoose.connect('mongodb://localhost/' + config.get('Customer.dbConfig').dbName, {useMongoClient: true});
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -55,6 +56,7 @@ app.use(partials());
 
 app.use('/', index);
 app.use('/controller', controller);
+app.use('/show-upload', showupload);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

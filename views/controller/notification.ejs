@@ -1,0 +1,42 @@
+<div class="page-header">
+    <h1><%= title %></h1>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <form method="post" id="notification_form">
+            <div class="form-group">
+                <label for="title">标题</label>
+                <input type="text" class="form-control" id="title" placeholder="标题" name="title" value="<%= notification.title || '' %>">
+            </div>
+            <div class="form-group">
+                <label for="title">是否显示</label>
+                <select class="form-control" name="display">
+                    <option value="true" <%= notification.display ? "selected" : "" %>>显示</option>
+                    <option value="false" <%= !notification.display ? "selected" : "" %>>不显示</option>
+                </select>
+            </div>
+            <br/>
+            <h4>内容</h4>
+            <div id="summernote_content"><%- notification.content || "" %></div>
+            <hr/>
+            <button type="submit" id="post_button" class="btn btn-default"><span class="glyphicon glyphicon-share-alt"></span> 确认</button>
+        </form>
+    </div>
+</div>
+<hr/>
+<script>
+    $(document).ready(function() {
+        $("#notification_page").addClass("active");
+        $('#notification_form').submit(function(event) {
+            var data = {
+                content: $('#summernote_content').summernote('code')
+            };
+            post(data, "notification_form");
+        });
+        $('#summernote_content').summernote({
+            height: 500,                 // set editor height
+            minHeight: null,             // set minimum height of editor
+            maxHeight: null,             // set maximum height of editor
+        });
+    });
+</script>

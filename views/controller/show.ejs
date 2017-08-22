@@ -1,0 +1,64 @@
+<div class="page-header">
+    <h1><%= title %> <small> | 共计 <%= shows.length %> 个买家秀</small></h1>
+    <a class="btn btn-warning btn-sm" href="/controller/show/add">添加一个买家秀</a>
+</div>
+<table id="show_table" class="table table-striped table-bordered table-hover" cellspacing="0" width="100%">
+    <thead>
+        <tr>
+            <th>标题</th>
+            <th>用户</th>
+            <th>描述</th>
+            <th>运单号</th>
+            <th>添加时间</th>
+            <th>操作</th>
+        </tr>
+    </thead>
+    <tfoot>
+        <tr>
+            <th>标题</th>
+            <th>用户</th>
+            <th>描述</th>
+            <th>运单号</th>
+            <th>添加时间</th>
+            <th>操作</th>
+        </tr>
+    </tfoot>
+    <tbody>
+        <% shows.forEach(function(show, index) { %>
+            <tr>
+                <td>
+                    <%= show.title %>
+                </td>
+                <td>
+                    <%= show.name %>
+                </td>
+                <td>
+                    <%= show.description %>
+                </td>
+                <td>
+                    <%= show.transid %>
+                </td>
+                <td>
+                    <%= (new Date(show.updated_at)).toLocaleString("en-US", {timeZone: "Asia/Shanghai"}) %>
+                </td>
+                <td>
+                    <a type="button" class="btn btn-default" href="/controller/show/edit?id=<%= show._id %>"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a>
+                    <a type="button" class="btn btn-default" href="/controller/show/remove?id=<%= show._id %>"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a>
+                </td>
+            </tr>
+        <% }) %>
+    </tbody>
+</table>
+
+<script>
+    $(document).ready(function () {
+        $("#show_page").addClass("active");
+        var dt = $('#show_table').DataTable({
+            lengthMenu: [
+                [10, 25, 50, -1],
+                [10, 25, 50, "All"]
+            ],
+            stateSave: true,
+        });
+    });
+</script>

@@ -1,15 +1,69 @@
 var express = require('express');
 var router = express.Router();
+var formidable = require('formidable');
+var fs = require('fs');
+var mv = require('mv');
 var auth = require('../models/auth');
 var Service = require('../models/service');
 var Doc = require('../models/doc');
 var Transfer = require('../models/transfer');
+var Show = require('../models/show');
 var ShopTutorial = require('../models/shoptutorial');
+var Slide = require('../models/slide');
+var Notiz = require('../models/notification');
+var About = require('../models/about');
 
 router.get('/', auth, function (req, res, next) {
     res.render('controller/index', {
         layout: 'controller/layout',
         title: '美速通控制台'
+    });
+});
+
+router.get('/notification', auth, function (req, res, next) {
+    Notiz.findOne({}).sort({ updated_at: -1 }).exec(function (err, notification) {
+        if (err) next(err);
+        else {
+            res.render('controller/notification', {
+                title: '编辑首页提醒',
+                notification: notification || {},
+                layout: 'controller/layout'
+            });
+        }
+    });
+});
+
+router.post('/notification', auth, function (req, res, next) {
+    var notification = req.body;
+    notification.display = (notification.display == "true");
+    Notiz.create(notification, function (err, notification) {
+        if (err) next(err);
+        else {
+            res.redirect('/controller/notification');
+        }
+    });
+});
+
+router.get('/about', auth, function (req, res, next) {
+    About.findOne({}).sort({ updated_at: -1 }).exec(function (err, about) {
+        if (err) next(err);
+        else {
+            res.render('controller/about', {
+                title: '编辑关于我们',
+                about: about || {},
+                layout: 'controller/layout'
+            });
+        }
+    });
+});
+
+router.post('/about', auth, function (req, res, next) {
+    var about = req.body;
+    About.create(about, function (err, about) {
+        if (err) next(err);
+        else {
+            res.redirect('/controller/about');
+        }
     });
 });
 
@@ -39,7 +93,7 @@ router.post('/service/add', auth, function (req, res, next) {
         if (err) {
             next(err);
         }
-        return res.redirect('/controller/');
+        return res.redirect('/controller/service');
     });
 });
 
@@ -69,7 +123,7 @@ router.post('/service/edit', auth, function (req, res, next) {
     }, service, function (err, service) {
         if (err) next(err);
         else {
-            res.redirect('/controller/');
+            res.redirect('/controller/service');
         }
     });
 });
@@ -78,7 +132,7 @@ router.get('/service/remove', auth, function (req, res, next) {
     Service.findByIdAndRemove(req.query.id, function (err, service) {
         if (err) next(err);
         else {
-            return res.redirect('/controller/');
+            return res.redirect('/controller/service');
         }
     });
 });
@@ -107,7 +161,7 @@ router.post('/doc/add', auth, function (req, res, next) {
         if (err) {
             next(err);
         }
-        return res.redirect('/controller/');
+        return res.redirect('/controller/doc');
     });
 });
 
@@ -131,7 +185,7 @@ router.post('/doc/edit', auth, function (req, res, next) {
     }, doc, function (err, doc) {
         if (err) next(err);
         else {
-            res.redirect('/controller/');
+            res.redirect('/controller/doc');
         }
     });
 });
@@ -140,7 +194,7 @@ router.get('/doc/remove', auth, function (req, res, next) {
     Doc.findByIdAndRemove(req.query.id, function (err, doc) {
         if (err) next(err);
         else {
-            return res.redirect('/controller/');
+            return res.redirect('/controller/doc');
         }
     });
 });
@@ -154,8 +208,6 @@ router.get('/shoptutorial', auth, function (req, res, next) {
         });
     });
 });
-
-
 
 router.get('/shoptutorial/add', auth, function (req, res, next) {
     res.render('controller/shoptutorial-form', {
@@ -171,7 +223,7 @@ router.post('/shoptutorial/add', auth, function (req, res, next) {
         if (err) {
             next(err);
         }
-        return res.redirect('/controller/');
+        return res.redirect('/controller/shoptutorial');
     });
 });
 
@@ -195,7 +247,7 @@ router.post('/shoptutorial/edit', auth, function (req, res, next) {
     }, shoptutorial, function (err, shoptutorial) {
         if (err) next(err);
         else {
-            res.redirect('/controller/');
+            res.redirect('/controller/shoptutorial');
         }
     });
 });
@@ -204,7 +256,7 @@ router.get('/shoptutorial/remove', auth, function (req, res, next) {
     ShopTutorial.findByIdAndRemove(req.query.id, function (err, shoptutorial) {
         if (err) next(err);
         else {
-            return res.redirect('/controller/');
+            return res.redirect('/controller/shoptutorial');
         }
     });
 });
@@ -233,7 +285,7 @@ router.post('/transfer/add', auth, function (req, res, next) {
         if (err) {
             next(err);
         }
-        return res.redirect('/controller/');
+        return res.redirect('/controller/transfer');
     });
 });
 
@@ -257,7 +309,7 @@ router.post('/transfer/edit', auth, function (req, res, next) {
     }, transfer, function (err, transfer) {
         if (err) next(err);
         else {
-            res.redirect('/controller/');
+            res.redirect('/controller/transfer');
         }
     });
 });
@@ -266,7 +318,157 @@ router.get('/transfer/remove', auth, function (req, res, next) {
     Transfer.findByIdAndRemove(req.query.id, function (err, transfer) {
         if (err) next(err);
         else {
-            return res.redirect('/controller/');
+            return res.redirect('/controller/transfer');
+        }
+    });
+});
+
+router.get('/show', auth, function (req, res, next) {
+    Show.find({}).sort({ updated_at: -1 }).exec(function (err, shows) {
+        res.render('controller/show', {
+            layout: 'controller/layout',
+            title: '买家秀',
+            shows: shows
+        });
+    });
+});
+
+router.get('/show/add', auth, function (req, res, next) {
+    res.render('controller/show-form', {
+        title: '添加买家秀',
+        show: {},
+        layout: 'controller/layout'
+    });
+});
+
+router.post('/show/add', auth, function (req, res, next) {
+    var show = req.body;
+    Show.create(show, function (err, show) {
+        if (err) {
+            next(err);
+        }
+        return res.redirect('/controller/show');
+    });
+});
+
+router.get('/show/edit', auth, function (req, res, next) {
+    Show.findById(req.query.id, function (err, show) {
+        if (err) next(err);
+        else {
+            res.render('controller/show-form', {
+                title: '编辑买家秀',
+                show: show,
+                layout: 'controller/layout'
+            });
+        }
+    });
+});
+
+router.post('/show/edit', auth, function (req, res, next) {
+    var show = req.body;
+    Show.findOneAndUpdate({
+        _id: req.query.id
+    }, show, function (err, show) {
+        if (err) next(err);
+        else {
+            res.redirect('/controller/show');
+        }
+    });
+});
+
+router.get('/show/remove', auth, function (req, res, next) {
+    Show.findByIdAndRemove(req.query.id, function (err, show) {
+        if (err) next(err);
+        else {
+            return res.redirect('/controller/show');
+        }
+    });
+});
+
+router.get('/slide', auth, function (req, res, next) {
+    Slide.find({}).sort({ updated_at: -1 }).exec(function (err, slides) {
+        res.render('controller/slide', {
+            layout: 'controller/layout',
+            title: '首页轮播',
+            slides: slides
+        });
+    });
+});
+
+router.get('/slide/add', auth, function (req, res, next) {
+    res.render('controller/slide-form', {
+        title: '添加首页轮播',
+        slide: {},
+        layout: 'controller/layout'
+    });
+});
+
+router.post('/slide/add', auth, function (req, res, next) {
+    var slide = req.body;
+    console.log(slide);
+    var form = new formidable.IncomingForm();
+    form.parse(req, function (err, fields, files) {
+        var oldpath = files.img.path;
+        var newpath = process.cwd() + '/public/images/banner/' + files.img.name;
+        console.log(oldpath);
+        console.log(newpath);
+        mv(oldpath, newpath, { mkdirp: true }, function (err) {
+            if (err) throw err;
+            console.log('File uploaded and moved!');
+            slide.img = '/images/banner/' + files.img.name;
+            Slide.create(slide, function (err, slide) {
+                if (err) {
+                    next(err);
+                }
+                return res.redirect('/controller/slide');
+            });
+        });
+    });
+});
+
+router.get('/slide/edit', auth, function (req, res, next) {
+    Slide.findById(req.query.id, function (err, slide) {
+        if (err) next(err);
+        else {
+            res.render('controller/slide-form', {
+                title: '编辑首页轮播',
+                slide: slide,
+                layout: 'controller/layout'
+            });
+        }
+    });
+});
+
+router.post('/slide/edit', auth, function (req, res, next) {
+    var slide = req.body;
+    console.log(slide);
+    var form = new formidable.IncomingForm();
+    form.parse(req, function (err, fields, files) {
+        var oldpath = files.img.path;
+        var newpath = process.cwd() + '/public/images/banner/' + files.img.name;
+        console.log(oldpath);
+        console.log(newpath);
+        mv(oldpath, newpath, { mkdirp: true }, function (err) {
+            if (err) throw err;
+            console.log('File uploaded and moved!');
+            slide.img = '/images/banner/' + files.img.name;
+            Slide.findOneAndUpdate({
+                _id: req.query.id
+            }, slide, function (err, slide) {
+                if (err) next(err);
+                else {
+                    res.redirect('/controller/slide');
+                }
+            });
+        });
+    });
+});
+
+router.get('/slide/remove', auth, function (req, res, next) {
+    Slide.findByIdAndRemove(req.query.id, function (err, slide) {
+        if (err) next(err);
+        else {
+            return res.redirect('/controller/slide');
         }
     });
 });

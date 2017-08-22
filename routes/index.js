@@ -1,9 +1,14 @@
 var express = require('express');
 var router = express.Router();
+var request = require('request');
 var Service = require('../models/service');
 var Doc = require('../models/doc');
 var Transfer = require('../models/transfer');
 var ShopTutorial = require('../models/shoptutorial');
+var Show = require('../models/show');
+var Slide = require('../models/slide');
+var Notiz = require('../models/notification');
+var About = require('../models/about');
 
 /* GET home page. */
 router.get('/', function (req, res, next) {
@@ -11,22 +16,31 @@ router.get('/', function (req, res, next) {
     Doc.find({}).sort({ updated_at: -1 }).exec(function (err, docs) {
       Transfer.find({}).sort({ updated_at: -1 }).exec(function (err, transfers) {
         ShopTutorial.find({}).sort({ updated_at: -1 }).exec(function (err, shoptutorials) {
-          var paths = [], path;
-          transfers.forEach(function (transfer, index) {
-            if (path != transfer.path) {
-              paths.push(transfer.path);
-              path = transfer.path;
-            }
-          });
-          res.render('frontend/index', {
-            title: '德淘转运_德淘之家_欧洲购物_欧淘货运德淘网|美速通转运——你身边最好的专业海淘转运公司',
-            description: "美速通转运网-致力于成为中国最专业的转运公司！本公司位于洛杉矶，主要经营北美到中国大陆的传统国际快递、以及国际电子商务仓储、物流及相关业务，为德淘人士、欧洲购物、欧淘、德淘转运、德淘海外代购公司、以及德淘代购个人提供一个优秀的转运平台。",
-            keywords: "德淘转运，德淘，欧洲购物,欧淘，德淘之家，德淘网，美速通，德淘攻略",
-            services: services,
-            docs: docs,
-            paths: paths,
-            transfers: transfers,
-            shoptutorials: shoptutorials
+          Show.find({}).sort({ updated_at: -1 }).exec(function (err, shows) {
+            Slide.find({}).sort({ updated_at: -1 }).exec(function (err, slides) {
+              Notiz.findOne({}).sort({ updated_at: -1 }).exec(function (err, notification) {
+                var paths = [], path;
+                transfers.forEach(function (transfer, index) {
+                  if (path != transfer.path) {
+                    paths.push(transfer.path);
+                    path = transfer.path;
+                  }
+                });
+                res.render('frontend/index', {
+                  title: '德淘转运_德淘之家_欧洲购物_欧淘货运德淘网|美速通转运——你身边最好的专业海淘转运公司',
+                  description: "美速通转运网-致力于成为中国最专业的转运公司！本公司位于洛杉矶，主要经营北美到中国大陆的传统国际快递、以及国际电子商务仓储、物流及相关业务，为德淘人士、欧洲购物、欧淘、德淘转运、德淘海外代购公司、以及德淘代购个人提供一个优秀的转运平台。",
+                  keywords: "德淘转运，德淘，欧洲购物,欧淘，德淘之家，德淘网，美速通，德淘攻略",
+                  services: services || [],
+                  docs: docs,
+                  paths: paths,
+                  transfers: transfers,
+                  shoptutorials: shoptutorials,
+                  shows: shows,
+                  slides: slides,
+                  notification: notification || {},
+                });
+              });
+            });
           });
         });
       });
@@ -151,6 +165,50 @@ router.get('/shoptutorial', function (req, res, next) {
         });
       });
     });
+  });
+});
+
+router.get('/aboutus', function (req, res, next) {
+  ShopTutorial.findById(req.query.id, function (err, shoptutorial) {
+    Service.find({}).sort({ updated_at: 1 }).exec(function (err, services) {
+      Doc.find({}).sort({ updated_at: -1 }).exec(function (err, docs) {
+        Transfer.find({}).sort({ updated_at: -1 }).exec(function (err, transfers) {
+          ShopTutorial.find({}).sort({ updated_at: -1 }).exec(function (err, shoptutorials) {
+            About.findOne({}).sort({ updated_at: -1 }).exec(function (err, about) {
+              if (err) next(err);
+              else {
+                var paths = [], path;
+                transfers.forEach(function (transfer, index) {
+                  if (path != transfer.path) {
+                    paths.push(transfer.path);
+                    path = transfer.path;
+                  }
+                });
+                res.render('frontend/about', {
+                  title: '关于我们',
+                  description: "美速通转运网-致力于成为中国最专业的转运公司！本公司位于洛杉矶，主要经营北美到中国大陆的传统国际快递、以及国际电子商务仓储、物流及相关业务，为德淘人士、欧洲购物、欧淘、德淘转运、德淘海外代购公司、以及德淘代购个人提供一个优秀的转运平台。",
+                  keywords: "德淘转运，德淘，欧洲购物,欧淘，德淘之家，德淘网，美速通，德淘攻略",
+                  shoptutorial: shoptutorial,
+                  docs: docs,
+                  paths: paths,
+                  transfers: transfers,
+                  shoptutorials: shoptutorials,
+                  about: about || {},
+                });
+              }
+            });
+          });
+        });
+      });
+    });
+  });
+});
+
+router.get('/currencyExchange', function (req, res, next) {
+  request({
+    url: "https://www.exchangerate-api.com/EUR/CNY?k=2d8c6e862f92ff48d10fa915"
+  }, function (err, response, data) {
+    res.send(parseFloat(data).toFixed(4));
   });
 });
 

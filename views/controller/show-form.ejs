@@ -1,0 +1,59 @@
+<div class="page-header">
+    <h1><%= title %></h1>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <form method="post" id="show_form">
+            <div class="form-group">
+                <label for="title">标题</label>
+                <input type="text" class="form-control" id="title" placeholder="标题" name="title" value="<%= show.title || '' %>">
+            </div>
+            <div class="form-group">
+                <label for="name">用户名</label>
+                <input type="text" class="form-control" id="name" placeholder="用户名" name="name" value="<%= show.name || ""%>">
+            </div>
+            <div class="form-group">
+                <label for="description">描述</label>
+                <input type="text" class="form-control" id="description" placeholder="描述" name="description" value="<%= show.description || ""%>">
+            </div>
+            <div class="form-group">
+                <label for="transid">运单号</label>
+                <input type="text" class="form-control" id="transid" placeholder="运单号" name="transid" value="<%= show.transid || ""%>">
+            </div>
+            <div class="form-group">
+                <label>宝贝图片</label>
+                <input type="file" id="img" onchange="previewFile('#img', '#img_preview')"/>
+                <div class="row">
+                    <div class="col-xs-12 col-md-12">
+                        <a href="#" class="thumbnail" id="img_preview" hidden></a>
+                    </div>
+                </div>
+            </div>
+            <button type="submit" id="post_button" class="btn btn-default"><span class="glyphicon glyphicon-share-alt"></span> 确认</button>
+        </form>
+        <% if (show.img !== "" && show.img !== undefined) { %>
+        <hr/>
+        <label>图片</label>
+        <div class="row">
+            <div class="col-xs-4 col-md-2">
+                <a href="#" class="thumbnail">
+                    <img src=<%- show.img %> alt="show logo set">
+                </a>
+            </div>
+        </div>
+        <% } %>
+    </div>
+</div>
+<hr/>
+<script>
+    var _img = "";
+    $(document).ready(function() {
+        $("#show_page").addClass("active");
+        $('#show_form').submit(function(event) {
+            var data = {
+                img: JSON.stringify(_img),
+            };
+            post(data, "show_form");
+        });
+    });
+</script>

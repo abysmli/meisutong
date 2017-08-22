@@ -42,6 +42,7 @@
     <link href="/asset/plugins/owlcarousel2/assets/owl.theme.default.min.css" rel="stylesheet">
     <link href="/asset/plugins/hover/hover-min.css" rel="stylesheet">		
     <link href="/asset/plugins/morphext/morphext.css" rel="stylesheet">
+    <link href="/asset/plugins/flag-icon-css/css/flag-icon.min.css" rel="stylesheet">
     
     <!-- The Project's core CSS file -->
     <!-- Use css/rtl_style.css for RTL version -->
@@ -92,6 +93,7 @@
                 <div class="header-top-first clearfix">
                   <ul class="list-inline hidden-md-down">
                     <li class="list-inline-item"><i class="fa fa-phone pr-1 pl-2"></i> <strong class="pl-1">联系方式:</strong> 400-920-2955（中国）+49-7152-6100381（德国）</li>
+                    <li class="list-inline-item"><i class="fa fa-exchange pr-1 pl-2"></i> <strong class="pl-1">欧元汇率:</strong> <i id="exchange"></i></li>
                   </ul>
                 </div>
                 <!-- header-top-first end -->
@@ -106,43 +108,10 @@
                   <!-- ================ -->
                   <div class="header-top-dropdown text-right">
                     <div class="btn-group">
-                      <button id="header-top-drop-1" type="button" class="btn dropdown-toggle btn-default btn-sm dropdown-toggle--no-caret" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-search pr-2"></i> 查询物流</button>
-                      <ul class="dropdown-menu dropdown-menu-right dropdown-animation" aria-labelledby="header-top-drop-1">
-                        <li>
-                          <form class="login-form margin-clear">
-                            <div class="form-group has-feedback">
-                              <label class="control-label">请输入查询号码</label>
-                              <textarea rows="4" class="form-control" placeholder="您可以输入多个查询号码，每个查询号码之间用[Enter]键隔开。"></textarea>
-                            </div>
-                            <button type="submit" class="btn btn-gray btn-sm">查询</button>
-                          </form>
-                        </li>
-                      </ul>
+                      <a id="header-top-drop-1" href="http://usa.99mst.com/" type="button" class="btn btn-default btn-sm"><span class="flag-icon flag-icon-us"></span> 去美国</a>
                     </div>
                     <div class="btn-group">
-                      <button id="header-top-drop-2" type="button" class="btn dropdown-toggle btn-default btn-sm dropdown-toggle--no-caret" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-user pr-2"></i> 登陆美速通</button>
-                      <ul class="dropdown-menu dropdown-menu-right dropdown-animation" aria-labelledby="header-top-drop-2">
-                        <li>
-                          <form class="login-form margin-clear">
-                            <div class="form-group has-feedback">
-                              <label class="control-label">用户名</label>
-                              <input type="text" class="form-control" placeholder="">
-                              <i class="fa fa-user form-control-feedback"></i>
-                            </div>
-                            <div class="form-group has-feedback">
-                              <label class="control-label">密码</label>
-                              <input type="password" class="form-control" placeholder="">
-                              <i class="fa fa-lock form-control-feedback"></i>
-                            </div>
-                            <button type="submit" class="btn btn-gray btn-sm">登录</button>
-                            <span class="pl-1 pr-1">or</span>
-                            <button type="submit" class="btn btn-default btn-sm">在线注册</button>
-                            <ul>
-                              <li><a href="#">忘记密码</a></li>
-                            </ul>
-                          </form>
-                        </li>
-                      </ul>
+                      <a id="header-top-drop-2" href="http://jp.99mst.com/" type="button" class="btn btn-default btn-sm"><span class="flag-icon flag-icon-jp"></span> 去日本</a>
                     </div>
                   </div>
                   <!--  header top dropdowns end -->
@@ -170,7 +139,7 @@
                 <div class="header-first clearfix">
                   <!-- logo -->
                   <div id="logo" class="logo">
-                    <a href="/"><img id="logo_img" src="/images/logo.png" alt="The Project"></a>
+                    <a href="/"><img id="logo_img" src="/images/logo_c.png" width="250" alt="The Project"></a>
                   </div>
                 </div>
                 <!-- header-first end -->
@@ -196,7 +165,7 @@
                     <div class="navbar-brand clearfix hidden-lg-up">
                       <!-- logo -->
                       <div id="logo-mobile" class="logo">
-                        <a href="/"><img id="logo-img-mobile" src="/images/logo.png" alt="The Project"></a>
+                        <a href="/"><img id="logo-img-mobile" src="/images/logo_c.png" width="250" alt="The Project"></a>
                       </div>
                     </div>
 
@@ -236,14 +205,41 @@
                             <% }) %>
                           </ul>
                         </li>
-                        
                         <li class="nav-item">
                           <a href="/shoptutorial" class="nav-link">海淘教程</a>
                         </li>
 
-                        <li class="nav-item">
-                          <a href="/shophelper" class="nav-link">购物助手</a>
-                        </li>
+                        <!-- mega-menu start -->
+                        <li class="nav-item dropdown active mega-menu mega-menu--wide">
+                            <a href="#" class="nav-link dropdown-toggle" id="first-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">购物助手</a>
+                            <ul class="dropdown-menu" aria-labelledby="first-dropdown">
+                              <li>
+                                <div class="row">
+                                  <div class="col-md-12">
+                                    <h4 class="title"><i class="fa fa-laptop pr-2"></i> 购物助手</h4>
+                                    <div class="row">
+                                      <div class="col-lg-3">
+                                        <div class="divider"></div>
+                                        <ul class="menu">
+                                          <li class="active"><a href="/"><i class="icon-suitcase pr-2"></i>找货比价</a></li>
+                                          <li ><a href="/"><i class="icon-suitcase pr-2"></i>一键代发商城</a></li>
+                                          <li ><a href="/"><i class="icon-suitcase pr-2"></i>代付专家购</a></li>
+                                        </ul>
+                                      </div>
+                                      <div class="col-lg-9">
+                                          <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                                            <div class="input-group-addon">@</div>
+                                            <input type="text" class="form-control" id="inlineFormInputGroup" placeholder="输入商品名称或粘贴想要代购的商品地址">
+                                          </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </li>
+                            </ul>
+                          </li>
+                          <!-- mega-menu end -->
+
 
                         <li class="nav-item">
                           <a href="/aboutus" class="nav-link">关于我们</a>
@@ -277,41 +273,12 @@
           <div class="slider-revolution-5-container">
             <div id="slider-banner-fullwidth-big-height" class="slider-banner-fullwidth-big-height rev_slider" data-version="5.0">
               <ul class="slides">
-                <!-- slide 1 start -->
+                <!-- slide start -->
                 <!-- ================ -->
-                <li data-transition="random" data-slotamount="default" data-masterspeed="default" data-title="Next Generation Template">
-
+                <% slides.forEach((slide, index)=>{ %>
+                <li data-transition="random" data-slotamount="default" data-masterspeed="default" data-title="<%= slide.title %>">
                 <!-- main image -->
-                <img src="/images/slide03.jpg" alt="slidebg1" data-bgposition="center center"  data-bgrepeat="no-repeat" data-bgfit="cover"  class="rev-slidebg">
-
-                <!-- LAYER NR. 1 -->
-                <div class="tp-caption sfb fadeout dark-translucent-bg caption-box text-left"
-                  style="background-color: rgba(0, 0, 0, 0.8);"
-                  data-x="right"
-                  data-y="center"
-                  data-start="600"
-                  data-whitespace="normal"
-                  data-transform_idle="o:1;"
-                  data-transform_in="y:[100%];sX:1;sY:1;o:0;s:1150;e:Power4.easeInOut;"
-                  data-transform_out="y:[100%];s:1000;e:Power2.easeInOut;"
-                  data-mask_in="x:0px;y:[100%];s:inherit;e:inherit;"
-                  data-mask_out="x:inherit;y:inherit;s:inherit;e:inherit;">
-                  <h2 class="title">Fast Shipping Everywhere</h2>
-                  <div class="separator-2 clearfix"></div>
-                  <p>Voluptatem ad provident non repudiandae beatae cupiditate amet reiciendis lorem ipsum dolor sit amet, consectetur.</p>
-                  <div class="text-right"><a class="btn btn-small btn-default margin-clear" href="/service/1">Read More</a></div>
-                </div>
-
-                </li>
-                <!-- slide 1 end -->
-
-                <!-- slide 2 start -->
-                <!-- ================ -->
-                <li data-transition="random" data-slotamount="default" data-masterspeed="default" data-title="Premium Bootstrap Template">
-
-                <!-- main image -->
-                <img src="/images/slide04.jpg" alt="slidebg2" data-bgposition="center center"  data-bgrepeat="no-repeat" data-bgfit="cover" class="rev-slidebg">
-
+                <img src="<%= slide.img %>" alt="slidebg1" data-bgposition="center center"  data-bgrepeat="no-repeat" data-bgfit="cover"  class="rev-slidebg">
                 <!-- LAYER NR. 1 -->
                 <div class="tp-caption sfb fadeout dark-translucent-bg caption-box text-left"
                   style="background-color: rgba(0, 0, 0, 0.8);"
@@ -324,28 +291,69 @@
                   data-transform_out="y:[100%];s:1000;e:Power2.easeInOut;"
                   data-mask_in="x:0px;y:[100%];s:inherit;e:inherit;"
                   data-mask_out="x:inherit;y:inherit;s:inherit;e:inherit;">
-                  <h2 class="title">Shipping Services</h2>
+                  <h2 class="title"><%= slide.title %></h2>
                   <div class="separator-2 clearfix"></div>
-                  <p>Voluptatem ad provident non repudiandae beatae cupiditate amet reiciendis lorem ipsum dolor sit amet, consectetur.</p>
-                  <div class="text-right"><a class="btn btn-small btn-default margin-clear" href="/service/2">Read More</a></div>
+                  <p><%= slide.description %></p>
+                  <div class="text-right"><a class="btn btn-small btn-default margin-clear" href="/slide?id=<%= slide._id %>">查看详情</a></div>
                 </div>
-
                 </li>
-                <!-- slide 2 end -->
+                <% }) %>
+                <!-- slide end -->
               </ul>
-              <div class="tp-bannertimer"></div>
+              <div class="tp-static-layers" style="width:100%; height:100%; overflow:hidden">
+                <!-- BEGIN STATIC LAYER -->
+                <div class="tp-static-layer tp-caption tp-resizeme custombg" 
+                    data-startslide="0" 
+                    data-endslide="99"
+                    data-frames='[{"delay": 1000, "speed": 1000, "from": "opacity: 0", "to": "opacity: 1"}, 
+                                  {"delay": "wait", "speed": 1000, "to": "opacity: 0"}]' 
+                    data-x="right" 
+                    data-y="center" 
+                    data-hoffset="0" 
+                    data-voffset="0" 
+                    data-width="['auto']"
+                    data-height="['auto']">
+                  <div class="loginBox">
+                    <form action="http://track.99mst.com/cgi-bin/GInfo.dll?Login" method="post" target="_blank">
+                      <input type="hidden" name="w" value="99mst">
+                      <div class="inp_div">
+                        <input class="inputC" type="text" id="ac" name="ac" placeholder="用户名">
+                      </div>
+                      <div class="inp_div">
+                        <input class="inputC" type="password" id="pwd" name="pwd" placeholder="密码">
+                      </div>
+                      <div class="dl_div">
+                        <div class="absL">
+                          <input type="checkbox" class="ver"> 记住密码
+                        </div>
+                        <div class="absR">
+                          <input type="submit" class="logbtn" style="width:87px;height:27px;background:url(http://usa.99mst.com/templates/default/images/btn_login.jpg) no-repeat left center;border:0;text-indent:150px;" value="登 录">
+                        </div>
+                        <div class="clear"></div>
+                      </div>
+                    </form>
+                    <div class="dl_div">
+                      <div class="absL">
+                        <a style="color: black" href="http://track.99mst.com/cgi-bin/ginfo.dll?formmemberapply&amp;w=99mst"><img style="display: inline-block !important;" src="http://usa.99mst.com/templates/default/images/icon_reg.gif" alt="免费注册">免费注册</a>
+                      </div>
+                      <div class="absR">
+                        <a style="color: black" href="http://track.99mst.com/cgi-bin/GInfo.dll?DispInfo&amp;w=99mst&amp;nid=32"><img style="display: inline-block !important;" src="http://usa.99mst.com/templates/default/images/icon_forget.gif" alt="免费注册">忘记密码</a>
+                      </div>
+                    <div class="clear"></div>
+                  </div>
+                </div>
+                <!-- END STATIC LAYER -->
+              </div>
+            <!-- END STATIC LAYERS -->
             </div>
           </div>
           <!-- slider revolution end -->
-
         </div>
         <!-- slideshow end -->
-
       </div>
       <!-- banner end -->
 
       <div id="page-start"></div>
-
       <!-- section start -->
       <!-- ================ -->
       <section class="section light-gray-bg border-clear clearfix padding-ver-clear">
@@ -355,9 +363,11 @@
               <div class="feature-box-2">
                 <span class="icon without-bg"><i class="text-default fa fa-truck"></i></span>
                 <div class="body">
+                  <% if (services.length !== 0) { %>
                   <h4 class="title"><%= services[0].title %></h4>
                   <p><%= services[0].description %></p>
                   <p><a href="/service?id=<%= services[0]._id %>">查看详情<i class="pl-1 fa fa-angle-double-right"></i></a></p>
+                  <% } %>
                 </div>
               </div>
             </div>
@@ -365,9 +375,25 @@
               <div class="feature-box-2">
                 <span class="icon without-bg"><i class="fa fa-plane"></i></span>
                 <div class="body">
-                  <h4 class="title"><%= services[1].title %></h4>
-                  <p><%= services[1].description %></p>
-                  <p><a href="/service?id=<%= services[1]._id %>">查看详情<i class="pl-1 fa fa-angle-double-right"></i></a></p>
+                  <h4 class="title">运单查询</h4>
+                  <div class="row">
+                    <div class="col-md-3">
+                      <div class="form-group">
+                        <select class="form-control" id="com">
+                          <option>DHL</option>
+                          <option>UPS</option>
+                          <option>顺丰速运</option>
+                          <option>EMS</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="col-md-9">
+                      <div class="form-group">
+                        <input type="text" class="form-control" aria-describedby="searchNumber" placeholder="请输入运单号">
+                      </div>
+                    </div>
+                  </div>
+                  <p><a href="/service?id=<%= services[1]._id %>" class="btn btn-success">查看详情<i class="pl-1 fa fa-angle-double-right"></i></a></p>
                 </div>
               </div>
             </div>
@@ -387,7 +413,7 @@
             <div class="main col-12">
               <!-- page-title start -->
               <!-- ================ -->
-              <h1 class="page-title text-center">我们的 <strong>服务</strong></h1>
+              <h1 class="page-title text-center">我们的服务</h1>
               <div class="separator"></div>
               <p class="large text-center">美速通全体成员向我们的客户提供以下服务及活动</p>
               <br>
@@ -421,6 +447,44 @@
       </section>
       <!-- section end -->
 
+      <!-- section -->
+      <!-- ================ -->
+      <section class="pv-30 light-gray-bg padding-bottom-clear">
+        <div class="container">
+          <div class="row justify-content-md-center">
+            <div class="col-lg-8">
+              <h2 class="text-center mt-4">买家秀</h2>
+              <div class="separator"></div>
+            </div>
+          </div>
+        </div>
+        <div class="space-bottom">
+          <div class="owl-carousel content-slider">
+            <% shows.forEach((show, index) => { %>
+            <div class="container">
+              <div class="row justify-content-md-center">
+                <div class="col-lg-8">
+                  <div class="testimonial text-center">
+                    <div class="testimonial-image">
+                      <img src=<%- show.img %>>
+                    </div>
+                    <h3 class="mt-3"><%= show.title %></h3>
+                    <div class="separator"></div>
+                    <div class="testimonial-body">
+                      <blockquote>
+                        <p><%= show.description %></p>
+                      </blockquote>
+                      <div class="testimonial-info-1">- <%= show.name %> 单号：<%= show.transid %></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <% }) %>
+          </div>
+        </div>
+      </section>
+
       <!-- section start -->
       <!-- ================ -->
       <section class="section parallax">
@@ -436,37 +500,37 @@
               <div class="clients-container">
                 <div class="clients">
                   <div class="client-image object-non-visible" data-animation-effect="fadeIn" data-effect-delay="100">
-                    <a href="#"><img src="/images/logos/YT.png" alt=""></a>
+                    <a href="https://www.etao.com/" target="_blank"><img src="/images/logos/YT.png" alt=""></a>
                   </div>
                   <div class="client-image object-non-visible" data-animation-effect="fadeIn" data-effect-delay="100">
-                    <a href="#"><img src="/images/logos/MSD.png" alt=""></a>
+                    <a href="http://www.maishoudang.com/" target="_blank"><img src="/images/logos/MSD.png" alt=""></a>
                   </div>
                   <div class="client-image object-non-visible" data-animation-effect="fadeIn" data-effect-delay="100">
-                    <a href="#"><img src="/images/logos/EHG.png" alt=""></a>
+                    <a href="http://www.ehtao.net/" target="_blank"><img src="/images/logos/EHG.png" alt=""></a>
                   </div>
                   <div class="client-image object-non-visible" data-animation-effect="fadeIn" data-effect-delay="200">
-                    <a href="#"><img src="/images/logos/FedEx.png" alt=""></a>
+                    <a href="http://www.fedex.com/de/" target="_blank"><img src="/images/logos/FedEx.png" alt=""></a>
                   </div>
                   <div class="client-image object-non-visible" data-animation-effect="fadeIn" data-effect-delay="300">
-                    <a href="#"><img src="/images/logos/EMS.png" alt=""></a>
+                    <a href="http://www.ems.post/operators/germany" target="_blank"><img src="/images/logos/EMS.png" alt=""></a>
                   </div>
                   <div class="client-image object-non-visible" data-animation-effect="fadeIn" data-effect-delay="400">
-                    <a href="#"><img src="/images/logos/DHL.png" alt=""></a>
+                    <a href="https://www.dhl.de/" target="_blank"><img src="/images/logos/DHL.png" alt=""></a>
                   </div>
                   <div class="client-image object-non-visible" data-animation-effect="fadeIn" data-effect-delay="500">
-                    <a href="#"><img src="/images/logos/SF.png" alt=""></a>
+                    <a href="http://www.sf-express.com/" target="_blank"><img src="/images/logos/SF.png" alt=""></a>
                   </div>
                   <div class="client-image object-non-visible" data-animation-effect="fadeIn" data-effect-delay="700">
-                    <a href="#"><img src="/images/logos/TNT.png" alt=""></a>
+                    <a href="https://www.tnt.com/" target="_blank"><img src="/images/logos/TNT.png" alt=""></a>
                   </div>
                   <div class="client-image object-non-visible" data-animation-effect="fadeIn" data-effect-delay="800">
-                    <a href="#"><img src="/images/logos/USPS.png" alt=""></a>
+                    <a href="https://www.usps.com/" target="_blank"><img src="/images/logos/USPS.png" alt=""></a>
                   </div>
                   <div class="client-image object-non-visible" data-animation-effect="fadeIn" data-effect-delay="100">
-                    <a href="#"><img src="/images/logos/AAE.png" alt=""></a>
+                    <a href="http://nyc.aaeexpress.us/" target="_blank"><img src="/images/logos/AAE.png" alt=""></a>
                   </div>
                   <div class="client-image object-non-visible" data-animation-effect="fadeIn" data-effect-delay="100">
-                    <a href="#"><img src="/images/logos/UPS.png" alt=""></a>
+                    <a href="https://www.ups.com/" target="_blank"><img src="/images/logos/UPS.png" alt=""></a>
                   </div>
                 </div>
               </div>
@@ -475,6 +539,7 @@
         </div>
       </section>
       <!-- section end -->
+
       <footer>
         <!-- .subfooter start -->
         <!-- ================ -->
@@ -493,6 +558,49 @@
 
       </footer>
       <!-- footer end -->
+
+      <div class="quicklink">        
+        <div class="quickbox" style="display: block;">
+          <ul style="list-style: none;">
+            <li><a href="http://crm2.qq.com/page/portalpage/wpa.php?uin=800008691&amp;aty=0&amp;a=0&amp;curl=www.99mst.de&amp;ty=1" target="_blank" title="在线客服"><i class="quickicona"></i>在线客服</a></li>
+            <li class="quickwx usergroup"><i class="quickicone"></i>信息咨询
+              <div class="wxcode" style="display: none;">
+                <img src="http://eur-go.img-cn-hangzhou.aliyuncs.com/attached/image/2017/07/04/33e7372699ae40e2b113204b97d475ad.png?_=636347890170891566" width="60" height="60" alt="客户交流微信群">
+              </div>
+            </li>               
+            <li><a href="http://weibo.com/eurgo" target="_blank" title="官方微博"><i class="quickiconb"></i>官方微博</a></li>
+            <li class="quickbot" style="display: none;"><i class="quickicond"></i>返回顶部</li>
+          </ul>
+        </div>
+        <div class="quickon">
+          <div class="quickclose" style="display: block;"><i class="closeicona"></i></div>
+          <div class="quickopen hidden" style="display: none;">
+            <div class="quickplus"><i class="closeiconb"></i></div>
+            <div class="quickbot" style="display: none;"><i class="closeiconc"></i></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Modal -->
+      <% if(notification.display) {%>
+      <div class="modal fade" id="notizModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title" id="myModalLabel"><%= notification.title %></h4>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            </div>
+            <div class="modal-body">
+              <%- notification.content %>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-sm btn-dark" data-dismiss="modal">关闭</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <% } %>
+      
     </div>
     <!-- page-wrapper end -->
 
@@ -528,6 +636,13 @@
     <script type="text/javascript" src="/asset/js/template.js"></script>
     <!-- Custom Scripts -->
     <script type="text/javascript" src="/asset/js/custom.js"></script>
+    <% if(notification.display) {%>
+    <script>
+      $(document).ready(()=>{
+        $("#notizModal").modal()
+      });
+    </script>
+    <% } %>
 
   </body>
 </html>
