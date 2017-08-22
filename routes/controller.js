@@ -87,8 +87,6 @@ router.get('/service/add', auth, function (req, res, next) {
 
 router.post('/service/add', auth, function (req, res, next) {
     var service = req.body;
-    service.img = JSON.parse(service.img);
-    console.log(service.img);
     Service.create(service, function (err, service) {
         if (err) {
             next(err);
@@ -114,10 +112,7 @@ router.post('/service/edit', auth, function (req, res, next) {
     var service = req.body;
     if (JSON.parse(service.img) == "") {
         delete service.img;
-    } else {
-        service.img = JSON.parse(service.img);
     }
-    console.log(service.img);
     Service.findOneAndUpdate({
         _id: req.query.id
     }, service, function (err, service) {
@@ -180,6 +175,9 @@ router.get('/doc/edit', auth, function (req, res, next) {
 
 router.post('/doc/edit', auth, function (req, res, next) {
     var doc = req.body;
+    if (JSON.parse(doc.img) == "") {
+        delete doc.img;
+    }
     Doc.findOneAndUpdate({
         _id: req.query.id
     }, doc, function (err, doc) {
@@ -242,6 +240,9 @@ router.get('/shoptutorial/edit', auth, function (req, res, next) {
 
 router.post('/shoptutorial/edit', auth, function (req, res, next) {
     var shoptutorial = req.body;
+    if (JSON.parse(shoptutorial.img) == "") {
+        delete shoptutorial.img;
+    }
     ShopTutorial.findOneAndUpdate({
         _id: req.query.id
     }, shoptutorial, function (err, shoptutorial) {
@@ -304,6 +305,9 @@ router.get('/transfer/edit', auth, function (req, res, next) {
 
 router.post('/transfer/edit', auth, function (req, res, next) {
     var transfer = req.body;
+    if (JSON.parse(transfer.img) == "") {
+        delete transfer.img;
+    }
     Transfer.findOneAndUpdate({
         _id: req.query.id
     }, transfer, function (err, transfer) {
@@ -366,6 +370,9 @@ router.get('/show/edit', auth, function (req, res, next) {
 
 router.post('/show/edit', auth, function (req, res, next) {
     var show = req.body;
+    if (JSON.parse(show.img) == "") {
+        delete show.img;
+    }
     Show.findOneAndUpdate({
         _id: req.query.id
     }, show, function (err, show) {
@@ -405,24 +412,31 @@ router.get('/slide/add', auth, function (req, res, next) {
 
 router.post('/slide/add', auth, function (req, res, next) {
     var slide = req.body;
-    console.log(slide);
     var form = new formidable.IncomingForm();
     form.parse(req, function (err, fields, files) {
+        var slide = fields;
         var oldpath = files.img.path;
         var newpath = process.cwd() + '/public/images/banner/' + files.img.name;
-        console.log(oldpath);
-        console.log(newpath);
-        mv(oldpath, newpath, { mkdirp: true }, function (err) {
-            if (err) throw err;
-            console.log('File uploaded and moved!');
-            slide.img = '/images/banner/' + files.img.name;
+        if (files.img.name == "") {
             Slide.create(slide, function (err, slide) {
                 if (err) {
                     next(err);
                 }
                 return res.redirect('/controller/slide');
             });
-        });
+        } else {
+            mv(oldpath, newpath, { mkdirp: true }, function (err) {
+                if (err) throw err;
+                var slide = fields;
+                slide.img = '/images/banner/' + files.img.name;
+                Slide.create(slide, function (err, slide) {
+                    if (err) {
+                        next(err);
+                    }
+                    return res.redirect('/controller/slide');
+                });
+            });
+        }
     });
 });
 
@@ -440,18 +454,12 @@ router.get('/slide/edit', auth, function (req, res, next) {
 });
 
 router.post('/slide/edit', auth, function (req, res, next) {
-    var slide = req.body;
-    console.log(slide);
     var form = new formidable.IncomingForm();
     form.parse(req, function (err, fields, files) {
+        var slide = fields;
         var oldpath = files.img.path;
         var newpath = process.cwd() + '/public/images/banner/' + files.img.name;
-        console.log(oldpath);
-        console.log(newpath);
-        mv(oldpath, newpath, { mkdirp: true }, function (err) {
-            if (err) throw err;
-            console.log('File uploaded and moved!');
-            slide.img = '/images/banner/' + files.img.name;
+        if (files.img.name == "") {
             Slide.findOneAndUpdate({
                 _id: req.query.id
             }, slide, function (err, slide) {
@@ -460,7 +468,20 @@ router.post('/slide/edit', auth, function (req, res, next) {
                     res.redirect('/controller/slide');
                 }
             });
-        });
+        } else {
+            mv(oldpath, newpath, { mkdirp: true }, function (err) {
+                if (err) throw err;
+                slide.img = '/images/banner/' + files.img.name;
+                Slide.findOneAndUpdate({
+                    _id: req.query.id
+                }, slide, function (err, slide) {
+                    if (err) next(err);
+                    else {
+                        res.redirect('/controller/slide');
+                    }
+                });
+            });
+        }
     });
 });
 
