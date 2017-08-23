@@ -39,6 +39,14 @@ File Description: Place here your custom CSS styles
     background: url("/images/login_bg.png") no-repeat left top !important;
 }
 
+.logbtn {
+    width:87px;
+    height:27px;
+    background:url(http://usa.99mst.com/templates/default/images/btn_login.jpg) no-repeat left center;
+    border:0;
+    text-indent:150px;
+}
+
 .loginBox form {
     margin-top: 64px;
     margin-bottom: 20px;
