@@ -1,20 +1,28 @@
 <div class="page-header">
-    <h1><%= title %></h1>
+    <h1>
+        <%= title %>
+    </h1>
 </div>
+
 <div class="row">
     <div class="col-md-12">
         <form method="post" id="shoptutorial_form">
+            <input type="hidden" class="form-control" id="ShopId" name="ShopId" value="<%= shoptutorial.ShopId || '' %>">
+            <input type="hidden" class="form-control" id="LogoURL" name="LogoURL" value="<%= shoptutorial.LogoURL || '' %>">
+            <input type="hidden" class="form-control" id="ProductCount" name="ProductCount" value="<%= shoptutorial.ProductCount || '' %>">
+            <input type="hidden" class="form-control" id="ProgramId" name="ProgramId" value="<%= shoptutorial.ProgramId || '' %>">
+            <input type="hidden" class="form-control" id="ShortURL" name="ShortURL" value="<%= shoptutorial.ShortURL || '' %>">
             <div class="form-group">
                 <label for="title">标题</label>
-                <input type="text" class="form-control" id="title" placeholder="标题" name="title" value="<%= shoptutorial.title || '' %>">
+                <input type="text" class="form-control" id="ShopTitle" placeholder="标题" name="ShopTitle" value="<%= shoptutorial.ShopTitle || '' %>">
             </div>
             <div class="form-group">
-                <label for="description">说明</label>
-                <input type="text" class="form-control" id="description" placeholder="说明" name="description" value="<%= shoptutorial.description || ""%>">
+                <label for="title">店铺简介</label>
+                <input type="text" class="form-control" id="Description" placeholder="店铺简介" name="Description" value="<%= shoptutorial.Description || '' %>">
             </div>
             <div class="form-group">
-                <label>店铺图片</label>
-                <input type="file" id="img" onchange="previewFile('#img', '#img_preview')"/>
+                <label>店铺Logo</label>
+                <input type="file" id="img" onchange="previewFile('#img', '#img_preview')" />
                 <div class="row">
                     <div class="col-xs-12 col-md-12">
                         <a href="#" class="thumbnail" id="img_preview" hidden></a>
@@ -22,33 +30,35 @@
                 </div>
             </div>
             <br/>
-            <h4>内容</h4>
-            <div id="summernote_content"><%- shoptutorial.content || "" %></div>
+            <h4>店铺海淘教程</h4>
+            <div id="summernote_content">
+                <%- shoptutorial.Tutorial || "" %>
+            </div>
             <hr/>
             <button type="submit" id="post_button" class="btn btn-default"><span class="glyphicon glyphicon-share-alt"></span> 确认</button>
         </form>
-        <% if (shoptutorial.img !== "" && shoptutorial.img !== undefined) { %>
-        <hr/>
-        <label>图片</label>
-        <div class="row">
-            <div class="col-xs-4 col-md-2">
-                <a href="#" class="thumbnail">
-                    <img src=<%- shoptutorial.img %> alt="shoptutorial logo set">
+        <% if (shoptutorial.Logo !== "" && shoptutorial.Logo !== undefined) { %>
+            <hr/>
+            <label>图片</label>
+            <div class="row">
+                <div class="col-xs-4 col-md-2">
+                    <a href="#" class="thumbnail">
+                    <img src=<%- shoptutorial.Logo %> alt="shoptutorial logo set">
                 </a>
+                </div>
             </div>
-        </div>
-        <% } %>
+            <% } %>
     </div>
 </div>
 <hr/>
 <script>
     var _img = "";
-    $(document).ready(function() {
+    $(document).ready(function () {
         $("#shoptutorial_page").addClass("active");
-        $('#shoptutorial_form').submit(function(event) {
+        $('#shoptutorial_form').submit(function (event) {
             var data = {
-                img: JSON.stringify(_img),
-                content: $('#summernote_content').summernote('code')
+                Logo: JSON.stringify(_img),
+                Tutorial: $('#summernote_content').summernote('code')
             };
             post(data, "shoptutorial_form");
         });
@@ -57,6 +67,5 @@
             minHeight: null,             // set minimum height of editor
             maxHeight: null,             // set maximum height of editor
         });
-
     });
 </script>

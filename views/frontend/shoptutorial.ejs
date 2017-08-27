@@ -265,42 +265,39 @@
 
           <!-- main start -->
           <!-- ================ -->
-          <div class="main col-lg-8">
+          <div class="main col-lg-12">
 
             <!-- page-title start -->
             <!-- ================ -->
             <h1 class="page-title">
               <%= title %>
             </h1>
+            <div class="separator-2"></div>
             <!-- page-title end -->
-
-            <!-- blogpost start -->
-            <!-- ================ -->
-            <article class="blogpost full">
-              <%- shoptutorial.content %>
-            </article>
-            <!-- blogpost end -->
+            <div class="row">
+            <% shoptutorials.forEach((shoptutorial, index)=>{ %>
+              <div class="col-sm-4">
+                  <div class="image-box shadow text-center mb-20">
+                    <div class="overlay-container">
+                      <img src=<% if (shoptutorial.Logo) { %><%- shoptutorial.Logo %><% } else { %>"<%= shoptutorial.LogoURL%>"<% } %> alt="">
+                      <div class="overlay-top">
+                        <div class="text">
+                          <h3><a href="http://allhaha.com/go/<%= shoptutorial.ShortURL %>"><%= shoptutorial.ShopTitle %></a></h3>
+                          <p class="small"><%= shoptutorial.Description %></p>
+                        </div>
+                      </div>
+                      <div class="overlay-bottom">
+                        <div class="links">
+                          <a href="/shoptutorial?id=<%= shoptutorial._id %>" class="btn btn-gray-transparent btn-animated btn-sm">查看教程 <i class="pl-10 fa fa-arrow-right"></i></a>
+                          <a href="http://allhaha.com/go/<%= shoptutorial.ShortURL %>" class="btn btn-success btn-animated btn-sm">进入商店 <i class="pl-10 fa fa-arrow-right"></i></a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <% }) %>
+            </div>            
           </div>
-          <!-- sidebar start -->
-          <!-- ================ -->
-          <aside class="col-lg-4 col-xl-3 offset-xl-1">
-            <div class="sidebar">
-              <div class="block clearfix">
-                <h3 class="title">菜单</h3>
-                <div class="separator-2"></div>
-                <nav>
-                  <ul class="nav flex-column">
-                    <li class="nav-item"><a class="nav-link" href="/">首页</a></li>
-                    <li class="nav-item"><a class="nav-link" href="/">服务</a></li>
-                    <li class="nav-item"><a class="nav-link" href="/">操作指南</a></li>
-                    <li class="nav-item"><a class="nav-link active" href="/">海淘教程</a></li>
-                    <li class="nav-item"><a class="nav-link" href="/">购物助手</a></li>
-                  </ul>
-                </nav>
-              </div>
-            </div>
-          </aside>
-          <!-- sidebar end -->
         </div>
       </div>
     </section>

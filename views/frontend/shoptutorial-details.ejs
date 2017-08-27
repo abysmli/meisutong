@@ -247,7 +247,8 @@
     <div class="breadcrumb-container">
       <div class="container">
         <ol class="breadcrumb">
-          <li class="breadcrumb-item"><i class="fa fa-home pr-2"></i><a href="/">首页</a></li>
+          <li class="breadcrumb-item"><i class="fa fa-home pr-2"></i><a href="/">首页</a></li>          
+          <li class="breadcrumb-item"><a href="/shoptutorial">海淘教程</a></li>
           <li class="breadcrumb-item active">
             <%= title %>
           </li>
@@ -272,12 +273,13 @@
             <h1 class="page-title">
               <%= title %>
             </h1>
-            <!-- page-title end -->
             <div class="separator-2"></div>
+            <!-- page-title end -->
+
             <!-- blogpost start -->
             <!-- ================ -->
             <article class="blogpost full">
-              <%- service.content %>
+              <%- shoptutorial.Tutorial %>
             </article>
             <!-- blogpost end -->
           </div>
@@ -291,9 +293,9 @@
                 <nav>
                   <ul class="nav flex-column">
                     <li class="nav-item"><a class="nav-link" href="/">首页</a></li>
-                    <li class="nav-item"><a class="nav-link active" href="/">服务</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/">服务</a></li>
                     <li class="nav-item"><a class="nav-link" href="/">操作指南</a></li>
-                    <li class="nav-item"><a class="nav-link" href="/">海淘教程</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="/">海淘教程</a></li>
                     <li class="nav-item"><a class="nav-link" href="/">购物助手</a></li>
                   </ul>
                 </nav>

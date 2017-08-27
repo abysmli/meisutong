@@ -139,7 +139,35 @@ router.get('/transfer', function (req, res, next) {
 });
 
 router.get('/shoptutorial', function (req, res, next) {
-  ShopTutorial.findById(req.query.id, function (err, shoptutorial) {
+  if (req.query.id) {
+    ShopTutorial.findById(req.query.id, function (err, shoptutorial) {
+      Service.find({}).sort({ updated_at: 1 }).exec(function (err, services) {
+        Doc.find({}).sort({ updated_at: -1 }).exec(function (err, docs) {
+          Transfer.find({}).sort({ updated_at: -1 }).exec(function (err, transfers) {
+            ShopTutorial.find({}).sort({ updated_at: -1 }).exec(function (err, shoptutorials) {
+              var paths = [], path;
+              transfers.forEach(function (transfer, index) {
+                if (path != transfer.path) {
+                  paths.push(transfer.path);
+                  path = transfer.path;
+                }
+              });
+              res.render('frontend/shoptutorial-details', {
+                title: shoptutorial.ShopTitle,
+                description: shoptutorial.Description,
+                keywords: "德淘转运，德淘，欧洲购物,欧淘，德淘之家，德淘网，美速通，德淘攻略",
+                shoptutorial: shoptutorial,
+                docs: docs,
+                paths: paths,
+                transfers: transfers,
+                shoptutorials: shoptutorials
+              });
+            });
+          });
+        });
+      });
+    });
+  } else {
     Service.find({}).sort({ updated_at: 1 }).exec(function (err, services) {
       Doc.find({}).sort({ updated_at: -1 }).exec(function (err, docs) {
         Transfer.find({}).sort({ updated_at: -1 }).exec(function (err, transfers) {
@@ -152,10 +180,9 @@ router.get('/shoptutorial', function (req, res, next) {
               }
             });
             res.render('frontend/shoptutorial', {
-              title: shoptutorial.title,
-              description: shoptutorial.description,
+              title: "海淘教程",
+              description: "海淘教程",
               keywords: "德淘转运，德淘，欧洲购物,欧淘，德淘之家，德淘网，美速通，德淘攻略",
-              shoptutorial: shoptutorial,
               docs: docs,
               paths: paths,
               transfers: transfers,
@@ -165,7 +192,7 @@ router.get('/shoptutorial', function (req, res, next) {
         });
       });
     });
-  });
+  }
 });
 
 router.get('/aboutus', function (req, res, next) {
@@ -209,6 +236,15 @@ router.get('/currencyExchange', function (req, res, next) {
     url: "https://www.exchangerate-api.com/EUR/CNY?k=2d8c6e862f92ff48d10fa915"
   }, function (err, response, data) {
     res.send(parseFloat(data).toFixed(4));
+  });
+});
+
+router.get('/comingsoon', function (req, res, next) {
+  res.render('frontend/comingsoon', {
+    title: '即将到来',
+    description: "美速通转运网-致力于成为中国最专业的转运公司！本公司位于洛杉矶，主要经营北美到中国大陆的传统国际快递、以及国际电子商务仓储、物流及相关业务，为德淘人士、欧洲购物、欧淘、德淘转运、德淘海外代购公司、以及德淘代购个人提供一个优秀的转运平台。",
+    keywords: "德淘转运，德淘，欧洲购物,欧淘，德淘之家，德淘网，美速通，德淘攻略",
+    layout: null
   });
 });
 

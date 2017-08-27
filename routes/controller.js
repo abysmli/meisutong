@@ -1,7 +1,6 @@
 var express = require('express');
 var router = express.Router();
 var formidable = require('formidable');
-var fs = require('fs');
 var mv = require('mv');
 var auth = require('../models/auth');
 var Service = require('../models/service');
@@ -12,6 +11,8 @@ var ShopTutorial = require('../models/shoptutorial');
 var Slide = require('../models/slide');
 var Notiz = require('../models/notification');
 var About = require('../models/about');
+var allhaha = require('../utils/allhahaAPI');
+var Allhaha = new allhaha("e3016002-f1c1-47e1-b0e4-3770415e2797", "47c0ae5b-d9ee-4ebb-ba29-79caf197eb69");
 
 router.get('/', auth, function (req, res, next) {
     res.render('controller/index', {
@@ -198,19 +199,43 @@ router.get('/doc/remove', auth, function (req, res, next) {
 });
 
 router.get('/shoptutorial', auth, function (req, res, next) {
-    ShopTutorial.find({}).sort({ updated_at: -1 }).exec(function (err, shoptutorials) {
-        res.render('controller/shoptutorial', {
-            layout: 'controller/layout',
-            title: '海淘教程',
-            shoptutorials: shoptutorials,
-        });
+    Allhaha.getShops((err, shops) => {
+        if (!err) {
+            req.session.shops = shops;
+            ShopTutorial.find({}).sort({ updated_at: -1 }).exec((err, shoptutorials) => {
+                if (err) return next(err);
+                shops.forEach((shop, index)=>{
+                    for (let shoptutorial of shoptutorials) {
+                        if (shop.ShopId == shoptutorial.ShopId) {
+                            shops.splice(index, 1);
+                        }
+                    }
+                });
+                res.render('controller/shoptutorial', {
+                    layout: 'controller/layout',
+                    title: '海淘教程',
+                    shops: shops,
+                    shoptutorials: shoptutorials,
+                });
+            });
+        } else {
+            next(err);
+        }
     });
 });
 
 router.get('/shoptutorial/add', auth, function (req, res, next) {
+    var shoptutorial = {};
+    if (req.query.id) {
+        req.session.shops.forEach((shop) => {
+            if (shop._id == req.query.id) {
+                shoptutorial = shop;
+            }
+        });
+    }
     res.render('controller/shoptutorial-form', {
         title: '添加海淘教程',
-        shoptutorial: {},
+        shoptutorial: shoptutorial,
         layout: 'controller/layout'
     });
 });
@@ -240,8 +265,8 @@ router.get('/shoptutorial/edit', auth, function (req, res, next) {
 
 router.post('/shoptutorial/edit', auth, function (req, res, next) {
     var shoptutorial = req.body;
-    if (JSON.parse(shoptutorial.img) == "") {
-        delete shoptutorial.img;
+    if (JSON.parse(shoptutorial.Logo) == "") {
+        delete shoptutorial.Logo;
     }
     ShopTutorial.findOneAndUpdate({
         _id: req.query.id
@@ -411,7 +436,6 @@ router.get('/slide/add', auth, function (req, res, next) {
 });
 
 router.post('/slide/add', auth, function (req, res, next) {
-    var slide = req.body;
     var form = new formidable.IncomingForm();
     form.parse(req, function (err, fields, files) {
         var slide = fields;
