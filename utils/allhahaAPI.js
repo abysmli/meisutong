@@ -17,9 +17,13 @@ class Auth {
             },
             json: true
         }, (err, httpResponse, body) => {
-            if (body.success) {
-                this.token = body.token;
-                callback(body);
+            if (body) {
+                if (body.success) {
+                    this.token = body.token;
+                    callback(body);
+                } else {
+                    callback(body);
+                }
             } else {
                 callback(err);
             }
@@ -52,6 +56,24 @@ class Auth {
             if (result.success) {
                 request.get({
                     url: 'http://allhaha.com/api/getShops',
+                    headers: {
+                        'x-access-token': this.token
+                    },
+                    json: true
+                }, (err, httpResponse, body) => {
+                    callback(err, body);
+                });
+            } else {
+                console.log("Check Allhaha Auth Failed!");
+            }
+        });
+    }
+
+    searchProduct(query, callback) {
+        this.auth((result) => {
+            if (result.success) {
+                request.get({
+                    url: 'http://allhaha.com/api/searchProduct?search_value=' + query,
                     headers: {
                         'x-access-token': this.token
                     },

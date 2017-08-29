@@ -295,42 +295,51 @@
 
           <!-- main start -->
           <!-- ================ -->
-          <div class="main col-lg-8">
+          <div class="main col-lg-12">
 
             <!-- page-title start -->
             <!-- ================ -->
             <h1 class="page-title">
               <%= title %>
             </h1>
-            <!-- page-title end -->
             <div class="separator-2"></div>
-            <!-- blogpost start -->
-            <!-- ================ -->
-            <article class="blogpost full">
-              <%- doc.content %>
-            </article>
-            <!-- blogpost end -->
-          </div>
-          <!-- sidebar start -->
-          <!-- ================ -->
-          <aside class="col-lg-4 col-xl-3 offset-xl-1">
-            <div class="sidebar">
-              <div class="block clearfix">
-                <h3 class="title">菜单</h3>
-                <div class="separator-2"></div>
-                <nav>
-                  <ul class="nav flex-column">
-                    <li class="nav-item"><a class="nav-link" href="/">首页</a></li>
-                    <li class="nav-item"><a class="nav-link" href="/">服务</a></li>
-                    <li class="nav-item"><a class="nav-link active" href="/">操作指南</a></li>
-                    <li class="nav-item"><a class="nav-link" href="/">海淘教程</a></li>
-                    <li class="nav-item"><a class="nav-link" href="/">购物助手</a></li>
-                  </ul>
-                </nav>
+            <!-- page-title end -->
+            <div class="row">
+              
+              <!-- Tab panes -->
+              <div class="tab-content clear-style">
+                  <div class="tab-pane active" id="pill-1">
+                      <div class="row masonry-grid-fitrows grid-space-10">
+                          <% products.forEach((product, index) => { %>
+                          <% if(index < 1000) { %>
+                          <div class="col-lg-3 col-md-3 masonry-grid-item">
+                              <div class="listing-item white-bg bordered mb-20">
+                                  <div class="overlay-container">
+                                      <img src="<%= product.ProductImage %>" style="max-height: 200px; margin:auto;" alt="">
+                                      <a class="overlay-link popup-img-single" href="<%= product.ProductImage %>"><i class="fa fa-search-plus"></i></a>
+                                      <div class="overlay-to-top links">
+                                          <span class="small">
+                                          <a href="<%= product.URL %>" class="btn-sm-link"><i class="fa fa-search pr-10"></i>点击查看</a>
+                                          </span>
+                                      </div>
+                                  </div>
+                                  <div class="body">
+                                      <h3><a href="<%= product.URL %>"><%= product.Title %></a></h3>
+                                      <p class="small"><%= product.Title %></p>
+                                      <div class="elements-list clearfix">
+                                          <span class="price"><%= product.Price %> €</span>
+                                          <a href="<%= product.URL %>" class="pull-right margin-clear btn btn-sm btn-default-transparent btn-animated">点击查看<i class="fa fa-search"></i></a>
+                                      </div>
+                                  </div>
+                              </div>
+                          </div>
+                          <% } %>
+                          <% }) %>
+                      </div>
+                  </div>
               </div>
-            </div>
-          </aside>
-          <!-- sidebar end -->
+            </div>            
+          </div>
         </div>
       </div>
     </section>

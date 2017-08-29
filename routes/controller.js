@@ -204,7 +204,7 @@ router.get('/shoptutorial', auth, function (req, res, next) {
             req.session.shops = shops;
             ShopTutorial.find({}).sort({ updated_at: -1 }).exec((err, shoptutorials) => {
                 if (err) return next(err);
-                shops.forEach((shop, index)=>{
+                shops.forEach((shop, index) => {
                     for (let shoptutorial of shoptutorials) {
                         if (shop.ShopId == shoptutorial.ShopId) {
                             shops.splice(index, 1);
@@ -413,6 +413,16 @@ router.get('/show/remove', auth, function (req, res, next) {
         if (err) next(err);
         else {
             return res.redirect('/controller/show');
+        }
+    });
+});
+
+router.get('/show/active', auth, function (req, res, next) {
+    var active = (req.query.state == "true");
+    Show.findByIdAndUpdate(req.query.id, { active: active }, function (err, show) {
+        if (err) next(err);
+        else {
+            res.redirect('/controller/show');
         }
     });
 });

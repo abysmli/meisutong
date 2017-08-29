@@ -8,6 +8,10 @@ var ShowSchema = new mongoose.Schema({
     description: String,
     transid: String,
     img: String,
+    active: {
+        type: Boolean,
+        default: false
+    },
     updated_at: { type: Date, default: Date.now }
 });
 

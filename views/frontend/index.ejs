@@ -222,15 +222,18 @@
                                         <div class="divider"></div>
                                         <ul class="menu">
                                           <li class="active"><a href="#"><i class="icon-suitcase pr-2"></i>找货比价</a></li>
-                                          <li ><a href="/comingsoon"><i class="icon-suitcase pr-2"></i>一键代发商城</a></li>
-                                          <li ><a href="/comingsoon"><i class="icon-suitcase pr-2"></i>代付专家购</a></li>
+                                          <li><a href="/comingsoon"><i class="icon-suitcase pr-2"></i>一键代发商城</a></li>
+                                          <li><a href="/comingsoon"><i class="icon-suitcase pr-2"></i>代付专家购</a></li>
                                         </ul>
                                       </div>
                                       <div class="col-lg-9">
-                                          <div class="input-group mb-2 mr-sm-2 mb-sm-0">
-                                            <div class="input-group-addon"><span class="fa fa-search"></span></div>
-                                            <input type="text" class="form-control" id="searchInput" placeholder="输入商品名称或粘贴想要代购的商品地址">
-                                          </div>
+                                          <form id="searchProductForm" action="/searchProduct" method="post">
+                                            <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                                              <div class="input-group-addon"><span class="fa fa-search"></span></div>
+                                              <input type="text" class="form-control" name="search" id="searchInput" placeholder="输入商品名称或粘贴想要代购的商品地址">
+                                              <button type="submit" style="display: none;"></button>
+                                            </div>
+                                          </form>
                                       </div>
                                     </div>
                                   </div>
@@ -304,7 +307,7 @@
                 <div class="tp-static-layer tp-caption tp-resizeme custombg" 
                     data-startslide="0" 
                     data-endslide="99"
-                    data-frames='[{"delay": 1000, "speed": 1000, "from": "opacity: 0", "to": "opacity: 1"}, 
+                    data-frames='[{"delay": 1000, "speed": 1000, "from": "opacity: 0", "to": "opacity: 0.9"}, 
                                   {"delay": "wait", "speed": 1000, "to": "opacity: 0"}]' 
                     data-x="right" 
                     data-y="center" 
@@ -380,26 +383,6 @@
                   <p><a href="/service?id=<%= services[1]._id %>">查看详情<i class="pl-1 fa fa-angle-double-right"></i></a></p>
                   <% } %>
                 </div>
-                <!-- <div class="body">
-                  <h4 class="title">运单查询</h4>
-                  <div class="row">
-                     <div class="col-md-3">
-                      
-                        
-                        
-                      </div>
-                    </div> 
-                    <div class="col-md-12">
-                      <div class="form-group">
-                        
-                        <input type="text" id="YQNum" width="80%" maxlength="50"/>
-                        
-                        <div id="YQContainer"></div>
-                      </div>
-                    </div>
-                  </div>
-                  <p><a href="#" onclick="doTrack()" class="btn btn-success">查看详情<i class="pl-1 fa fa-angle-double-right"></i></a></p>
-                </div> -->
               </div>
             </div>
           </div>
@@ -501,44 +484,37 @@
       </section>
       <!-- section end -->
 
-      <!-- section -->
+            <!-- section start -->
       <!-- ================ -->
-      <section class="pv-30 light-gray-bg padding-bottom-clear">
+      <section class="section light-gray-bg clearfix">
         <div class="container">
-          <div class="row justify-content-md-center">
-            <div class="col-lg-8">
-              <h2 class="text-center mt-4">买家秀</h2>
+          <div class="row">
+            <div class="col-lg-8 offset-lg-2">
+              <h2 class="text-center mt-4">买家秀</strong></h2>
               <div class="separator"></div>
             </div>
           </div>
         </div>
-        <div class="space-bottom">
-          <div class="owl-carousel content-slider">
-            <% shows.forEach((show, index) => { %>
-            <div class="container">
-              <div class="row justify-content-md-center">
-                <div class="col-lg-8">
-                  <div class="testimonial text-center">
-                    <div class="testimonial-image">
-                      <img src=<%- show.img %>>
-                    </div>
-                    <h3 class="mt-3"><%= show.title %></h3>
-                    <div class="separator"></div>
-                    <div class="testimonial-body">
-                      <blockquote>
-                        <p><%= show.description %></p>
-                      </blockquote>
-                      <div class="testimonial-info-1">- <%= show.name %> 单号：<%= show.transid %></div>
-                    </div>
-                  </div>
+        <div class="owl-carousel carousel-autoplay pl-10 pr-10">
+          <% shows.forEach((show, index) => { %>
+          <div class="listing-item pl-10 pr-10 mb-20">
+            <div class="overlay-container bordered overlay-visible">
+              <img src=<%- show.img %> alt="">
+              <div class="overlay-bottom">
+                <div class="text">
+                  <h3 class="title"><%= show.title %></h3>
+                  <div class="separator light"></div>
+                  <p class="small margin-clear"><%= show.description %></p>
+                  <p class="small margin-clear"><%= show.name %> 单号：<%= show.transid %></p>
                 </div>
               </div>
             </div>
-            <% }) %>
           </div>
+          <% }) %>
         </div>
       </section>
-
+      <!-- section end -->
+  
       <!-- section start -->
       <!-- ================ -->
       <section class="section parallax">
