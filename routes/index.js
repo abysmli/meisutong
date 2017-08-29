@@ -231,14 +231,6 @@ router.get('/aboutus', function (req, res, next) {
   });
 });
 
-router.get('/currencyExchange', function (req, res, next) {
-  request({
-    url: "https://www.exchangerate-api.com/EUR/CNY?k=2d8c6e862f92ff48d10fa915"
-  }, function (err, response, data) {
-    res.send(parseFloat(data).toFixed(4));
-  });
-});
-
 router.get('/comingsoon', function (req, res, next) {
   res.render('frontend/comingsoon', {
     title: '即将到来',
@@ -247,5 +239,20 @@ router.get('/comingsoon', function (req, res, next) {
     layout: null
   });
 });
+
+router.get('/currencyExchange', function (req, res, next) {
+  request({
+    url: "https://www.exchangerate-api.com/EUR/CNY?k=2d8c6e862f92ff48d10fa915"
+  }, function (err, response, data) {
+    res.send(parseFloat(data).toFixed(4));
+  });
+});
+
+router.post('/track', function (req, res, next) {
+  request.post({ url: 'http://de.99mst.com/cgi-bin/GInfo.dll', form: req.body, json: true }, function (err, httpResponse, body) {
+    res.json(body);
+  });
+});
+
 
 module.exports = router;

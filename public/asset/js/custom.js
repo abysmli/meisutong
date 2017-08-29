@@ -7,6 +7,7 @@
  * License URI: http://support.wrapbootstrap.com/
  * File Description: Place here your custom scripts
  */
+var transfertype = "";
 
 (function ($) {
 	$(document).ready(function () {
@@ -82,8 +83,149 @@
 			}
 		});
 	}); // End document ready
-
 })(this.jQuery);
+
+
+function setTrack(type) {
+	transfertype = type;
+	$("#transfer-type").text(type == "MST" ? "美速通速运" : type == "other" ? "其它" : type);
+}
+
+function doTrack() {
+	$("#YQContainer").html("");
+	if (transfertype == "MST" || transfertype == "") {
+		$.ajax({
+			url: '/track',
+			type: 'POST',
+			timeout: 20000,
+			dataType: 'json',
+			data: {
+				'MfcISAPICommand': 'EmsApiTrack',
+				'cno': document.getElementById("YQNum").value,
+				'ntype': "10010000",
+				'cp': '65001'
+			},
+			success: (data) => {
+				var statusCode = {
+					'-9': '错误',
+					'-5': '错误',
+					'-4': '错误',
+					'-3': '不支持的运单号',
+					'-2': '没有结果',
+					'0': '处理中',
+					'1': '已发出',
+					'2': '运输中',
+					'3': '已抵达',
+					'4': '错误',
+					'5': '进入海关',
+					'6': '地址错误',
+					'7': '包裹丢失',
+					'8': '包裹寄回发送地',
+					'9': '错误',
+					'10': '错误',
+				}
+				var template = {};
+				if (data) {
+					if (data.ReturnValue == 100) {
+						data.Response_Info.statusDetails = statusCode[data.Response_Info.status];
+						template = _.template('<div class="container" style="text-align: left">' +
+							'    <h4>包裹状态</h4>' +
+							'    <table class="table table-bordered table-colored table-hover">' +
+							'        <tbody>' +
+							'            <tr>' +
+							'                <td>运单号</td>' +
+							'                <td><%= data.Response_Info.Number %></td>' +
+							'            </tr>' +
+							'            <tr>' +
+							'                <td>发出地</td>' +
+							'                <td><%= data.Response_Info.From %></td>' +
+							'            </tr>' +
+							'            <tr>' +
+							'                <td>目的地</td>' +
+							'                <td><%= data.Response_Info.Destination %></td>' +
+							'            </tr>' +
+							'            <tr>' +
+							'                <td>包裹数量</td>' +
+							'                <td><%= data.Response_Info.totalPieces %></td>' +
+							'            </tr>' +
+							'            <tr>' +
+							'                <td>发送状态</td>' +
+							'                <td><%= data.Response_Info.statusDetails %></td>' +
+							'            </tr>' +
+							'            <tr>' +
+							'                <td>送达日期</td>' +
+							'                <td><%= data.Response_Info.deliveryDate %></td>' +
+							'            </tr>' +
+							'        </tbody>' +
+							'    </table>' +
+							'	 <br/>' +
+							'    <h4>包裹追踪</h4>' +
+							'    <table class="table table-bordered table-colored table-hover">' +
+							'        <tbody>' +
+							'            <thead>' +
+							'                <tr>' +
+							'                    <th>日期</th>' +
+							'                    <th>国家</th>' +
+							'                    <th>状态</th>' +
+							'                </tr>' +
+							'            </thead>' +
+							'            <% data.trackingEventList.forEach((event, index)=>{ %>' +
+							'            <tr>' +
+							'                <td><%= event.date %></td>' +
+							'                <td><%= event.place %></td>' +
+							'                <td><%= event.details %></td>' +
+							'            </tr>' +
+							'            <% }) %>' +
+							'        </tbody>' +
+							'    </table>' +
+							'</div>');
+					} else if (data.ReturnValue == -102) {
+						template = _.template('<div class="container alert alert-danger">' +
+							'	<strong>运单号错误</strong>' +
+							'</div>');
+					} else if (data.ReturnValue == -9) {
+						template = _.template('<div class="container alert alert-danger">' +
+						'	<strong>未知错误</strong>' +
+						'</div>');
+					} else {
+						template = _.template('<div class="container alert alert-danger">' +
+						'	<strong>未知错误</strong>' +
+						'</div>');
+					}
+				} else {
+					template = _.template('<div class="container alert alert-danger">' +
+					'	<strong>未知错误</strong>' +
+					'</div>');
+				}
+				$("#YQContainer").html(template({ data: data }));
+			},
+			error: function (xhr, status, error) {
+				console.log(xhr.status);
+				console.log(xhr.responseText);
+			},
+		});
+	} else {
+		var YQ_Lang = transfertype == "other" ? "0" : transfertype;
+		var num = document.getElementById("YQNum").value;
+		if (num === "") {
+			alert("请输入运单号");
+			return;
+		}
+		YQV5.trackSingle({
+			//必须，指定承载内容的容器ID。
+			YQ_ContainerId: "YQContainer",
+			//可选，指定查询结果高度，最大高度为800px，默认撑满容器。
+			YQ_Height: 400,
+			//可选，指定运输商，默认为自动识别。
+			YQ_Fc: YQ_Lang,
+			//可选，指定UI语言，默认根据浏览器自动识别。
+			YQ_Lang: "zh-CN",
+			//必须，指定要查询的单号。
+			YQ_Num: num
+		});
+	}
+
+}
 
 
 

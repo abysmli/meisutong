@@ -374,25 +374,80 @@
               <div class="feature-box-2">
                 <span class="icon without-bg"><i class="fa fa-plane"></i></span>
                 <div class="body">
+                  <% if (services.length > 1) { %>
+                  <h4 class="title"><%= services[1].title %></h4>
+                  <p><%= services[1].description %></p>
+                  <p><a href="/service?id=<%= services[1]._id %>">查看详情<i class="pl-1 fa fa-angle-double-right"></i></a></p>
+                  <% } %>
+                </div>
+                <!-- <div class="body">
                   <h4 class="title">运单查询</h4>
                   <div class="row">
-                    <div class="col-md-3">
-                      <div class="form-group">
-                        <select class="form-control" id="com">
-                          <option>DHL</option>
-                          <option>UPS</option>
-                          <option>顺丰速运</option>
-                          <option>EMS</option>
-                        </select>
+                     <div class="col-md-3">
+                      
+                        
+                        
                       </div>
-                    </div>
-                    <div class="col-md-9">
+                    </div> 
+                    <div class="col-md-12">
                       <div class="form-group">
-                        <input type="text" class="form-control" aria-describedby="searchNumber" placeholder="请输入运单号">
+                        
+                        <input type="text" id="YQNum" width="80%" maxlength="50"/>
+                        
+                        <div id="YQContainer"></div>
                       </div>
                     </div>
                   </div>
-                  <p><a href="/service?id=<%= services[1]._id %>" class="btn btn-success">查看详情<i class="pl-1 fa fa-angle-double-right"></i></a></p>
+                  <p><a href="#" onclick="doTrack()" class="btn btn-success">查看详情<i class="pl-1 fa fa-angle-double-right"></i></a></p>
+                </div> -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- section end -->
+
+      <!-- section start -->
+      <!-- ================ -->
+      <section class="section pv-40 clearfix">
+        <div class="container">
+          <div class="row">
+            <div class="col-12">
+              <div class="call-to-action text-center">
+                <div class="row">
+                  <div class="col-lg-10 offset-lg-1">
+                    <h1 class="title"><strong>运单查询</strong></h1>
+                    <p class="large text-center">请输入您的运单号进行包裹追踪</p>
+                    <div class="separator"></div>
+                    <form class="form-inline margin-clear d-flex justify-content-center">
+                      <div class="input-group">
+                        <div class="input-group-btn">
+                          <button type="button" id="transfer-type" class="btn btn-large btn-secondary dropdown-toggle" style="margin: 0" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            美速通速运
+                          </button>
+                          <div class="dropdown-menu">
+                            <a class="dropdown-item" onclick="setTrack('MST')">美速通速运</a>
+                            <div role="separator" class="dropdown-divider"></div>
+                            <a class="dropdown-item" onclick="setTrack('DHL')">DHL</a>
+                            <a class="dropdown-item" onclick="setTrack('Hermes')">Hermes</a>
+                            <a class="dropdown-item" onclick="setTrack('UPS')">UPS</a>
+                            <a class="dropdown-item" onclick="setTrack('GLS')">GLS</a>
+                            <a class="dropdown-item" onclick="setTrack('DPD')">DPD</a>
+                            <a class="dropdown-item" onclick="setTrack('顺丰速运')">顺丰速运</a>
+                            <a class="dropdown-item" onclick="setTrack('安能物流')">安能物流</a>
+                            <a class="dropdown-item" onclick="setTrack('德邦物流')">德邦物流</a>
+                            <a class="dropdown-item" onclick="setTrack('百世快递')">百世快递</a>
+                            <a class="dropdown-item" onclick="setTrack('优速快递')">优速快递</a>
+                            <a class="dropdown-item" onclick="setTrack('other')">其它</a>
+                          </div>
+                        </div>
+                        <input type="text" class="form-control form-control-lg" id="YQNum" placeholder="运单号" aria-label="Text input with dropdown button">
+                      </div>
+                      <button type="button" onclick="doTrack()" class="btn btn-lg btn-gray-transparent btn-animated margin-clear ml-3">查询 <i class="fa fa-search"></i></button>
+                    </form>
+                    <div class="separator"></div>
+                    <div id="YQContainer"></div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -423,7 +478,7 @@
                 <div class="col-md-6">
                   <div class="image-box style-2 mb-20">
                     <div class="overlay-container overlay-visible">
-                      <img src="<%- service.img %>" alt="">
+                      <img src=<%- service.img %> alt="">
                       <a href="/service?id=<%= service._id %>" class="overlay-link"><i class="fa fa-link"></i></a>
                       <div class="overlay-bottom">
                         <div class="text">
@@ -606,6 +661,7 @@
     <!-- JavaScript files placed at the end of the document so the pages load faster -->
     <!-- ================================================== -->
     <!-- Jquery and Bootstap core js files -->
+    <script type="text/javascript" src="/asset/js/underscore-min.js"></script>
     <script type="text/javascript" src="/asset/plugins/jquery.min.js"></script>
     <script type="text/javascript" src="/asset/plugins/tether.min.js"></script>
     <script type="text/javascript" src="/asset/bootstrap/js/bootstrap.min.js"></script>
@@ -633,6 +689,8 @@
     <script type="text/javascript" src="/asset/plugins/owlcarousel2/owl.carousel.min.js"></script>
     <!-- Initialization of Plugins -->
     <script type="text/javascript" src="/asset/js/template.js"></script>
+    <!-- 17 Track Js -->
+    <script type="text/javascript" src="//www.17track.net/externalcall.js"></script>
     <!-- Custom Scripts -->
     <script type="text/javascript" src="/asset/js/custom.js"></script>
     <% if(notification.display) {%>
