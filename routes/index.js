@@ -288,6 +288,7 @@ router.get('/currencyExchange', function (req, res, next) {
 
 router.post('/track', function (req, res, next) {
   request.post({ url: 'http://de.99mst.com/cgi-bin/GInfo.dll', form: req.body, json: true }, function (err, httpResponse, body) {
+    console.log(body);
     res.json(body);
   });
 });

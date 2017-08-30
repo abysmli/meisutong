@@ -178,6 +178,9 @@ function doTrack() {
 							'            <% }) %>' +
 							'        </tbody>' +
 							'    </table>' +
+							'<br/>' +
+							'<h4><%= data.Response_Info.transKind %>段包裹查询</h4>' +
+							'<p><%= data.Response_Info.transKind %>段包裹 点击<a target="_blank" href="http://www.sf-express.com/cn/sc/dynamic_function/waybill/#search/bill-number/<%= data.Response_Info.transNbr %>"><%= data.Response_Info.transNbr %></a>查询</p>' +
 							'</div>');
 					} else if (data.ReturnValue == -102) {
 						template = _.template('<div class="container alert alert-danger">' +
@@ -185,17 +188,17 @@ function doTrack() {
 							'</div>');
 					} else if (data.ReturnValue == -9) {
 						template = _.template('<div class="container alert alert-danger">' +
-						'	<strong>未知错误</strong>' +
-						'</div>');
+							'	<strong>未知错误</strong>' +
+							'</div>');
 					} else {
 						template = _.template('<div class="container alert alert-danger">' +
-						'	<strong>未知错误</strong>' +
-						'</div>');
+							'	<strong>未知错误</strong>' +
+							'</div>');
 					}
 				} else {
 					template = _.template('<div class="container alert alert-danger">' +
-					'	<strong>未知错误</strong>' +
-					'</div>');
+						'	<strong>未知错误</strong>' +
+						'</div>');
 				}
 				$("#YQContainer").html(template({ data: data }));
 			},
