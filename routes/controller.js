@@ -176,9 +176,6 @@ router.get('/doc/edit', auth, function (req, res, next) {
 
 router.post('/doc/edit', auth, function (req, res, next) {
     var doc = req.body;
-    if (JSON.parse(doc.img) == "") {
-        delete doc.img;
-    }
     Doc.findOneAndUpdate({
         _id: req.query.id
     }, doc, function (err, doc) {
@@ -330,9 +327,6 @@ router.get('/transfer/edit', auth, function (req, res, next) {
 
 router.post('/transfer/edit', auth, function (req, res, next) {
     var transfer = req.body;
-    if (JSON.parse(transfer.img) == "") {
-        delete transfer.img;
-    }
     Transfer.findOneAndUpdate({
         _id: req.query.id
     }, transfer, function (err, transfer) {
