@@ -6,6 +6,7 @@ var ShopTutorialSchema = new mongoose.Schema({
     ShopId: String,
     ShopTitle: String,
     Description: String,
+    Category: String,
     Logo: String,
     LogoURL: String,
     ProductCount: String,

@@ -149,6 +149,7 @@ File Description: Place here your custom CSS styles
 .quicklink .quickbox ul li i.quickicond{background-position: 0px -490px;}
 .quicklink .quickbox ul li i.quickicone{background-position: 0px -890px;}
 .quicklink .quickbox ul li i.quickiconf{background-position: 0px -955px;}
+.quicklink .quickbox ul li i.quickicong{background-position: 0px -563px;}
 
 .quicklink .quickbox ul li:hover i.quickicona{background-position: -100px -281px;}
 .quicklink .quickbox ul li:hover i.quickiconb{background-position: -100px -339px;}
@@ -156,6 +157,7 @@ File Description: Place here your custom CSS styles
 .quicklink .quickbox ul li:hover i.quickicond{background-position: -100px -490px;}
 .quicklink .quickbox ul li:hover i.quickicone{background-position: -100px -890px;}
 .quicklink .quickbox ul li:hover i.quickiconf{background-position: -100px -955px;}
+.quicklink .quickbox ul li:hover i.quickicong{background-position: -100px -563px;}
 .quicklink .quickbox > ul > li:hover > a{color:#FFF; }
 
 .quicklink .quickbox i,.quicklink .quickon i{ background:url(/images/icons.png) no-repeat;}

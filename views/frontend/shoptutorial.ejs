@@ -304,14 +304,18 @@
 
             <!-- page-title start -->
             <!-- ================ -->
-            <h1 class="page-title">
-              <%= title %>
-            </h1>
+            <h1 class="page-title"><%= title %></h1>
+            <div class="btn-group button-group filters-button-group" role="group" aria-label="Category Button Group">
+              <button class="btn btn-gray-transparent btn-sm" data-filter="*">全部店铺</button>
+              <% categorys.forEach((category, index)=>{ %>
+              <button class="btn btn-gray-transparent btn-sm" data-filter=".<%= category %>"><%= category %></button>
+              <% }) %>
+            </div>
             <div class="separator-2"></div>
             <!-- page-title end -->
-            <div class="row">
+            <div class="row grid">
             <% shoptutorials.forEach((shoptutorial, index)=>{ %>
-              <div class="col-sm-3">
+              <div class="col-lg-3 col-md-4 col-sm-6 element-item <%= shoptutorial.Category %>" data-category="<%= shoptutorial.Category %>">
                 <div class="image-box style-2 mb-20 shadow bordered light-gray-bg text-center">
                   <div class="overlay-container">
                     <img style="padding: 16px" src=<% if (shoptutorial.Logo) { %><%- shoptutorial.Logo %><% } else { %>"<%= shoptutorial.LogoURL%>"<% } %> alt="">
@@ -386,6 +390,8 @@
   <script type="text/javascript" src="/asset/bootstrap/js/bootstrap.min.js"></script>
   <!-- Modernizr javascript -->
   <script type="text/javascript" src="/asset/plugins/modernizr.js"></script>
+  <!-- Isotope javascript -->
+  <script type="text/javascript" src="/asset/plugins/isotope/isotope.pkgd.min.js"></script>
   <!-- Magnific Popup javascript -->
   <script type="text/javascript" src="/asset/plugins/magnific-popup/jquery.magnific-popup.min.js"></script>
   <!-- Appear javascript -->

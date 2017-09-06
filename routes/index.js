@@ -184,11 +184,17 @@ router.get('/shoptutorial', function (req, res, next) {
       Transfer.find({}).sort({ updated_at: -1 }).exec(function (err, transfers) {
         ShopTutorial.find({}).sort({ updated_at: -1 }).exec(function (err, shoptutorials) {
           Search.find({active: true}).sort({ times: -1 }).limit(20).exec(function (err, hotsearchs) {
-            var paths = [], path;
+            let paths = [], path, categorys = [], category;
             transfers.forEach(function (transfer, index) {
               if (path != transfer.path) {
                 paths.push(transfer.path);
                 path = transfer.path;
+              }
+            });
+            shoptutorials.forEach((shop, index)=>{
+              if (category != shop.Category) {
+                categorys.push(shop.Category);
+                category = shop.Category;
               }
             });
             res.render('frontend/shoptutorial', {
@@ -198,6 +204,7 @@ router.get('/shoptutorial', function (req, res, next) {
               docs: docs,
               paths: paths,
               transfers: transfers,
+              categorys: categorys,
               shoptutorials: shoptutorials,
               hotsearchs: hotsearchs
             });
