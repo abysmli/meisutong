@@ -43,6 +43,9 @@
     <link href="/asset/plugins/hover/hover-min.css" rel="stylesheet">		
     <link href="/asset/plugins/morphext/morphext.css" rel="stylesheet">
     <link href="/asset/plugins/flag-icon-css/css/flag-icon.min.css" rel="stylesheet">
+
+    <!-- Track More -->
+    <link rel="stylesheet" type="text/css" href="//s.trackingmore.com/plugins/v1/plugins.css?time=20170825">
     
     <!-- The Project's core CSS file -->
     <!-- Use css/rtl_style.css for RTL version -->
@@ -216,9 +219,9 @@
                               <li>
                                 <div class="row">
                                   <div class="col-md-12">
-                                    <h4 class="title"><i class="fa fa-laptop pr-2"></i> 购物助手</h4>
                                     <div class="row">
                                       <div class="col-lg-3">
+                                        <h4 class="title"><i class="fa fa-laptop pr-2"></i> 购物助手</h4>
                                         <div class="divider"></div>
                                         <ul class="menu">
                                           <li class="active"><a href="#"><i class="icon-suitcase pr-2"></i>找货比价</a></li>
@@ -227,13 +230,18 @@
                                         </ul>
                                       </div>
                                       <div class="col-lg-9">
-                                          <form id="searchProductForm" action="/searchProduct" method="post">
-                                            <div class="input-group mb-2 mr-sm-2 mb-sm-0">
-                                              <div class="input-group-addon"><span class="fa fa-search"></span></div>
-                                              <input type="text" class="form-control" name="search" id="searchInput" placeholder="输入商品名称或粘贴想要代购的商品地址">
-                                              <button type="submit" style="display: none;"></button>
-                                            </div>
-                                          </form>
+                                        <form id="searchProductForm" action="/searchProduct" method="post">
+                                          <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                                            <div class="input-group-addon"><span class="fa fa-search"></span></div>
+                                            <input type="text" class="form-control" name="search" id="searchInput" placeholder="输入商品名称或粘贴想要代购的商品地址">
+                                            <button type="submit" style="display: none;"></button>
+                                          </div>
+                                        </form>
+                                        <div class="divider"></div>
+                                        <h4>大家都在搜：</h4>
+                                        <% hotsearchs.forEach((hotsearch, index) => { %>
+                                        <a href="/searchProduct?search=<%= hotsearch.query %>" style="display:inline-block;"><%= hotsearch.query %></a>
+                                        <% }) %>
                                       </div>
                                     </div>
                                   </div>
@@ -408,20 +416,11 @@
                           <button type="button" id="transfer-type" class="btn btn-large btn-secondary dropdown-toggle" style="margin: 0" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             美速通速运
                           </button>
-                          <div class="dropdown-menu">
+                          <div class="dropdown-menu" style="cursor:pointer">
                             <a class="dropdown-item" onclick="setTrack('MST')">美速通速运</a>
                             <div role="separator" class="dropdown-divider"></div>
-                            <a class="dropdown-item" onclick="setTrack('DHL')">DHL</a>
-                            <a class="dropdown-item" onclick="setTrack('Hermes')">Hermes</a>
-                            <a class="dropdown-item" onclick="setTrack('UPS')">UPS</a>
-                            <a class="dropdown-item" onclick="setTrack('GLS')">GLS</a>
-                            <a class="dropdown-item" onclick="setTrack('DPD')">DPD</a>
-                            <a class="dropdown-item" onclick="setTrack('顺丰速运')">顺丰速运</a>
-                            <a class="dropdown-item" onclick="setTrack('安能物流')">安能物流</a>
-                            <a class="dropdown-item" onclick="setTrack('德邦物流')">德邦物流</a>
-                            <a class="dropdown-item" onclick="setTrack('百世快递')">百世快递</a>
-                            <a class="dropdown-item" onclick="setTrack('优速快递')">优速快递</a>
-                            <a class="dropdown-item" onclick="setTrack('other')">其它</a>
+                            <a class="dropdown-item" onclick="setTrack('Euro')">欧洲段物流</a>
+                            <a class="dropdown-item" onclick="setTrack('China')">国内段物流</a>
                           </div>
                         </div>
                         <input type="text" class="form-control form-control-lg" id="YQNum" placeholder="运单号" aria-label="Text input with dropdown button">
@@ -429,7 +428,7 @@
                       <button type="button" onclick="doTrack()" class="btn btn-lg btn-gray-transparent btn-animated margin-clear ml-3">查询 <i class="fa fa-search"></i></button>
                     </form>
                     <div class="separator"></div>
-                    <div id="YQContainer"></div>
+                    <div id="YQContainer" style="max-height: 600px"></div>
                   </div>
                 </div>
               </div>
@@ -667,6 +666,8 @@
     <script type="text/javascript" src="/asset/js/template.js"></script>
     <!-- 17 Track Js -->
     <script type="text/javascript" src="//www.17track.net/externalcall.js"></script>
+    <!-- Track More -->
+    <script type="text/javascript" src="//s.trackingmore.com/plugins/v1/plugins.min.js"></script>
     <!-- Custom Scripts -->
     <script type="text/javascript" src="/asset/js/custom.js"></script>
     <% if(notification.display) {%>

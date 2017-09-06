@@ -88,10 +88,14 @@ var transfertype = "";
 
 function setTrack(type) {
 	transfertype = type;
-	$("#transfer-type").text(type == "MST" ? "美速通速运" : type == "other" ? "其它" : type);
+	$("#transfer-type").text(type == "MST" ? "美速通速运" : type == "Euro" ? "欧洲段物流" : "国内段物流");
 }
 
 function doTrack() {
+	if (document.getElementById("YQNum").value === "") {
+		alert("请输入运单号");
+		return;
+	}
 	$("#YQContainer").html("");
 	if (transfertype == "MST" || transfertype == "") {
 		$.ajax({
@@ -207,24 +211,26 @@ function doTrack() {
 				console.log(xhr.responseText);
 			},
 		});
-	} else {
-		var YQ_Lang = transfertype == "other" ? "0" : transfertype;
-		var num = document.getElementById("YQNum").value;
-		if (num === "") {
-			alert("请输入运单号");
-			return;
-		}
+	} else if (transfertype == "Euro") {
+		let num = document.getElementById("YQNum").value;
 		YQV5.trackSingle({
 			//必须，指定承载内容的容器ID。
 			YQ_ContainerId: "YQContainer",
 			//可选，指定查询结果高度，最大高度为800px，默认撑满容器。
 			YQ_Height: 400,
-			//可选，指定运输商，默认为自动识别。
-			YQ_Fc: YQ_Lang,
 			//可选，指定UI语言，默认根据浏览器自动识别。
 			YQ_Lang: "zh-CN",
 			//必须，指定要查询的单号。
 			YQ_Num: num
+		});
+	} else if (transfertype == "China") {
+		let num = document.getElementById("YQNum").value;
+		TRACKINGMORE.trackMynumber({
+			TR_ElementId: "YQContainer",      //必须，指定悬浮位置的元素ID。
+			TR_Height: "600px",       //可选，指定查询结果高度，最大高度为800px，默认撑满容器。
+			TR_ExpressCode: "0",
+			TR_Lang: "cn",       //可选，指定UI语言，默认根据浏览器自动识别。
+			TR_Num: num       //必须，指定要查询的单号。
 		});
 	}
 

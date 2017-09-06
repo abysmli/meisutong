@@ -222,37 +222,42 @@
 
                         <!-- mega-menu start -->
                         <li class="nav-item dropdown active mega-menu mega-menu--wide">
-                            <a href="#" class="nav-link dropdown-toggle" id="first-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">购物助手</a>
-                            <ul class="dropdown-menu" aria-labelledby="first-dropdown">
-                              <li>
-                                <div class="row">
-                                  <div class="col-md-12">
-                                    <h4 class="title"><i class="fa fa-laptop pr-2"></i> 购物助手</h4>
-                                    <div class="row">
-                                      <div class="col-lg-3">
-                                        <div class="divider"></div>
-                                        <ul class="menu">
-                                          <li class="active"><a href="#"><i class="icon-suitcase pr-2"></i>找货比价</a></li>
-                                          <li><a href="/comingsoon"><i class="icon-suitcase pr-2"></i>一键代发商城</a></li>
-                                          <li><a href="/comingsoon"><i class="icon-suitcase pr-2"></i>代付专家购</a></li>
-                                        </ul>
-                                      </div>
-                                      <div class="col-lg-9">
-                                          <form id="searchProductForm" action="/searchProduct" method="post">
-                                            <div class="input-group mb-2 mr-sm-2 mb-sm-0">
-                                              <div class="input-group-addon"><span class="fa fa-search"></span></div>
-                                              <input type="text" class="form-control" name="search" id="searchInput" placeholder="输入商品名称或粘贴想要代购的商品地址">
-                                              <button type="submit" style="display: none;"></button>
-                                            </div>
-                                          </form>
-                                      </div>
+                          <a href="#" class="nav-link dropdown-toggle" id="first-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">购物助手</a>
+                          <ul class="dropdown-menu" aria-labelledby="first-dropdown">
+                            <li>
+                              <div class="row">
+                                <div class="col-md-12">
+                                  <div class="row">
+                                    <div class="col-lg-3">
+                                      <h4 class="title"><i class="fa fa-laptop pr-2"></i> 购物助手</h4>
+                                      <div class="divider"></div>
+                                      <ul class="menu">
+                                        <li class="active"><a href="#"><i class="icon-suitcase pr-2"></i>找货比价</a></li>
+                                        <li><a href="/comingsoon"><i class="icon-suitcase pr-2"></i>一键代发商城</a></li>
+                                        <li><a href="/comingsoon"><i class="icon-suitcase pr-2"></i>代付专家购</a></li>
+                                      </ul>
+                                    </div>
+                                    <div class="col-lg-9">
+                                      <form id="searchProductForm" action="/searchProduct" method="post">
+                                        <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                                          <div class="input-group-addon"><span class="fa fa-search"></span></div>
+                                          <input type="text" class="form-control" name="search" id="searchInput" placeholder="输入商品名称或粘贴想要代购的商品地址">
+                                          <button type="submit" style="display: none;"></button>
+                                        </div>
+                                      </form>
+                                      <div class="divider"></div>
+                                      <h4>大家都在搜：</h4>
+                                      <% hotsearchs.forEach((hotsearch, index) => { %>
+                                      <a href="/searchProduct?search=<%= hotsearch.query %>" style="display:inline-block;"><%= hotsearch.query %></a>
+                                      <% }) %>
                                     </div>
                                   </div>
                                 </div>
-                              </li>
-                            </ul>
-                          </li>
-                          <!-- mega-menu end -->
+                              </div>
+                            </li>
+                          </ul>
+                        </li>
+                        <!-- mega-menu end -->
 
                         <li class="nav-item">
                           <a href="/aboutus" class="nav-link">关于我们</a>

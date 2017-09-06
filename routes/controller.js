@@ -11,6 +11,7 @@ var ShopTutorial = require('../models/shoptutorial');
 var Slide = require('../models/slide');
 var Notiz = require('../models/notification');
 var About = require('../models/about');
+var Search = require('../models/search');
 var allhaha = require('../utils/allhahaAPI');
 var Allhaha = new allhaha("e3016002-f1c1-47e1-b0e4-3770415e2797", "47c0ae5b-d9ee-4ebb-ba29-79caf197eb69");
 
@@ -417,6 +418,38 @@ router.get('/show/active', auth, function (req, res, next) {
         if (err) next(err);
         else {
             res.redirect('/controller/show');
+        }
+    });
+});
+
+router.get('/hotsearch', auth, function (req, res, next) {
+    Search.find({}).sort({times: -1}).exec(function (err, searchs) {
+        if (err) next(err);
+        else {
+            res.render('controller/hotsearch', {
+                layout: 'controller/layout',
+                title: '大家热搜',
+                searchs: searchs
+            });
+        }
+    });
+});
+
+router.get('/hotsearch/remove', auth, function (req, res, next) {
+    Search.findByIdAndRemove(req.query.id, function (err, searchs) {
+        if (err) next(err);
+        else {
+            return res.redirect('/controller/hotsearch');
+        }
+    });
+});
+
+router.get('/hotsearch/active', auth, function (req, res, next) {
+    var active = (req.query.state == "true");
+    Search.findByIdAndUpdate(req.query.id, { active: active }, function (err, searchs) {
+        if (err) next(err);
+        else {
+            res.redirect('/controller/hotsearch');
         }
     });
 });
