@@ -14,6 +14,7 @@ var flash = require('express-flash');
 var controller = require('./routes/controller');
 var showupload = require('./routes/showupload');
 var config = require('config');
+var fileManager = require('express-file-manager');
 
 var index = require('./routes/index');
 
@@ -57,6 +58,7 @@ app.use(partials());
 app.use('/', index);
 app.use('/controller', controller);
 app.use('/show-upload', showupload);
+app.use('/filemanager', fileManager(process.cwd() + '/public/files/', {}));
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
