@@ -161,3 +161,28 @@ File Description: Place here your custom CSS styles
 .quicklink .quickbox > ul > li:hover > a{color:#FFF; }
 
 .quicklink .quickbox i,.quicklink .quickon i{ background:url(/images/icons.png) no-repeat;}
+
+.trDialog {
+    z-index: 1000 !important;
+    overflow-y: auto;
+}
+
+.trFrameClose {
+    top: 0px !important;
+    z-index: 1100 !important;
+}
+
+.loader {
+    margin: auto;
+    border: 4px solid #f3f3f3; /* Light grey */
+    border-top: 4px solid #3498db; /* Blue */
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}

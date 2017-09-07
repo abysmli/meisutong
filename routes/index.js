@@ -22,7 +22,7 @@ router.get('/', function (req, res, next) {
           Show.find({ active: true }).sort({ updated_at: -1 }).exec(function (err, shows) {
             Slide.find({}).sort({ updated_at: -1 }).exec(function (err, slides) {
               Notiz.findOne({}).sort({ updated_at: -1 }).exec(function (err, notification) {
-                Search.find({active: true}).sort({ times: -1 }).limit(20).exec(function (err, hotsearchs) {
+                Search.find({ active: true }).sort({ times: -1 }).limit(20).exec(function (err, hotsearchs) {
                   var paths = [], path;
                   transfers.forEach(function (transfer, index) {
                     if (path != transfer.path) {
@@ -60,7 +60,7 @@ router.get('/service', function (req, res, next) {
       Doc.find({}).sort({ updated_at: -1 }).exec(function (err, docs) {
         Transfer.find({}).sort({ updated_at: -1 }).exec(function (err, transfers) {
           ShopTutorial.find({}).sort({ updated_at: -1 }).exec(function (err, shoptutorials) {
-            Search.find({active: true}).sort({ times: -1 }).limit(20).exec(function (err, hotsearchs) {
+            Search.find({ active: true }).sort({ times: -1 }).limit(20).exec(function (err, hotsearchs) {
               var paths = [], path;
               transfers.forEach(function (transfer, index) {
                 if (path != transfer.path) {
@@ -92,7 +92,7 @@ router.get('/doc', function (req, res, next) {
     Doc.find({}).sort({ updated_at: -1 }).exec(function (err, docs) {
       Transfer.find({}).sort({ updated_at: -1 }).exec(function (err, transfers) {
         ShopTutorial.find({}).sort({ updated_at: -1 }).exec(function (err, shoptutorials) {
-          Search.find({active: true}).sort({ times: -1 }).limit(20).exec(function (err, hotsearchs) {
+          Search.find({ active: true }).sort({ times: -1 }).limit(20).exec(function (err, hotsearchs) {
             var paths = [], path;
             transfers.forEach(function (transfer, index) {
               if (path != transfer.path) {
@@ -123,7 +123,7 @@ router.get('/transfer', function (req, res, next) {
     Doc.find({}).sort({ updated_at: -1 }).exec(function (err, docs) {
       Transfer.find({}).sort({ updated_at: -1 }).exec(function (err, transfers) {
         ShopTutorial.find({}).sort({ updated_at: -1 }).exec(function (err, shoptutorials) {
-          Search.find({active: true}).sort({ times: -1 }).limit(20).exec(function (err, hotsearchs) {
+          Search.find({ active: true }).sort({ times: -1 }).limit(20).exec(function (err, hotsearchs) {
             var paths = [], path;
             transfers.forEach(function (transfer, index) {
               if (path != transfer.path) {
@@ -155,7 +155,7 @@ router.get('/shoptutorial', function (req, res, next) {
       Doc.find({}).sort({ updated_at: -1 }).exec(function (err, docs) {
         Transfer.find({}).sort({ updated_at: -1 }).exec(function (err, transfers) {
           ShopTutorial.find({}).sort({ updated_at: -1 }).exec(function (err, shoptutorials) {
-            Search.find({active: true}).sort({ times: -1 }).limit(20).exec(function (err, hotsearchs) {
+            Search.find({ active: true }).sort({ times: -1 }).limit(20).exec(function (err, hotsearchs) {
               var paths = [], path;
               transfers.forEach(function (transfer, index) {
                 if (path != transfer.path) {
@@ -183,7 +183,7 @@ router.get('/shoptutorial', function (req, res, next) {
     Doc.find({}).sort({ updated_at: -1 }).exec(function (err, docs) {
       Transfer.find({}).sort({ updated_at: -1 }).exec(function (err, transfers) {
         ShopTutorial.find({}).sort({ updated_at: -1 }).exec(function (err, shoptutorials) {
-          Search.find({active: true}).sort({ times: -1 }).limit(20).exec(function (err, hotsearchs) {
+          Search.find({ active: true }).sort({ times: -1 }).limit(20).exec(function (err, hotsearchs) {
             let paths = [], path, categorys = [], category;
             transfers.forEach(function (transfer, index) {
               if (path != transfer.path) {
@@ -191,7 +191,7 @@ router.get('/shoptutorial', function (req, res, next) {
                 path = transfer.path;
               }
             });
-            shoptutorials.forEach((shop, index)=>{
+            shoptutorials.forEach((shop, index) => {
               if (category != shop.Category) {
                 categorys.push(shop.Category);
                 category = shop.Category;
@@ -221,7 +221,7 @@ router.get('/aboutus', function (req, res, next) {
       Transfer.find({}).sort({ updated_at: -1 }).exec(function (err, transfers) {
         ShopTutorial.find({}).sort({ updated_at: -1 }).exec(function (err, shoptutorials) {
           About.findOne({}).sort({ updated_at: -1 }).exec(function (err, about) {
-            Search.find({active: true}).sort({ times: -1 }).limit(20).exec(function (err, hotsearchs) {
+            Search.find({ active: true }).sort({ times: -1 }).limit(20).exec(function (err, hotsearchs) {
               if (err) next(err);
               else {
                 var paths = [], path;
@@ -268,7 +268,7 @@ router.all('/searchProduct', function (req, res, next) {
       Doc.find({}).sort({ updated_at: -1 }).exec(function (err, docs) {
         Transfer.find({}).sort({ updated_at: -1 }).exec(function (err, transfers) {
           ShopTutorial.find({}).sort({ updated_at: -1 }).exec(function (err, shoptutorials) {
-            Search.find({active: true}).sort({ times: -1 }).limit(20).exec(function (err, hotsearchs) {
+            Search.find({ active: true }).sort({ times: -1 }).limit(20).exec(function (err, hotsearchs) {
               if (err) next(err);
               else {
                 var paths = [], path;
@@ -320,46 +320,92 @@ router.get('/currencyExchange', function (req, res, next) {
 
 router.post('/track', function (req, res, next) {
   request.post({ url: 'http://de.99mst.com/cgi-bin/GInfo.dll', form: req.body, json: true }, function (err, httpResponse, body) {
-    res.json(body);
+    if (body) {
+      if (body.ReturnValue == '100') {
+        let trackingnumber = body.Response_Info.transNbr;
+        let code, carrier;
+        if (trackingnumber.length == 13) {
+          code = 'china-post';
+          carrier = "中国邮政";
+        } else if (trackingnumber.length == 10) {
+          code = 'deppon';
+          carrier = "德邦物流";
+        } else if (trackingnumber.length == 14 || (trackingnumber.charAt(0) == '2' && trackingnumber.length == 12)) {
+          code = 'ane66';
+          carrier = "安能物流";
+        } else if (trackingnumber.length == 12) {
+          code = 'sf-express';
+          carrier = "顺丰快递";
+        } else {
+          code = '';
+          carrier = '';
+        }
+        body.ChinaPart = {
+          trackingnumber: trackingnumber,
+          code: code,
+          carrier: carrier
+        };
+        request.post({
+          url: 'https://api.trackingmore.com/v2/trackings/post', json: true, body: {
+            'tracking_number': trackingnumber,
+            'carrier_code': code
+          }, headers: {
+            'Content-Type': 'application/json',
+            'Trackingmore-Api-Key': '464031ea-ff09-4a31-8ec7-b07e99d5ecee'
+          }
+        }, function (err, httpResponse, responseBody) {
+          console.log(responseBody);
+          setTimeout(()=>{
+            request.get({
+              url: 'http://api.trackingmore.com/v2/trackings/' + code + '/' + trackingnumber, json: true, headers: {
+                'Content-Type': 'application/json',
+                'Trackingmore-Api-Key': '464031ea-ff09-4a31-8ec7-b07e99d5ecee',
+              }
+            }, function (err, httpResponse, _body) {
+              console.log(_body);
+              if (_body.data.origin_info) {
+                if (_body.data.origin_info.trackinfo) {
+                  console.log(_body.data.origin_info.trackinfo);
+                  _body.data.origin_info.trackinfo.reverse()
+                  body.ChinaPart.info = _body.data;
+                }
+              }
+              res.json(body);
+            });
+          }, 7000);
+        });
+      } else {
+        res.json(body);
+      }
+    } else {
+      res.json(body);
+    }
   });
 });
 
 // request.post({
 //   url: 'https://api.trackingmore.com/v2/carriers/detect', json: true, body: {
-//     'tracking_number': '848146552238'
+//     'tracking_number': trackingnumber
 //   }, headers: {
 //     'Content-Type': 'application/json',
 //     'Trackingmore-Api-Key': '464031ea-ff09-4a31-8ec7-b07e99d5ecee'
 //   }
 // }, function (err, httpResponse, body) {
-//   console.log(body.data.length);
-//   if (body.meta.code == 200) {
-//     var codes = body.data;
-//     tracking(codes, 0);
-//   } else {
-//     console.log("Wrong Tracking Number");
-//   }
+//   console.log(body);
 // });
 
-// function tracking(codes, i) {
-//   if (i < codes.length) {
-//     request.post({
-//       url: 'https://api.trackingmore.com/v2/trackings/realtime', json: true, body: {
-//         'tracking_number': '848146552238',
-//         "carrier_code": codes[i].code,
-//         "lang": "cn"
-//       }, headers: {
-//         'Content-Type': 'application/json',
-//         'Trackingmore-Api-Key': '464031ea-ff09-4a31-8ec7-b07e99d5ecee',
-//       }
-//     }, function (err, httpResponse, body) {
-//       console.log(i);
-//       console.log(codes[i].code);
-//       console.log(body.data.items);
-//       tracking(codes, i + 1);
-//     });
-//   }
-// }
+router.get('/carriers', (req, res, next) => {
+  request.get({
+    url: 'https://api.trackingmore.com/v2/carriers', json: true, headers: {
+      'Content-Type': 'application/json',
+      'Trackingmore-Api-Key': '464031ea-ff09-4a31-8ec7-b07e99d5ecee',
+      'Lang': 'cn'
+    }
+  }, function (err, httpResponse, body) {
+    res.json(body);
+  });
+});
+
 
 
 module.exports = router;

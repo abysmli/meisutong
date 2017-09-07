@@ -410,7 +410,7 @@
                     <h1 class="title"><strong>运单查询</strong></h1>
                     <p class="large text-center">请输入您的运单号进行包裹追踪</p>
                     <div class="separator"></div>
-                    <form class="form-inline margin-clear d-flex justify-content-center">
+                    <form id="tracking-form" class="form-inline margin-clear d-flex justify-content-center">
                       <div class="input-group">
                         <div class="input-group-btn">
                           <button type="button" id="transfer-type" class="btn btn-large btn-secondary dropdown-toggle" style="margin: 0" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -424,11 +424,13 @@
                           </div>
                         </div>
                         <input type="text" class="form-control form-control-lg" id="YQNum" placeholder="运单号" aria-label="Text input with dropdown button">
+                        <div class="input-group-btn">
+                          <button type="button" onclick="doTrack()" class="btn btn-lg btn-gray-transparent btn-animated margin-clear">查询 <i class="fa fa-search"></i></button>
+                        </div>
                       </div>
-                      <button type="button" onclick="doTrack()" class="btn btn-lg btn-gray-transparent btn-animated margin-clear ml-3">查询 <i class="fa fa-search"></i></button>
                     </form>
                     <div class="separator"></div>
-                    <div id="YQContainer" style="max-height: 600px"></div>
+                    <div id="YQContainer"></div>
                   </div>
                 </div>
               </div>
@@ -443,7 +445,6 @@
       <section class="pv-40">
         <div class="container">
           <div class="row">
-
             <!-- main start -->
             <!-- ================ -->
             <div class="main col-12">
@@ -454,7 +455,6 @@
               <p class="large text-center">美速通全体成员向我们的客户提供以下服务及活动</p>
               <br>
               <!-- page-title end -->
-
               <div class="row">
                 <% services.forEach(function(service, index){ %>
                 <div class="col-md-6">
@@ -477,7 +477,6 @@
                 <% }) %>
             </div>
             <!-- main end -->
-
           </div>
         </div>
       </section>
@@ -584,7 +583,6 @@
           </div>
         </div>
         <!-- .subfooter end -->
-
       </footer>
       <!-- footer end -->
 

@@ -16,6 +16,11 @@ var transfertype = "";
 		});
 		"use strict";
 
+		$("#tracking-form").submit((e) => {
+			doTrack();
+			return false;
+		});
+
 		// quicklink
 		$(".quickbot").hide();
 		$(".quickbox .wxcode").hide();
@@ -108,8 +113,10 @@ function doTrack() {
 		alert("请输入运单号");
 		return;
 	}
+	$(".trDialog").remove();
 	$("#YQContainer").html("");
 	if (transfertype == "MST" || transfertype == "") {
+		$("#YQContainer").append('<div class="loader"></div>');
 		$.ajax({
 			url: '/track',
 			type: 'POST',
@@ -180,23 +187,45 @@ function doTrack() {
 							'        <tbody>' +
 							'            <thead>' +
 							'                <tr>' +
-							'                    <th>日期</th>' +
 							'                    <th>国家</th>' +
 							'                    <th>状态</th>' +
+							'                    <th>日期</th>' +
 							'                </tr>' +
 							'            </thead>' +
 							'            <% data.trackingEventList.forEach((event, index)=>{ %>' +
 							'            <tr>' +
-							'                <td><%= event.date %></td>' +
 							'                <td><%= event.place %></td>' +
 							'                <td><%= event.details %></td>' +
+							'                <td><%= event.date %></td>' +
 							'            </tr>' +
 							'            <% }) %>' +
 							'        </tbody>' +
 							'    </table>' +
 							'<br/>' +
-							'<h4><%= data.Response_Info.transKind %>段包裹查询</h4>' +
-							'<p><%= data.Response_Info.transKind %>段包裹 点击<a target="_blank" href="http://www.sf-express.com/cn/sc/dynamic_function/waybill/#search/bill-number/<%= data.Response_Info.transNbr %>"><%= data.Response_Info.transNbr %></a>查询</p>' +
+							'<% if (data.ChinaPart.info) { %>' +
+							'<h4>国内<b><%= data.ChinaPart.carrier %></b>段包裹查询</h4>' +
+							'<table class="table table-bordered table-colored table-hover">' +
+							'    <tbody>' +
+							'        <thead>' +
+							'            <tr>' +
+							'                <th>状态</th>' +
+							'                <th>日期</th>' +
+							'                <th>详情</th>' +
+							'            </tr>' +
+							'        </thead>' +
+							'        <% data.ChinaPart.info.origin_info.trackinfo.forEach((event, index)=>{ %>' +
+							'        <tr>' +
+							'            <td><%= event.StatusDescription %></td>' +
+							'            <td><%= event.Date %></td>' +
+							'            <td><%= event.Details %></td>' +
+							'        </tr>' +
+							'        <% }) %>' +
+							'    </tbody>' +
+							'</table>' +
+							'<% } else { %>' +
+							'<h4>国内<b><%= data.ChinaPart.carrier %></b>段包裹查询</h4>' +
+							'<p>国内<b><%= data.ChinaPart.carrier %></b>段包裹查询失败，请手动查询国内段物流！追踪码：<%= data.ChinaPart.trackingnumber %></p>' +
+							'<% } %>' +
 							'</div>');
 					} else if (data.ReturnValue == -102) {
 						template = _.template('<div class="container alert alert-danger">' +
@@ -229,7 +258,7 @@ function doTrack() {
 			//必须，指定承载内容的容器ID。
 			YQ_ContainerId: "YQContainer",
 			//可选，指定查询结果高度，最大高度为800px，默认撑满容器。
-			YQ_Height: 400,
+			YQ_Height: 800,
 			//可选，指定UI语言，默认根据浏览器自动识别。
 			YQ_Lang: "zh-CN",
 			//必须，指定要查询的单号。
@@ -239,7 +268,7 @@ function doTrack() {
 		let num = document.getElementById("YQNum").value;
 		TRACKINGMORE.trackMynumber({
 			TR_ElementId: "YQContainer",      //必须，指定悬浮位置的元素ID。
-			TR_Height: "600px",       //可选，指定查询结果高度，最大高度为800px，默认撑满容器。
+			TR_Height: 800,       //可选，指定查询结果高度，最大高度为800px，默认撑满容器。
 			TR_ExpressCode: "0",
 			TR_Lang: "cn",       //可选，指定UI语言，默认根据浏览器自动识别。
 			TR_Num: num       //必须，指定要查询的单号。
@@ -247,7 +276,3 @@ function doTrack() {
 	}
 
 }
-
-
-
-
