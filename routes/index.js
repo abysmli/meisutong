@@ -10,6 +10,8 @@ var Slide = require('../models/slide');
 var Notiz = require('../models/notification');
 var About = require('../models/about');
 var Search = require('../models/search');
+var sendMail = require('../utils/sendMail');
+var EmailSender = new sendMail();
 var allhaha = require('../utils/allhahaAPI');
 var Allhaha = new allhaha("e3016002-f1c1-47e1-b0e4-3770415e2797", "47c0ae5b-d9ee-4ebb-ba29-79caf197eb69");
 
@@ -354,18 +356,15 @@ router.post('/track', function (req, res, next) {
             'Trackingmore-Api-Key': '464031ea-ff09-4a31-8ec7-b07e99d5ecee'
           }
         }, function (err, httpResponse, responseBody) {
-          console.log(responseBody);
-          setTimeout(()=>{
+          setTimeout(() => {
             request.get({
               url: 'http://api.trackingmore.com/v2/trackings/' + code + '/' + trackingnumber, json: true, headers: {
                 'Content-Type': 'application/json',
                 'Trackingmore-Api-Key': '464031ea-ff09-4a31-8ec7-b07e99d5ecee',
               }
             }, function (err, httpResponse, _body) {
-              console.log(_body);
               if (_body.data.origin_info) {
                 if (_body.data.origin_info.trackinfo) {
-                  console.log(_body.data.origin_info.trackinfo);
                   _body.data.origin_info.trackinfo.reverse()
                   body.ChinaPart.info = _body.data;
                 }
@@ -383,16 +382,75 @@ router.post('/track', function (req, res, next) {
   });
 });
 
-// request.post({
-//   url: 'https://api.trackingmore.com/v2/carriers/detect', json: true, body: {
-//     'tracking_number': trackingnumber
-//   }, headers: {
-//     'Content-Type': 'application/json',
-//     'Trackingmore-Api-Key': '464031ea-ff09-4a31-8ec7-b07e99d5ecee'
-//   }
-// }, function (err, httpResponse, body) {
-//   console.log(body);
-// });
+router.get('/contactus', function (req, res, next) {
+  ShopTutorial.findById(req.query.id, function (err, shoptutorial) {
+    Doc.find({}).sort({ updated_at: -1 }).exec(function (err, docs) {
+      Transfer.find({}).sort({ updated_at: -1 }).exec(function (err, transfers) {
+        ShopTutorial.find({}).sort({ updated_at: -1 }).exec(function (err, shoptutorials) {
+          Search.find({ active: true }).sort({ times: -1 }).limit(20).exec(function (err, hotsearchs) {
+            if (err) next(err);
+            else {
+              var paths = [], path;
+              transfers.forEach(function (transfer, index) {
+                if (path != transfer.path) {
+                  paths.push(transfer.path);
+                  path = transfer.path;
+                }
+              });
+              res.render('frontend/contactus', {
+                title: '联系我们',
+                description: "美速通转运网-致力于成为中国最专业的转运公司！本公司位于洛杉矶，主要经营北美到中国大陆的传统国际快递、以及国际电子商务仓储、物流及相关业务，为德淘人士、欧洲购物、欧淘、德淘转运、德淘海外代购公司、以及德淘代购个人提供一个优秀的转运平台。",
+                keywords: "德淘转运，德淘，欧洲购物,欧淘，德淘之家，德淘网，美速通，德淘攻略",
+                shoptutorial: shoptutorial,
+                docs: docs,
+                paths: paths,
+                transfers: transfers,
+                shoptutorials: shoptutorials,
+                hotsearchs: hotsearchs,
+              });
+            }
+          });
+        });
+      });
+    });
+  });
+});
+
+router.post('/contactus', function (req, res, next) {
+  var feedback = req.body;
+  EmailSender.send({
+    to: feedback.email,
+    subject: '感谢您的留言',
+    template: 'feedback',
+    content: {
+      title: "感谢您的留言",
+      data: {
+        name: feedback.name,
+        email: feedback.email,
+        phone: feedback.phone,
+        category: feedback.category,
+        subject: feedback.subject,
+        message: feedback.message
+      }
+    }
+  }, function (err, info) { });
+  EmailSender.send({
+    to: 'service@cope-express.de',
+    subject: '收到留言，请尽快回复',
+    template: 'feedbackToUs',
+    content: {
+      title: "收到留言，请尽快回复",
+      data: {
+        name: feedback.name,
+        email: feedback.email,
+        phone: feedback.phone,
+        category: feedback.category,
+        subject: feedback.subject,
+        message: feedback.message
+      }
+    }
+  }, function (err, info) { res.redirect("/"); });
+});
 
 router.get('/carriers', (req, res, next) => {
   request.get({

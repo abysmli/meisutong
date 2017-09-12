@@ -285,6 +285,16 @@ router.get('/shoptutorial/remove', auth, function (req, res, next) {
     });
 });
 
+router.get('/shopRate', auth, function (req, res, next) {
+    Allhaha.getProgramRate(req.query.ProgramId, (err, rates) => {
+        res.render('controller/shoprate', {
+            layout: 'controller/layout',
+            title: '返利比率',
+            rates: rates
+        });
+    });
+});
+
 router.get('/transfer', auth, function (req, res, next) {
     Transfer.find({}).sort({ updated_at: -1 }).exec(function (err, transfers) {
         res.render('controller/transfer', {

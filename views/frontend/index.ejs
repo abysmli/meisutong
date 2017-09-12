@@ -288,24 +288,25 @@
                 <!-- ================ -->
                 <% slides.forEach((slide, index)=>{ %>
                 <li data-transition="random" data-slotamount="default" data-masterspeed="default" data-title="<%= slide.title %>">
-                <!-- main image -->
-                <img src="<%= slide.img %>" alt="slidebg1" data-bgposition="center center"  data-bgrepeat="no-repeat" data-bgfit="cover"  class="rev-slidebg">
-                <!-- LAYER NR. 1 -->
-                <div class="tp-caption sfb fadeout dark-translucent-bg caption-box text-left"
-                  style="background-color: rgba(0, 0, 0, 0.8);"
-                  data-x="left"
-                  data-y="center"
-                  data-start="600"
-                  data-whitespace="normal"
-                  data-transform_idle="o:1;"
-                  data-transform_in="y:[100%];sX:1;sY:1;o:0;s:1150;e:Power4.easeInOut;"
-                  data-transform_out="y:[100%];s:1000;e:Power2.easeInOut;"
-                  data-mask_in="x:0px;y:[100%];s:inherit;e:inherit;"
-                  data-mask_out="x:inherit;y:inherit;s:inherit;e:inherit;">
-                  <h2 class="title"><%= slide.title %></h2>
-                  <div class="separator-2 clearfix"></div>
-                  <p><%= slide.description %></p>
-                </div>
+                  <!-- main image -->
+                  <img src="<%= slide.img %>" alt="slidebg1" data-bgposition="center center"  data-bgrepeat="no-repeat" data-bgfit="cover"  class="rev-slidebg">
+                  <!-- LAYER NR. 1 -->
+                  <div class="tp-caption sfb fadeout dark-translucent-bg caption-box text-left"
+                    style="background-color: rgba(0, 0, 0, 0.8);"
+                    data-x="left"
+                    data-y="center"
+                    data-start="600"
+                    data-whitespace="normal"
+                    data-transform_idle="o:1;"
+                    data-transform_in="y:[100%];sX:1;sY:1;o:0;s:1150;e:Power4.easeInOut;"
+                    data-transform_out="y:[100%];s:1000;e:Power2.easeInOut;"
+                    data-mask_in="x:0px;y:[100%];s:inherit;e:inherit;"
+                    data-mask_out="x:inherit;y:inherit;s:inherit;e:inherit;">
+                    <h2 class="title"><%= slide.title %></h2>
+                    <div class="separator-2 clearfix"></div>
+                    <p><%- slide.description %></p>
+                    <!-- <div class="text-right"><a class="btn btn-small btn-default margin-clear" href="page-services.html">Read More</a></div> -->
+                  </div>
                 </li>
                 <% }) %>
                 <!-- slide end -->
@@ -420,7 +421,7 @@
                             <a class="dropdown-item" onclick="setTrack('MST')">美速通速运</a>
                             <div role="separator" class="dropdown-divider"></div>
                             <a class="dropdown-item" onclick="setTrack('Euro')">欧洲段物流</a>
-                            <a class="dropdown-item" onclick="setTrack('China')">国内段物流</a>
+                            <!-- <a class="dropdown-item" onclick="setTrack('China')">国内段物流</a> -->
                           </div>
                         </div>
                         <input type="text" class="form-control form-control-lg" id="YQNum" placeholder="运单号" aria-label="Text input with dropdown button">
@@ -596,7 +597,7 @@
               </div>
             </li>               
             <li><a href="http://www.weibo.com/meisutong" target="_blank" title="官方微博"><i class="quickiconb"></i>官方微博</a></li>
-            <li><a href="mailto:abysmli@gmail.com" target="_blank" title="邮件联系"><i class="quickicong"></i>邮件联系</a></li>
+            <li><a href="/contactus"  title="联系我们"><i class="quickicong"></i>联系我们</a></li>
             <li class="quickbot" style="display: none;"><i class="quickicond"></i>返回顶部</li>
           </ul>
         </div>

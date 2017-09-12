@@ -69,6 +69,24 @@ class Auth {
         });
     }
 
+    getProgramRate(ProgramId, callback) {
+        this.auth((result) => {
+            if (result.success) {
+                request.get({
+                    url: 'http://allhaha.com/api/getProgramRate?ProgramId=' + (ProgramId || "amazon"),
+                    headers: {
+                        'x-access-token': this.token
+                    },
+                    json: true
+                }, (err, httpResponse, body) => {
+                    callback(err, body);
+                });
+            } else {
+                console.log("Check Allhaha Auth Failed!");
+            }
+        });
+    }
+
     searchProduct(query, callback) {
         this.auth((result) => {
             if (result.success) {
