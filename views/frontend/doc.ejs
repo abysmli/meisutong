@@ -184,22 +184,18 @@
                         <li class="nav-item dropdown">
                           <a href="#" class="nav-link dropdown-toggle" id="second-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">转运资费</a>
                           <ul class="dropdown-menu" aria-labelledby="second-dropdown">
-                            <% paths.forEach(function(path, index){ %>
-                              <li class="dropdown ">
-                                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                                  <%= path %>
-                                </a>
-                                <ul class="dropdown-menu">
-                                  <% transfers.forEach(function(transfer, index){ %>
-                                    <li>
-                                      <a href="/transfer?id=<%= transfer._id %>">
-                                        <%= transfer.title %>
-                                      </a>
-                                    </li>
+                              <% paths.forEach(function(path, index){ %>
+                                <li class="dropdown ">
+                                  <a  class="dropdown-toggle" data-toggle="dropdown" href="#"><%= path %></a>
+                                  <ul class="dropdown-menu">
+                                    <% transfers.forEach(function(transfer, index){ %>
+                                      <% if(transfer.path == path) { %>
+                                      <li ><a href="/transfer?id=<%= transfer._id %>"><%= transfer.title %></a></li>
+                                      <% } %>
                                     <% }) %>
-                                </ul>
-                              </li>
-                              <% }) %>
+                                  </ul>
+                                </li>
+                                <% }) %>
                           </ul>
                         </li>
                         <!-- mega-menu end -->
@@ -221,7 +217,7 @@
                         </li>
 
                         <!-- mega-menu start -->
-                        <li class="nav-item dropdown active mega-menu mega-menu--wide">
+                        <li class="nav-item dropdown mega-menu mega-menu--wide">
                           <a href="#" class="nav-link dropdown-toggle" id="first-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">购物助手</a>
                           <ul class="dropdown-menu" aria-labelledby="first-dropdown">
                             <li>
