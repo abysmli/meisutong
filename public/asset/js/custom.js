@@ -203,7 +203,7 @@ function doTrack() {
 							'    </table>' +
 							'<br/>' +
 							'<% if (data.ChinaPart.info) { %>' +
-							'<h4>国内<b><%= data.ChinaPart.carrier %></b>段包裹查询</h4>' +
+							'<h4>国内<b><%= data.ChinaPart.carrier %></b>段包裹查询 - 运单号：<%= data.ChinaPart.trackingnumber %></h4>' +
 							'<table class="table table-bordered table-colored table-hover">' +
 							'    <tbody>' +
 							'        <thead>' +
