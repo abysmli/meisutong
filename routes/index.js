@@ -329,6 +329,7 @@ router.post('/track', function (req, res, next) {
             'Trackingmore-Api-Key': '464031ea-ff09-4a31-8ec7-b07e99d5ecee'
           }
         }, function (err, httpResponse, responseBody) {
+          console.log(responseBody);
           setTimeout(() => {
             request.get({
               url: 'http://api.trackingmore.com/v2/trackings/' + code + '/' + trackingnumber, json: true, headers: {
@@ -336,6 +337,7 @@ router.post('/track', function (req, res, next) {
                 'Trackingmore-Api-Key': '464031ea-ff09-4a31-8ec7-b07e99d5ecee',
               }
             }, function (err, httpResponse, _body) {
+              console.log(_body);
               if (_body.data.origin_info) {
                 if (_body.data.origin_info.trackinfo) {
                   _body.data.origin_info.trackinfo.reverse()
