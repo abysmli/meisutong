@@ -322,12 +322,12 @@ router.post('/track', function (req, res, next) {
           carrier: carrier
         };
         request.post({
-          url: 'http://chaoxun-international:3000/Request-Transfer-Post', json: true, body: body.ChinaPart
+          url: 'http://chaoxun-international.com:3000/Request-Transfer-Post', json: true, body: body.ChinaPart
         }, function (err, httpResponse, responseBody) {
           console.log(responseBody);
           setTimeout(() => {
             request.post({
-              url: 'http://chaoxun-international:3000/Request-Transfer-Tracking', json: true, body: body.ChinaPart
+              url: 'http://chaoxun-international.com:3000/Request-Transfer-Tracking', json: true, body: body.ChinaPart
             }, function (err, httpResponse, _body) {
               console.log(_body);
               if (_body.data.origin_info) {
@@ -447,7 +447,7 @@ router.get('/header', (req, res, next) => {
 
 router.get('/carriers', (req, res, next) => {
   request.post({
-    url: 'http://chaoxun-international:3000/Request-Transfer-Carriers', json: true, body: {}
+    url: 'http://chaoxun-international.com:3000/Request-Transfer-Carriers', json: true, body: {}
   }, function (err, httpResponse, body) {
     res.json(body);
   });
