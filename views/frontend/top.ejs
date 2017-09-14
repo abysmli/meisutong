@@ -102,10 +102,10 @@
                 <!-- ================ -->
                 <div class="header-top-dropdown text-right">
                   <div class="btn-group">
-                    <a id="header-top-drop-1" href="http://usa.99mst.com/" type="button" class="btn btn-default btn-sm"><span class="flag-icon flag-icon-us"></span> 去美国</a>
+                    <a id="header-top-drop-1" href="http://usa.99mst.com/" target="_blank" type="button" class="btn btn-default btn-sm"><span class="flag-icon flag-icon-us"></span> 去美国</a>
                   </div>
                   <div class="btn-group">
-                    <a id="header-top-drop-2" href="http://jp.99mst.com/" type="button" class="btn btn-default btn-sm"><span class="flag-icon flag-icon-jp"></span> 去日本</a>
+                    <a id="header-top-drop-2" href="http://jp.99mst.com/" target="_blank" type="button" class="btn btn-default btn-sm"><span class="flag-icon flag-icon-jp"></span> 去日本</a>
                   </div>
                 </div>
                 <!--  header top dropdowns end -->
@@ -133,7 +133,7 @@
               <div class="header-first clearfix">
                 <!-- logo -->
                 <div id="logo" class="logo">
-                  <a href="/"><img id="logo_img" src="/images/logo_c.png" width="250" alt="The Project"></a>
+                  <a href="/" target="_blank"><img id="logo_img" src="/images/logo_c.png" width="250" alt="The Project"></a>
                 </div>
               </div>
               <!-- header-first end -->
@@ -160,7 +160,7 @@
                     <div class="navbar-brand clearfix hidden-lg-up">
                       <!-- logo -->
                       <div id="logo-mobile" class="logo">
-                        <a href="/"><img id="logo-img-mobile" src="/images/logo_c.png" width="250" alt="The Project"></a>
+                        <a href="/" target="_blank"><img id="logo-img-mobile" src="/images/logo_c.png" width="250" alt="The Project"></a>
                       </div>
                     </div>
 
@@ -170,85 +170,26 @@
 
                         <!-- mega-menu start -->
                         <li class="nav-item active">
-                          <a href="/" class="nav-link">首页</a>
+                          <a href="/" target="_blank" class="nav-link">首页</a>
                         </li>
                         <!-- mega-menu end -->
                         <!-- mega-menu start -->
-                        <li class="nav-item dropdown">
-                          <a href="#" class="nav-link dropdown-toggle" id="second-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">转运资费</a>
-                          <ul class="dropdown-menu" aria-labelledby="second-dropdown">
-                              <% paths.forEach(function(path, index){ %>
-                                <li class="dropdown ">
-                                  <a  class="dropdown-toggle" data-toggle="dropdown" href="#"><%= path %></a>
-                                  <ul class="dropdown-menu">
-                                    <% transfers.forEach(function(transfer, index){ %>
-                                      <% if(transfer.path == path) { %>
-                                      <li ><a href="/transfer?id=<%= transfer._id %>"><%= transfer.title %></a></li>
-                                      <% } %>
-                                    <% }) %>
-                                  </ul>
-                                </li>
-                                <% }) %>
-                          </ul>
-                        </li>
-                        <!-- mega-menu end -->
-                        <li class="nav-item dropdown ">
-                          <a href="#" class="nav-link dropdown-toggle" id="third-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">操作指南</a>
-                          <ul class="dropdown-menu" aria-labelledby="sixth-dropdown">
-                            <% docs.forEach(function(doc, index){ %>
-                              <li>
-                                <a href="/doc?id=<%= doc._id %>">
-                                  <%= doc.title %>
-                                </a>
-                              </li>
-                              <% }) %>
-                          </ul>
+                        <li class="nav-item">
+                          <a href="/" target="_blank" class="nav-link">转运资费</a>
                         </li>
 
                         <li class="nav-item">
-                          <a href="/shoptutorial" class="nav-link">海淘教程</a>
+                          <a href="/shoptutorial" target="_blank" class="nav-link">海淘教程</a>
                         </li>
 
                         <!-- mega-menu start -->
-                        <li class="nav-item dropdown mega-menu mega-menu--wide">
-                          <a href="#" class="nav-link dropdown-toggle" id="first-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">购物助手</a>
-                          <ul class="dropdown-menu" aria-labelledby="first-dropdown">
-                            <li>
-                              <div class="row">
-                                <div class="col-md-12">
-                                  <div class="row">
-                                    <div class="col-lg-3">
-                                      <h4 class="title"><i class="fa fa-laptop pr-2"></i> 购物助手</h4>
-                                      <div class="divider"></div>
-                                      <ul class="menu">
-                                        <li class="active"><a href="#"><i class="icon-basket-1 pr-2"></i>找货比价</a></li>
-                                        <li><a href="/comingsoon"><i class="icon-globe pr-2"></i>一键代发商城</a></li>
-                                        <li><a href="/comingsoon"><i class="icon-suitcase pr-2"></i>代付专家购</a></li>
-                                      </ul>
-                                    </div>
-                                    <div class="col-lg-9">
-                                      <form id="searchProductForm" action="/searchProduct" method="post">
-                                        <div class="input-group">
-                                          <input type="text" class="form-control" name="search" id="searchInput" placeholder="输入商品名称或粘贴想要代购的商品地址">
-                                          <div class="input-group-btn"><button class="btn btn-gray-transparent btn-animated margin-clear" type="submit">查询 <i class="fa fa-search"></i></button></div>
-                                        </div>
-                                      </form>
-                                      <div class="divider"></div>
-                                      <h4>大家都在搜：</h4>
-                                      <% hotsearchs.forEach((hotsearch, index) => { %>
-                                      <a href="/searchProduct?search=<%= hotsearch.query %>" style="display:inline-block;"><%= hotsearch.query %></a>
-                                      <% }) %>
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-                            </li>
-                          </ul>
+                        <li class="nav-item">
+                          <a href="/" target="_blank" class="nav-link">购物助手</a>
                         </li>
                         <!-- mega-menu end -->
 
                         <li class="nav-item">
-                          <a href="/aboutus" class="nav-link">关于我们</a>
+                          <a href="/aboutus" target="_blank" class="nav-link">关于我们</a>
                         </li>
                       </ul>
                       <!-- main-menu end -->
@@ -278,7 +219,7 @@
             </div>
           </li>
           <li><a href="http://weibo.com/eurgo" target="_blank" title="官方微博"><i class="quickiconb"></i>官方微博</a></li>
-          <li><a href="/contactus"  title="联系我们"><i class="quickicong"></i>联系我们</a></li>
+          <li><a href="/contactus" target="_blank" title="联系我们"><i class="quickicong"></i>联系我们</a></li>
           <li class="quickbot" style="display: none;"><i class="quickicond"></i>返回顶部</li>
         </ul>
       </div>

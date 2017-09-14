@@ -322,21 +322,12 @@ router.post('/track', function (req, res, next) {
           carrier: carrier
         };
         request.post({
-          url: 'http://api.trackingmore.com/v2/trackings/post', json: true, body: {
-            'tracking_number': trackingnumber,
-            'carrier_code': code
-          }, headers: {
-            'Content-Type': 'application/json',
-            'Trackingmore-Api-Key': TrackingmoreAPIKey
-          }
+          url: 'http://chaoxun-international:3000/Request-Transfer-Post', json: true, body: body.ChinaPart
         }, function (err, httpResponse, responseBody) {
           console.log(responseBody);
           setTimeout(() => {
-            request.get({
-              url: 'http://api.trackingmore.com/v2/trackings/' + code + '/' + trackingnumber, json: true, headers: {
-                'Content-Type': 'application/json',
-                'Trackingmore-Api-Key': TrackingmoreAPIKey,
-              }
+            request.post({
+              url: 'http://chaoxun-international:3000/Request-Transfer-Tracking', json: true, body: body.ChinaPart
             }, function (err, httpResponse, _body) {
               console.log(_body);
               if (_body.data.origin_info) {
@@ -422,18 +413,6 @@ router.post('/contactus', function (req, res, next) {
   }, function (err, info) { res.redirect("/"); });
 });
 
-router.get('/carriers', (req, res, next) => {
-  request.get({
-    url: 'http://api.trackingmore.com/v2/carriers', json: true, headers: {
-      'Content-Type': 'application/json',
-      'Trackingmore-Api-Key': TrackingmoreAPIKey,
-      'Lang': 'cn'
-    }
-  }, function (err, httpResponse, body) {
-    res.json(body);
-  });
-});
-
 router.get('/EMS_MODEL/CN/S/TOP.HTM', (req, res, next) => {
   Doc.find({}).sort({ updated_at: -1 }).exec(function (err, docs) {
     Transfer.find({}).sort({ updated_at: -1 }).exec(function (err, transfers) {
@@ -464,6 +443,52 @@ router.get('/EMS_MODEL/CN/S/TOP.HTM', (req, res, next) => {
 
 router.get('/header', (req, res, next) => {
   res.json(req.headers);
+});
+
+router.get('/carriers', (req, res, next) => {
+  request.post({
+    url: 'http://chaoxun-international:3000/Request-Transfer-Carriers', json: true, body: {}
+  }, function (err, httpResponse, body) {
+    res.json(body);
+  });
+});
+
+router.post('/Request-Transfer-Post', (req, res, next) => {
+  request.post({
+    url: 'http://api.trackingmore.com/v2/trackings/post', json: true, body: {
+      'tracking_number': req.body.trackingnumber,
+      'carrier_code': req.body.code
+    }, headers: {
+      'Content-Type': 'application/json',
+      'Trackingmore-Api-Key': TrackingmoreAPIKey
+    }
+  }, function (err, httpResponse, body) {
+    res.json(body);
+  });
+});
+
+router.post('/Request-Transfer-Tracking', (req, res, next) => {
+
+  request.get({
+    url: 'http://api.trackingmore.com/v2/trackings/' + req.body.code + '/' + req.body.trackingnumber, json: true, headers: {
+      'Content-Type': 'application/json',
+      'Trackingmore-Api-Key': TrackingmoreAPIKey,
+    }
+  }, function (err, httpResponse, body) {
+    res.json(body);
+  });
+});
+
+router.post('/Request-Transfer-Carriers', (req, res, next) => {
+  request.get({
+    url: 'http://api.trackingmore.com/v2/carriers', json: true, headers: {
+      'Content-Type': 'application/json',
+      'Trackingmore-Api-Key': TrackingmoreAPIKey,
+      'Lang': 'cn'
+    }
+  }, function (err, httpResponse, body) {
+    res.json(body);
+  });
 });
 
 module.exports = router;
