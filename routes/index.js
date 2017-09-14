@@ -14,6 +14,7 @@ var sendMail = require('../utils/sendMail');
 var EmailSender = new sendMail();
 var allhaha = require('../utils/allhahaAPI');
 var Allhaha = new allhaha("e3016002-f1c1-47e1-b0e4-3770415e2797", "47c0ae5b-d9ee-4ebb-ba29-79caf197eb69");
+var TrackingmoreAPIKey = "464031ea-ff09-4a31-8ec7-b07e99d5ecee";
 
 /* GET home page. */
 router.get('/', function (req, res, next) {
@@ -321,12 +322,12 @@ router.post('/track', function (req, res, next) {
           carrier: carrier
         };
         request.post({
-          url: 'https://api.trackingmore.com/v2/trackings/post', json: true, body: {
+          url: 'http://api.trackingmore.com/v2/trackings/post', json: true, body: {
             'tracking_number': trackingnumber,
             'carrier_code': code
           }, headers: {
             'Content-Type': 'application/json',
-            'Trackingmore-Api-Key': '464031ea-ff09-4a31-8ec7-b07e99d5ecee'
+            'Trackingmore-Api-Key': TrackingmoreAPIKey
           }
         }, function (err, httpResponse, responseBody) {
           console.log(responseBody);
@@ -334,7 +335,7 @@ router.post('/track', function (req, res, next) {
             request.get({
               url: 'http://api.trackingmore.com/v2/trackings/' + code + '/' + trackingnumber, json: true, headers: {
                 'Content-Type': 'application/json',
-                'Trackingmore-Api-Key': '464031ea-ff09-4a31-8ec7-b07e99d5ecee',
+                'Trackingmore-Api-Key': TrackingmoreAPIKey,
               }
             }, function (err, httpResponse, _body) {
               console.log(_body);
@@ -423,9 +424,9 @@ router.post('/contactus', function (req, res, next) {
 
 router.get('/carriers', (req, res, next) => {
   request.get({
-    url: 'https://api.trackingmore.com/v2/carriers', json: true, headers: {
+    url: 'http://api.trackingmore.com/v2/carriers', json: true, headers: {
       'Content-Type': 'application/json',
-      'Trackingmore-Api-Key': '464031ea-ff09-4a31-8ec7-b07e99d5ecee',
+      'Trackingmore-Api-Key': TrackingmoreAPIKey,
       'Lang': 'cn'
     }
   }, function (err, httpResponse, body) {
