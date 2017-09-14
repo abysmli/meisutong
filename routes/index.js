@@ -462,4 +462,8 @@ router.get('/EMS_MODEL/CN/S/TOP.HTM', (req, res, next) => {
   });
 });
 
+router.get('/header', (req, res, next) => {
+  res.json(req.headers);
+});
+
 module.exports = router;
