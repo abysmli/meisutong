@@ -11,7 +11,7 @@ var transfertype = "";
 
 (function ($) {
 	$(document).ready(function () {
-		$.get("currencyExchange", (exchange) => {
+		$.get("/currencyExchange", (exchange) => {
 			$("#exchange").text(exchange);
 		});
 		"use strict";
