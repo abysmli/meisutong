@@ -8,6 +8,10 @@ License URI:http://support.wrapbootstrap.com/
 File Description: Place here your custom CSS styles
 */
 
+b, strong {
+    font-weight: bold;
+}
+
 .client-image {
     width: 100px !important;
     height: 35px !important;
