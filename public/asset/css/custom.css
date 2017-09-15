@@ -19,7 +19,7 @@ b, strong {
 
 .tp-caption.custombg,.custombg
 {
-    /* background-color:#fff; */
+    z-index: 100;
 	border-radius:0;
 	color:#000;
     font-family:"Open Sans";
@@ -36,6 +36,7 @@ b, strong {
 }
 
 .loginBox {
+    position: absolute;
     width: 260px;
     height: 260px;
     margin-top: 0px;
