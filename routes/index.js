@@ -521,7 +521,7 @@ router.get('/cgi-bin/GInfo.dll', (req, res, next) => {
           carrier = "顺丰快递";
         } else {
           code = '';
-          carrier = '';
+          carrier = '未知物流';
         }
         body.ChinaPart = {
           trackingnumber: trackingnumber,
