@@ -485,7 +485,26 @@ router.get('/cgi-bin/GInfo.dll', (req, res, next) => {
   };
   request.post({ url: 'http://de.99mst.com/cgi-bin/GInfo.dll', form: body, json: true }, function (err, httpResponse, body) {
     if (body) {
+      var statusCode = {
+        '-9': '错误',
+        '-5': '错误',
+        '-4': '错误',
+        '-3': '不支持的运单号',
+        '-2': '没有结果',
+        '0': '处理中',
+        '1': '已发出',
+        '2': '运输中',
+        '3': '已抵达',
+        '4': '错误',
+        '5': '进入海关',
+        '6': '地址错误',
+        '7': '包裹丢失',
+        '8': '包裹寄回发送地',
+        '9': '错误',
+        '10': '错误',
+      }
       if (body.ReturnValue == '100') {
+        body.Response_Info.statusDetails = statusCode[body.Response_Info.status];
         let trackingnumber = body.Response_Info.transNbr;
         let code, carrier;
         if (trackingnumber.length == 13) {
