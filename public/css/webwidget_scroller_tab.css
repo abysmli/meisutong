@@ -1,0 +1,318 @@
+@charset "utf-8";
+/* CSS Document */
+body,td,th {font-size: 12px; font-family:"微软雅黑"; color:#666666;}
+.webwidget_scroller_tab{font-size: 12px; font-family:"微软雅黑";width:278px;}
+.tabContainer{width:100%;overflow:hidden;}
+.tabContainer li{float:left;margin-right:2px;background:url(../images/mst_38.gif) no-repeat center bottom;height:24px;}
+.tabContainer li a{display:block!important;display:inline-block;padding:3px 15px 0px 15px;height:24px;line-height:22px;}
+.webwidget_scroller_tab .tabHead{
+    list-style-type: none;
+    margin:0px;
+    padding:0px;
+}
+.webwidget_scroller_tab .tabBody{
+	height: 132px;
+	overflow: hidden;
+	width:278px;
+	position: relative;
+
+}
+.webwidget_scroller_tab .tabBody ul,li{
+    margin: 0px;
+    padding: 0px;
+    list-style: none;
+}
+.webwidget_scroller_tab .tabBody ul{
+    width: 278px;
+    position: absolute;
+}
+.webwidget_scroller_tab .tabBody ul li{
+    float: left;
+    width: 278px;
+}
+.webwidget_scroller_tab .tabHead li a{
+    font-weight: bold;
+    text-decoration: none;
+    color: #FFF;
+}
+.webwidget_scroller_tab .tabCot{
+    float: left;
+
+
+	}
+.webwidget_scroller_tab .tabCot tr{
+	font-size:12px;
+	height:25px;
+	width:288px;
+	line-height:22px;
+	background:url(../images/1_34.gif);
+
+}
+.webwidget_scroller_tab .tabContainer li.currentBtn{background:url(../images/mst_35.gif) no-repeat center middle;}
+.webwidget_scroller_tab .tabContainer li.currentBtn a{height:24px;background:url(../images/mst_35.gif) no-repeat center middle;padding-top:5px;color:#434142;}
+.webwidget_scroller_tab .modA{margin:10px;}
+
+.webwidget_scroller_tab .modTop h3{padding:0px;margin:0px;height:24px;background:url(../images/mst_35.gif) no-repeat;color:#2C6A78;font-size:12px;line-height:12px;}
+.modTop span.modATL,.modTop span.modATR{float:left;width:4px;height:28px;overflow:hidden;}.modTop span.modATR{float:right;}
+.modA #sideNav dd a:hover{color:#FFF;text-decoration:none;}
+.webwidget_scroller_tab .modBottom{width:100%;height:4px;overflow:hidden;}
+.webwidget_scroller_tab .modBottom span.modABL,.modBottom span.modABR,.modTopB span.modATR,.modTopB span.modATL{float:left;width:4px;height:4px;overflow:hidden;}
+.webwidget_scroller_tab .modBottom span.modABR{float:right;}
+a:link {
+	color: #7A766C;
+	text-decoration: none;
+}
+a:visited {
+	text-decoration: none;
+	color: #7A766C;
+}
+a:hover {
+	text-decoration: underline;
+	color: #4D93A4;
+}
+a:active {
+	text-decoration: none;
+	color: #4D93A4;
+}
+.datetime{
+color:#6186a9;
+}
+#nav {
+text-align:center;background:url(../images/imdex_06.gif) repeat-x;line-height:45px;font-size:14px;}
+#nav ul{margin:0 auto;height:46px;padding:0;text-align:center;}
+#nav li {padding:0;list-style: none;display:inline;}
+#nav a {float:left;overflow:hidden;width:85px;height:46px;color:#FFF;text-decoration:none;background:url(../images/mst.gif) no-repeat;}
+#nav a:hover {background-position:0px;background:url(../images/imdex_07.gif) repeat-x;color:#4D93A4;}
+
+.tdindex{
+padding-left:20px;
+line-height:26px;
+}
+.tdindex1
+{
+padding:5px;
+color:#1c3b85;
+vertical-align:top;
+}
+.tdindex2
+{
+color:#96b6b5;
+padding:20px;
+vertical-align:top;
+}
+.tdindex3
+{
+color:#05606b;
+font-size:14px;
+font-weight:bold;
+padding-left:10px;
+}
+.zc
+{
+font-size:12px;
+line-height:14px;
+
+}
+.zc a
+{color:#4D93A4;
+}
+.indexdl
+{
+width:184px;
+padding-left:5px;
+background:url(../images/mst_19.gif) no-repeat center left;
+height:23px;
+}
+.indexdl1
+{
+width:284px;
+padding-left:5px;
+background:url(../images/mst_192.gif) no-repeat center left;
+height:23px;
+}
+.engdl
+{
+width:284px;
+padding-left:5px;
+background:url(../images/mst_193.gif) no-repeat center left;
+height:23px;
+}
+.zcyz
+{
+width:184px;
+padding-left:5px;
+background:url(../images/mst_191.gif) no-repeat center left;
+height:23px;
+}
+.zcdl
+{
+padding:8px;
+font-weight:bold;
+}
+.indexsub
+{
+width:56px;   
+height:24px;   
+background-image:url(../images/mst_24.gif);
+cursor:pointer;
+
+ BORDER-BOTTOM: 0px;
+  BORDER-LEFT: 0px; 
+  BORDER-RIGHT:0px; 
+  BORDER-TOP:0px;
+    font-family:"微软雅黑";
+  color:#FFFFFF; 
+}
+.serchsub
+{
+width:22px;   
+height:29px;   
+background-image:url(../images/serchsub.gif);
+cursor:pointer;
+
+ BORDER-BOTTOM: 0px;
+  BORDER-LEFT: 0px; 
+  BORDER-RIGHT:0px; 
+  BORDER-TOP:0px;
+    font-family:"微软雅黑";
+  color:#FFFFFF; 
+}
+.zcsub
+{
+width:126px;   
+height:24px;   
+background-image:url(../images/btn.gif);
+cursor:pointer;
+
+ BORDER-BOTTOM: 0px;
+  BORDER-LEFT: 0px; 
+  BORDER-RIGHT:0px; 
+  BORDER-TOP:0px;
+    font-family:"微软雅黑";
+  color:#FFFFFF; 
+}
+.indexcheck
+{
+width:15px;   
+height:15px;   
+
+ BORDER-BOTTOM: 1px solid #999999;
+  BORDER-LEFT: 1px solid #999999; 
+  BORDER-RIGHT:1px solid #999999; 
+  BORDER-TOP:1px solid #999999; 
+}
+#indextxt
+{
+background:none;
+width:120px;   
+height:20px;  
+line-height:18px; 
+ BORDER-BOTTOM: 0px;
+  BORDER-LEFT: 0px; 
+  BORDER-RIGHT:0px; 
+  BORDER-TOP:0px;
+}
+#serchtxt
+{
+background-image:url(../images/serchtxt.gif);
+padding-left:5px;
+width:100px;   
+height:29px;  
+line-height:28px; 
+ BORDER-BOTTOM: 0px;
+  BORDER-LEFT: 0px; 
+  BORDER-RIGHT:0px; 
+  BORDER-TOP:0px;
+}
+#zctxt
+{
+margin-left:1px;
+background:none;
+width:260px;   
+height:20px;  
+line-height:20px; 
+ BORDER-BOTTOM: 0px;
+  BORDER-LEFT: 0px; 
+  BORDER-RIGHT:0px; 
+  BORDER-TOP:0px;
+  color:#999999;
+}
+#yztxt
+{
+margin-left:8px;
+margin-right:14px;
+background:none;
+width:40px;   
+height:20px;  
+line-height:18px; 
+ BORDER-BOTTOM: 0px;
+  BORDER-LEFT: 0px; 
+  BORDER-RIGHT:0px; 
+  BORDER-TOP:0px;
+}
+#engtxt
+{
+color:#999999;
+font-size:12px;
+
+background:none;
+width:120px;   
+height:20px;  
+line-height:18px; 
+ BORDER-BOTTOM: 0px;
+  BORDER-LEFT: 0px; 
+  BORDER-RIGHT:0px; 
+  BORDER-TOP:0px;
+}
+.xing
+{
+
+line-height:22px;
+font-family:"宋体";
+color:#bf0008;
+}
+.tddl1
+{
+font-family:"微软雅黑";
+font-size:18px;
+font-weight:bold;
+color:#7A766C;
+padding-left:30px;
+}
+.tddl2{
+padding-left:30px;
+}
+.listtd
+{
+padding-left:10px;
+}
+.listtable
+{
+border-bottom:#CCCCCC solid 1px;
+height:30px;
+}
+.usertd
+{
+font-family:"宋体";
+font-size:14px;
+padding-left:10px;
+ color:#f19b00;
+ }
+ .banner
+ {
+ font-size:18px;
+ color:#FFFFFF;
+ }
+ .zh
+ {
+ color:#910004;
+ }
+.xxtd
+ {
+ padding-left:20px;
+ background-repeat:no-repeat;
+ }
+.list-bg {
+	background-image: url(../images/1-1.png);
+	background-repeat: no-repeat;
+}

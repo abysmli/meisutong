@@ -1,0 +1,706 @@
+﻿.fred {
+	color: #CC0000;
+	text-decoration: none;
+}
+a.fred:visited {
+	color: #CC0000;
+	text-decoration: none;
+}
+a.fred:hover {
+	color: #CC0000;
+	text-decoration: underline;
+}
+
+#newsBox {
+	height: 22px;
+	line-height: 22px;
+	margin-left: 0px;
+}
+#newsList2 {
+	width: 280px;
+	float: left;
+	clear: left;
+	text-align: left;
+	display: inline;
+	overflow: hidden;
+}
+
+#newsList {
+	width: 280px;
+	float: left;
+	clear: left;
+	text-align: left;
+	display: inline;
+	overflow: hidden;
+}
+.newsList {
+	FONT-SIZE: 12px;
+	COLOR: #333333;
+	FONT-FAMILY: "微软雅黑";
+	TEXT-DECORATION: none;
+	vertical-align: baseline;
+	text-align: left;
+}
+A.newsList:hover {
+	TEXT-DECORATION: underline}
+A.newsList:visited {
+	FONT-SIZE: 12px; COLOR: #333333}
+
+#newsData {
+	width: 70px;
+	margin-right: 5px;
+	clear: right;
+	float: right;
+	font-size: 12px;
+	FONT-FAMILY: "微软雅黑";
+	font-weight: normal;
+	text-align: left;
+	color: #999999;
+	display: inline;
+	overflow: hidden;
+	
+}
+
+#tbnews {
+	padding-right: 5px;
+	padding-left: 5px;
+}
+.newsListData {
+	FONT-SIZE: 12px; COLOR: #CCCCCC; FONT-FAMILY: "微软雅黑"; TEXT-DECORATION: none
+}
+.tdline_L {
+	border-left-width: 1px;
+	border-left-style: solid;
+	border-left-color: #C6C6C6;
+	border-top-style: none;
+	border-right-style: none;
+	border-bottom-style: none;
+}
+#tdline_R {
+	border-right-width: 1px;
+	border-right-style: solid;
+	border-right-color: #C6C6C6;
+}
+#tdline_T {
+	border-top-width: 1px;
+	border-top-style: solid;
+	border-top-color: #000000;
+	border-right-style: none;
+	border-bottom-style: none;
+	border-left-style: none;
+}
+#tdline_B {
+	border-bottom-width: 8px;
+	border-bottom-style: solid;
+	border-bottom-color: #E3E5E4;
+	border-top-style: none;
+	border-right-style: none;
+	border-left-style: none;
+}
+
+.inputFormMember{
+	font-size:12px;
+	COLOR:#000000;
+	cursor:hand;
+	BACKGROUND-COLOR:#FFFFFF;
+	border-top-width: 1px;
+	border-right-width: 1px;
+	border-bottom-width: 1px;
+	border-left-width: 1px;
+	border-top-style: solid;
+	border-right-style: solid;
+	border-bottom-style: solid;
+	border-left-style: solid;
+	border-top-color: #333333;
+	border-right-color: #CCCCCC;
+	border-bottom-color: #CCCCCC;
+	border-left-color: #666666;
+	height: 18px;
+	FONT-FAMILY: "微软雅黑";
+}
+
+.inputFormMultiLine{
+	border-top-width: 1px;
+	border-right-width: 1px;
+	border-bottom-width: 1px;
+	border-left-width: 1px;
+	border-top-style: solid;
+	border-right-style: solid;
+	border-bottom-style: solid;
+	border-left-style: solid;
+	border-top-color: #999999;
+	border-right-color: #CCCCCC;
+	border-bottom-color: #CCCCCC;
+	border-left-color: #999999;
+	FONT-FAMILY: "微软雅黑";
+	padding: 3px;
+	color: #62819F;
+	font-weight: normal;
+	letter-spacing: 1px;
+}
+
+.btn_submit{
+	CURSOR: pointer;
+	COLOR: #FFFFFF;
+	height: 22px;
+	width: 70px;
+	border-top-width: 0px;
+	border-right-width: 0px;
+	border-bottom-width: 0px;
+	border-left-width: 0px;
+	border-top-style: none;
+	border-right-style: none;
+	border-bottom-style: none;
+	border-left-style: none;
+	line-height: 22px;
+	background-image: url(../images/track_06.jpg);
+	background-repeat: no-repeat;
+}
+textarea {
+	border: 1px solid #CCCCCC;
+}
+select {
+	border-top-width: 1px;
+	border-right-width: 1px;
+	border-bottom-width: 1px;
+	border-left-width: 1px;
+	border-top-style: solid;
+	border-right-style: solid;
+	border-bottom-style: solid;
+	border-left-style: solid;
+	border-top-color: #666666;
+	border-right-color: #CCCCCC;
+	border-bottom-color: #CCCCCC;
+	border-left-color: #666666;
+	color: #999999;
+}
+
+.inputForm0 {
+	font-size:12px;
+	COLOR:#000000;
+	cursor:text;
+	BACKGROUND-COLOR:#ffffff;
+	Height:14px;
+	FONT-FAMILY: "微软雅黑";
+	border-top-width: 1px;
+	border-right-width: 1px;
+	border-bottom-width: 1px;
+	border-left-width: 1px;
+	border-top-style: solid;
+	border-right-style: solid;
+	border-bottom-style: solid;
+	border-left-style: solid;
+	border-top-color: #999999;
+	border-right-color: #F5F5F5;
+	border-bottom-color: #F5F5F5;
+	border-left-color: #999999;
+}
+.inputForm1 {
+	font-size:12px;
+	COLOR:#000000;
+	cursor:text;
+	BACKGROUND-COLOR:#ffffff;
+	Height:14px;
+	FONT-FAMILY: "微软雅黑";
+	width: 40px;
+	border-top-width: 1px;
+	border-right-width: 1px;
+	border-bottom-width: 1px;
+	border-left-width: 1px;
+	border-top-style: solid;
+	border-right-style: solid;
+	border-bottom-style: solid;
+	border-left-style: solid;
+	border-top-color: #999999;
+	border-right-color: #F5F5F5;
+	border-bottom-color: #F5F5F5;
+	border-left-color: #999999;
+}
+
+
+.contc{
+	font-size:12px;
+	line-height:1.8em;
+	color:#2562a4;
+	text-decoration:none;
+	padding-top: 20px;
+}
+.titlc{
+text-align:center; line-height:30px; font-weight:bold; color:#2562a4; font-size:18px;
+}
+#oClassName{
+	font-size:12px;
+	color:#FFFFFF;
+	FONT-FAMILY: "微软雅黑";
+	height: 25px;
+	text-align: left;
+	width: auto;
+	line-height: 25px;
+	text-indent: 45px;
+	background-color: #666666;
+}
+
+.kindc{
+	font-size:14px;
+	color:#FFFFFF;
+	font-weight:bold;
+	FONT-FAMILY: "微软雅黑";
+	width: auto;
+	height: 25px;
+	line-height: 25px;
+}
+.indxc{
+	font-size:14px;
+	color:#282828;
+	line-height:180%;
+	text-decoration:none;
+	text-indent: 10px;
+	padding-left: 10px;
+}
+.markc{font-size:12px;text-decoration:none;font-weight:bold}
+.datec{
+	font-size:12px;
+	color:#999999;
+	margin-top: 0px;
+	margin-right: 0px;
+	margin-bottom: 0px;
+	margin-left: 10px;
+}
+.morec{ font-size: 14px; text-decoration: underline; font-weight:bold; color: #666666}
+.infodatec{
+	font-size: 12px;
+	text-decoration: none;
+	line-height: 14pt;
+	color: #CCCCCC;
+	text-align: right;
+}
+.data_index { font-size: 12px; text-decoration: none; line-height: 14pt; color: #cccccc}
+.formc{
+	height: 18px;
+	border-top-width: 1px;
+	border-right-width: 1px;
+	border-bottom-width: 1px;
+	border-left-width: 1px;
+	border-top-color: #333333;
+	border-right-color: #333333;
+	border-bottom-color: #333333;
+	border-left-color: #333333;
+	background-position: center;
+	margin-left: 100px;
+	margin-top: 30px;
+}
+.buttonc0{	height: 18px;
+	width: 160px;
+	border: 1px solid #333333;
+	
+	
+		}
+.buttonc1{
+PADDING-RIGHT: 10px;
+	PADDING-LEFT: 10px;
+	FONT-SIZE: 12px;
+FILTER: progid:DXImageTransform.Microsoft.Gradient(GradientType=0, StartColorStr=#ffffff, EndColorStr=#cccccc);
+	CURSOR: hand;
+	COLOR: black;
+	PADDING-TOP: 1px;
+	border: 1px solid #CCCCCC;
+	margin-top: 1px;
+	margin-bottom: 0px;
+	margin-right: 5px;
+	height: 18px;
+}
+.dotLine {
+	border-top-style: dashed;
+	border-top-color: #333333;
+	border-top-width: 1px;
+	font-size: 1px;
+}
+.tdBorderForm{
+	padding: 3px;
+}.tdForm0 {
+	height: 20px;
+	width: 80px;
+	font-size: 12px;
+	text-align: right;
+	vertical-align: baseline;
+	border-bottom-width: 1px;
+	border-bottom-style: dashed;
+	border-bottom-color: #E7E7E7;
+	font-weight: bold;
+}
+.tdForm1 {
+	height: 20px;
+	font-size: 12px;
+	text-align: left;
+	vertical-align: middle;
+	border-bottom-width: 1px;
+	border-bottom-style: dashed;
+	border-bottom-color: #E7E7E7;
+}.btn1_mouseout {
+	PADDING-RIGHT: 10px;
+	PADDING-LEFT: 10px;
+	FONT-SIZE: 12px;
+FILTER: progid:DXImageTransform.Microsoft.Gradient(GradientType=0, StartColorStr=#ffffff, EndColorStr=#cccccc);
+	CURSOR: hand;
+	COLOR: black;
+	PADDING-TOP: 2px;
+	border: 1px solid #CCCCCC;
+	margin-top: 5px;
+	margin-bottom: 5px;
+}
+.btn1_mouseover {
+	PADDING-RIGHT: 10px;
+	PADDING-LEFT: 10px;
+	FONT-SIZE: 12px;
+FILTER: progid:DXImageTransform.Microsoft.Gradient(GradientType=0, StartColorStr=#ffffff, EndColorStr=#999999);
+	CURSOR: hand;
+	COLOR: black;
+	PADDING-TOP: 2px;
+	border: 1px solid #999999;
+	margin-top: 5px;
+	margin-bottom: 5px;
+}
+
+.myinput {
+	FONT-FAMILY: "微软雅黑";
+	font-size: 12px;
+	height: 16px;
+	line-height: 16px;
+	border: 1px solid #CCCCCC;
+	width: 80px;
+}
+.myinput2 {
+	FONT-FAMILY: "微软雅黑";
+	font-size: 12px;
+	height: 13px;
+	width: 30px;
+	border: 1px solid #CCCCCC;
+}
+.myinput3 {
+	FONT-FAMILY: "微软雅黑";
+	font-size: 12px;
+	height: 13px;
+	width: 15px;
+	border: 1px solid #CCCCCC;
+}
+
+.button {
+	font-size:12px;
+	COLOR:#000000;
+	BACKGROUND-COLOR:#FFFFFF;
+	border: 1px solid #333333;
+	padding-top: 1px;
+}
+.text_0{	font-size:12px;
+	COLOR:#000000;
+	BACKGROUND-COLOR:#FFFFFF;
+	border: 1px solid #333333;
+	padding-top: 1px;}
+
+
+.VerticalLine {
+	border-left-width: 1px;
+	border-left-style: dashed;
+	border-left-color: #F1EEFB;
+	padding-left: 5px;
+}
+.f12gray {
+	FONT-FAMILY: "微软雅黑";
+	color: #999999;
+	line-height: 130%;
+	text-decoration: none;
+}
+a.f12gray:hover {
+	text-decoration: underline;
+}
+a.f12gray:visited {
+	color: #999999;
+}
+.f9 {
+	FONT-FAMILY: "微软雅黑";
+	font-size: 9px;
+	color: #666666;
+	text-decoration: none;
+}
+
+.priceListOdd{
+	font-size: 12px;
+	line-height: 190%;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+	border-bottom-color: #E4E4E4;
+	padding-right: 10px;
+	padding-left: 8px;
+	border-right-width: 1px;
+	border-left-width: 1px;
+	border-right-style: solid;
+	border-left-style: solid;
+	border-right-color: #E4E4E4;
+	border-left-color: #E4E4E4;
+}
+.priceListEven{
+	font-size: 12px;
+	line-height: 190%;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+	border-bottom-color: #E4E4E4;
+	padding-right: 10px;
+	padding-left: 8px;
+	border-right-width: 1px;
+	border-left-width: 1px;
+	border-right-style: solid;
+	border-left-style: solid;
+	border-right-color: #E4E4E4;
+	border-left-color: #E4E4E4;
+}
+.priceListTitle{
+	font-weight: bold;
+	height: 25px;
+	letter-spacing: 1px;
+	text-align: center;
+}
+.priceListTable{
+	width: 95%;
+}
+.btn_go{
+	PADDING-RIGHT: 10px;
+	PADDING-LEFT: 10px;
+	FONT-SIZE: 12px;
+FILTER: progid:DXImageTransform.Microsoft.Gradient(GradientType=0, StartColorStr=#ffffff, EndColorStr=#cccccc);
+	CURSOR: hand;
+	COLOR: black;
+	PADDING-TOP: 0px;
+	border: 1px solid #CCCCCC;
+	margin-top: 0px;
+	margin-bottom: 3px;
+	margin-right: 5px;
+	height: 22px;
+}
+.txt_no{
+	font-size:12px;
+	COLOR:#000000;
+	cursor:text;
+	BACKGROUND-COLOR:#ffffff;
+	Height:18px;
+	border: 1px solid #666666;
+	padding-top: 2px;
+	vertical-align: baseline;
+	margin-bottom: 3px;
+	margin-right: 5px;
+}
+.trackListTitle{
+	background-color: #F0F0F0;
+	FONT-FAMILY: "微软雅黑";
+	font-size: 13px;
+	font-weight: bold;
+	color: #000000;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+	border-bottom-color: #999999;
+	text-align: center;
+	border-top-width: 1px;
+	border-top-style: solid;
+	border-top-color: #999999;
+	border-right-width: 1px;
+	border-right-style: solid;
+	border-right-color: #999999;
+}
+.trackContentTable{
+	background-color: #999999;
+	border-left-width: 1px;
+	border-left-style: solid;
+	border-left-color: #999999;
+}
+.trackListTable{
+	background-color: #FCFCFC;
+}
+
+.trackListOdd {
+	height: 28px;
+	padding-top: 2px;
+	padding-right: 5px;
+	padding-bottom: 2px;
+	padding-left: 5px;
+	border-right-width: 1px;
+	border-bottom-width: 1px;
+	border-right-style: solid;
+	border-bottom-style: solid;
+	border-right-color: #999999;
+	border-bottom-color: #999999;
+}
+.trackListEven{
+	height: 28px;
+	padding-top: 2px;
+	padding-right: 5px;
+	padding-bottom: 2px;
+	padding-left: 5px;
+	border-right-width: 1px;
+	border-bottom-width: 1px;
+	border-right-style: solid;
+	border-bottom-style: solid;
+	border-right-color: #999999;
+	border-bottom-color: #999999;
+}
+.trackHead {
+	text-align: left;
+}
+.trackIntroTable {
+	text-align: left;
+}
+.f14black {
+	font-family: "微软雅黑";
+	font-size: 14px;
+	color: #000000;
+	text-decoration: none;
+	letter-spacing: 1px;
+	font-weight: bold;
+}
+a.f14black:hover {
+	font-family: "宋体";
+	font-size: 14px;
+	color: #6600CC;
+	text-decoration: underline;
+	letter-spacing: 1px;
+}
+a.f14black:visited{
+	font-family: "宋体";
+	font-size: 14px;
+	color: #6600CC;
+	text-decoration: none;
+	letter-spacing: 1px;
+}
+.input_track {
+	width: 210px;
+	FONT-FAMILY: "微软雅黑";
+	color: #666666;
+	letter-spacing: 1px;
+	padding: 3px;
+	font-size: 12px;
+	border: 1px solid #CCCCCC;
+}
+#table_border {
+	border: 1px solid #E0E0E0;
+	background-color: #FFFFFF;
+}
+#td_border3blue {
+	border-right-width: 1px;
+	border-left-width: 1px;
+	border-right-style: solid;
+	border-left-style: solid;
+	border-right-color: #DFDFDF;
+	border-left-color: #DFDFDF;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+	border-bottom-color: #DFDFDF;
+}
+#td_border3white {
+	border-top-width: 1px;
+	border-right-width: 1px;
+	border-left-width: 1px;
+	border-top-style: solid;
+	border-right-style: solid;
+	border-left-style: solid;
+	border-top-color: #FFFFFF;
+	border-right-color: #FFFFFF;
+	border-left-color: #FFFFFF;
+}
+.input_login {
+	padding: 2px;
+	height: 14px;
+	FONT-FAMILY: "微软雅黑";
+	color: #000000;
+	font-size: 12px;
+	text-decoration: none;
+	width: 100px;
+	line-height: 14px;
+	background-repeat: no-repeat;
+	border: 1px solid #000000;
+}
+
+.bt_track {
+	height: 22px;
+	width: 70px;
+	cursor: pointer;
+	border-top-style: none;
+	border-right-style: none;
+	border-bottom-style: none;
+	border-left-style: none;
+	background-position: left top;
+	color: #FFFFFF;
+	line-height: 22px;
+	font-size: 12px;
+	FONT-FAMILY: "微软雅黑";
+	background-image: url(../pic/main034.jpg);
+	background-repeat: no-repeat;
+	border-top-width: 0px;
+	border-right-width: 0px;
+	border-bottom-width: 0px;
+	border-left-width: 0px;
+
+}
+.bt_login {
+	background-image: url(../pic/main056.jpg);
+	background-repeat: no-repeat;
+	height: 44px;
+	width: 45px;
+	cursor: pointer;
+	border-top-style: none;
+	border-right-style: none;
+	border-bottom-style: none;
+	border-left-style: none;
+	background-position: left top;
+	border-top-width: 0px;
+	border-right-width: 0px;
+	border-bottom-width: 0px;
+	border-left-width: 0px;
+	text-decoration: none;
+	FONT-FAMILY: "微软雅黑";
+}
+.bt_AcPwd {
+	background-image: url(../pic/main064.jpg);
+	background-repeat: no-repeat;
+	height: 22px;
+	width: 222px;
+	cursor: pointer;
+	border-top-style: none;
+	border-right-style: none;
+	border-bottom-style: none;
+	border-left-style: none;
+	background-position: left top;
+	text-indent: 5px;
+	margin: 0px;
+	padding: 0px;
+	color: #000000;
+	font-family: "微软雅黑";
+	font-size: 12px;
+	line-height: 22px;
+}
+
+a {
+	color: #000000;
+	text-decoration: none;
+}
+a:visited {
+	text-decoration: none;
+}
+a:hover {
+	text-decoration: underline;
+}
+.fgreen {
+	color: #B5E958;
+	text-decoration: none;
+}
+#footerList span {
+	color: #000000;
+}
+hr {
+	height: 1px;
+	border-top-width: 0px;
+	border-right-width: 0px;
+	border-bottom-width: 0px;
+	border-left-width: 0px;
+	border-top-style: none;
+	border-right-style: none;
+	border-bottom-style: none;
+	border-left-style: none;
+}

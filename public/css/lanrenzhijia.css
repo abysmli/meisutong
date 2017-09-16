@@ -1,0 +1,28 @@
+
+#center {
+	Z-INDEX: 2; 
+}
+#slider {
+	Z-INDEX: 1; POSITION:relative; WIDTH: 414px; HEIGHT: 157px; OVERFLOW: hidden; }
+#slider .slide {
+	Z-INDEX: 10; POSITION: absolute; WIDTH: 414px;HEIGHT: 157px; OVERFLOW: hidden; text-align:left;}
+#slider .title {
+	COLOR: #f80; FONT-SIZE: 1.2em; FONT-WEIGHT: bold; MARGIN-RIGHT: 1.5em; TEXT-DECORATION: none;}
+#slider .text {
+	POSITION: absolute; TEXT-ALIGN: justify; WIDTH: 470px; DISPLAY: none; FONT-FAMILY: "Î¢ÈíÑÅºÚ"; COLOR: #fff; FONT-SIZE: 0.9em; }
+#slider .diapo {
+	POSITION: absolute; FILTER: alpha(opacity=100); VISIBILITY: visible; opacity: 1;}
+#apDiv1 {
+	Z-INDEX: 1; POSITION: absolute; WIDTH: 414px; HEIGHT: 0px; OVERFLOW: hidden; }
+#apDiv2 {
+	Z-INDEX: 3; POSITION: absolute; WIDTH: 414px; HEIGHT: 0px; OVERFLOW: hidden; }
+.pagenext {
+	POSITION: relative; WIDTH: 414px; HEIGHT: 0px;}
+A.pn:link {
+	Z-INDEX: 4; POSITION: absolute; WIDTH: 10px; FONT: 12px "ËÎÌå"; COLOR: #666;TEXT-DECORATION: none;}
+A.pn:visited {
+	Z-INDEX: 4; POSITION: absolute; WIDTH: 10px; FONT: 12px "ËÎÌå"; COLOR: #666; TEXT-DECORATION: none;}
+A.pn:hover {
+	COLOR: #fff;}
+A.pn:active {
+	COLOR: #fff;}

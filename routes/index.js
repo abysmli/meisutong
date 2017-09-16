@@ -239,6 +239,35 @@ router.get('/aboutus', function (req, res, next) {
   });
 });
 
+router.get('/login', function (req, res, next) {
+  Service.find({}).sort({ updated_at: 1 }).exec(function (err, services) {
+    Doc.find({}).sort({ updated_at: -1 }).exec(function (err, docs) {
+      Transfer.find({}).sort({ updated_at: -1 }).exec(function (err, transfers) {
+        Search.find({ active: true }).sort({ times: -1 }).limit(20).exec(function (err, hotsearchs) {
+          var paths = [], path;
+          transfers.forEach(function (transfer, index) {
+            if (path != transfer.path) {
+              paths.push(transfer.path);
+              path = transfer.path;
+            }
+          });
+          res.render('frontend/login', {
+            title: '登录系统',
+            description: "美速通转运网-致力于成为中国最专业的转运公司！本公司位于洛杉矶，主要经营北美到中国大陆的传统国际快递、以及国际电子商务仓储、物流及相关业务，为德淘人士、欧洲购物、欧淘、德淘转运、德淘海外代购公司、以及德淘代购个人提供一个优秀的转运平台。",
+            keywords: "德淘转运，德淘，欧洲购物,欧淘，德淘之家，德淘网，美速通，德淘攻略",
+            services: services,
+            docs: docs,
+            paths: paths,
+            transfers: transfers,
+            hotsearchs: hotsearchs,
+            layout: null
+          });
+        });
+      });
+    });
+  });
+});
+
 router.get('/comingsoon', function (req, res, next) {
   res.render('frontend/comingsoon', {
     title: '即将到来',

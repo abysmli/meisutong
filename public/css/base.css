@@ -1,0 +1,111 @@
+@charset "utf-8";
+/* CSS Document */
+
+html {
+	color: #000;
+	background: #fff;
+}
+/* 重设边距 */
+body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, code, form, fieldset, legend, input, textarea, p, blockquote, th, td, hr, button, article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {
+	margin:0;
+	padding:0;
+}
+/* 定义文字样式 */
+a:link, a:visited {
+	text-decoration: none;
+}
+a:hover, a:active {
+	text-decoration: underline;
+}
+/* 重设html5标签 */
+article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+/* 字体继承 */
+body, button, input, select, textarea {
+	font:12px/1.5 tahoma, arial, \5FAE\8F6F\96C5\9ED1;
+}
+input, select, textarea {
+	font-size: 100%;
+}
+/* 表格 */
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+th {
+	text-align: inherit;
+}
+/* 去除默认边框 */
+input, button, textarea, fieldset, img {
+	border: 0 none;
+}
+/*统一效果*/
+img {
+	display:block;
+}
+button {
+	cursor:pointer;
+}
+/* iframe  */
+iframe {
+	display: block;
+}
+/* 去除firefox 边框 */
+abbr, acronym {
+	border: 0 none;
+	font-variant: normal;
+}
+/* 样式统一 */
+address, caption, cite, code, dfn, em, th, var {
+	font-style: normal;
+	font-weight: 400;
+}
+del {
+	text-decoration: line-through;
+}
+/* 列表样式 */
+ol, ul {
+	list-style: none outside none;
+}
+/* 对齐 */
+caption, th {
+	text-align: left;
+}
+/* 标题样式 */
+h1, h2, h3, h4, h5, h6 {
+	font-size: 100%;
+	font-weight: 400;
+}
+q:before, q:after {
+	content: ""
+}
+/* 清理浮动 */
+.clearfix {
+ *zoom:1;
+}
+.clearfix:after {
+	visibility: hidden;
+	display: block;
+	font-size: 0;
+	content: "";
+	clear: both;
+	height: 0;
+ *zoom:1;
+}
+/* 浮动 */
+.fl {
+	float: left;
+	display:inline;
+}
+.fr {
+	float: right;
+	display:inline;
+
+}
+.fc {
+	clear: both;
+}
+.fz {
+	zoom:1;
+}
