@@ -510,14 +510,16 @@
 				}
 			});
 			$("*[dir='ltr'] .owl-carousel.carousel-autoplay").owlCarousel({
-				items:1,
+				items:5,
+				margin:10,
+				stagePadding: 50,
 				autoplay: true,
 				autoplayTimeout: 5000,
 				autoplaySpeed: 700,
 				loop: true,
-				dots: false,
+				dots: true,
 				nav: true,
-				navText: false,
+				navText: true,
 				responsive:{
 					479:{
 						items:2
@@ -540,9 +542,9 @@
 				autoplayTimeout: 5000,
 				autoplaySpeed: 700,
 				loop: true,
-				dots: false,
+				dots: true,
 				nav: true,
-				navText: false,
+				navText: true,
 				responsive:{
 					479:{
 						items:2
