@@ -476,4 +476,90 @@ router.post('/Request-Transfer-Carriers', (req, res, next) => {
   });
 });
 
+router.get('/cgi-bin/GInfo.dll', (req, res, next) => {
+  var body = {
+    'MfcISAPICommand': 'EmsApiTrack',
+    'cno': req.query.cno,
+    'ntype': "10010000",
+    'cp': '65001'
+  };
+  request.post({ url: 'http://de.99mst.com/cgi-bin/GInfo.dll', form: body, json: true }, function (err, httpResponse, body) {
+    if (body) {
+      if (body.ReturnValue == '100') {
+        let trackingnumber = body.Response_Info.transNbr;
+        let code, carrier;
+        if (trackingnumber.length == 13) {
+          code = 'china-post';
+          carrier = "中国邮政";
+        } else if (trackingnumber.length == 10) {
+          code = 'deppon';
+          carrier = "德邦物流";
+        } else if (trackingnumber.length == 14 || (trackingnumber.charAt(0) == '2' && trackingnumber.length == 12)) {
+          code = 'ane66';
+          carrier = "安能物流";
+        } else if (trackingnumber.length == 12) {
+          code = 'sfb2c';
+          carrier = "顺丰快递";
+        } else {
+          code = '';
+          carrier = '';
+        }
+        body.ChinaPart = {
+          trackingnumber: trackingnumber,
+          code: code,
+          carrier: carrier
+        };
+        request.post({
+          url: 'http://chaoxun-international.com:3000/Request-Transfer-Post', json: true, body: body.ChinaPart
+        }, function (err, httpResponse, responseBody) {
+          console.log(responseBody);
+          setTimeout(() => {
+            request.post({
+              url: 'http://chaoxun-international.com:3000/Request-Transfer-Tracking', json: true, body: body.ChinaPart
+            }, function (err, httpResponse, _body) {
+              console.log(_body);
+              if (_body.data.origin_info) {
+                if (_body.data.origin_info.trackinfo) {
+                  _body.data.origin_info.trackinfo.reverse()
+                  body.ChinaPart.info = _body.data;
+                }
+              }
+              Service.find({}).sort({ updated_at: 1 }).exec(function (err, services) {
+                Doc.find({}).sort({ updated_at: -1 }).exec(function (err, docs) {
+                  Transfer.find({}).sort({ updated_at: -1 }).exec(function (err, transfers) {
+                    Search.find({ active: true }).sort({ times: -1 }).limit(20).exec(function (err, hotsearchs) {
+                      var paths = [], path;
+                      transfers.forEach(function (transfer, index) {
+                        if (path != transfer.path) {
+                          paths.push(transfer.path);
+                          path = transfer.path;
+                        }
+                      });
+                      res.render('frontend/tracking', {
+                        title: "物流追踪",
+                        description: "美速通转运网-致力于成为中国最专业的转运公司！本公司位于洛杉矶，主要经营北美到中国大陆的传统国际快递、以及国际电子商务仓储、物流及相关业务，为德淘人士、欧洲购物、欧淘、德淘转运、德淘海外代购公司、以及德淘代购个人提供一个优秀的转运平台。",
+                        keywords: "德淘转运，德淘，欧洲购物,欧淘，德淘之家，德淘网，美速通，德淘攻略",
+                        data: body,
+                        services: services,
+                        docs: docs,
+                        paths: paths,
+                        transfers: transfers,
+                        hotsearchs: hotsearchs,
+                      });
+                    });
+                  });
+                });
+              });
+            });
+          }, 7000);
+        });
+      } else {
+        res.json(body);
+      }
+    } else {
+      res.json(body);
+    }
+  });
+});
+
 module.exports = router;
