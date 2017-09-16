@@ -12,6 +12,10 @@ b, strong {
     font-weight: bold;
 }
 
+.blogpost {
+    color: black;
+}
+
 .client-image {
     width: 100px !important;
     height: 35px !important;
