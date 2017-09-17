@@ -18,35 +18,32 @@ var TrackingmoreAPIKey = "464031ea-ff09-4a31-8ec7-b07e99d5ecee";
 
 /* GET home page. */
 router.get('/', function (req, res, next) {
-  if (req.query.debug) {
-
-    Service.find({}).sort({ updated_at: 1 }).exec(function (err, services) {
-      Doc.find({}).sort({ updated_at: -1 }).exec(function (err, docs) {
-        Transfer.find({}).sort({ updated_at: -1 }).exec(function (err, transfers) {
-          Show.find({ active: true }).sort({ updated_at: -1 }).exec(function (err, shows) {
-            Slide.find({}).sort({ updated_at: -1 }).exec(function (err, slides) {
-              Notiz.findOne({}).sort({ updated_at: -1 }).exec(function (err, notification) {
-                Search.find({ active: true }).sort({ times: -1 }).limit(20).exec(function (err, hotsearchs) {
-                  var paths = [], path;
-                  transfers.forEach(function (transfer, index) {
-                    if (path != transfer.path) {
-                      paths.push(transfer.path);
-                      path = transfer.path;
-                    }
-                  });
-                  res.render('frontend/index', {
-                    title: '德淘转运_德淘之家_欧洲购物_欧淘货运德淘网|美速通转运——你身边最好的专业海淘转运公司',
-                    description: "美速通转运网-致力于成为中国最专业的转运公司！本公司位于洛杉矶，主要经营北美到中国大陆的传统国际快递、以及国际电子商务仓储、物流及相关业务，为德淘人士、欧洲购物、欧淘、德淘转运、德淘海外代购公司、以及德淘代购个人提供一个优秀的转运平台。",
-                    keywords: "德淘转运，德淘，欧洲购物,欧淘，德淘之家，德淘网，美速通，德淘攻略",
-                    services: services || [],
-                    docs: docs,
-                    paths: paths,
-                    transfers: transfers,
-                    shows: shows,
-                    slides: slides,
-                    notification: notification || {},
-                    hotsearchs: hotsearchs
-                  });
+  Service.find({}).sort({ updated_at: 1 }).exec(function (err, services) {
+    Doc.find({}).sort({ updated_at: -1 }).exec(function (err, docs) {
+      Transfer.find({}).sort({ updated_at: -1 }).exec(function (err, transfers) {
+        Show.find({ active: true }).sort({ updated_at: -1 }).exec(function (err, shows) {
+          Slide.find({}).sort({ updated_at: -1 }).exec(function (err, slides) {
+            Notiz.findOne({}).sort({ updated_at: -1 }).exec(function (err, notification) {
+              Search.find({ active: true }).sort({ times: -1 }).limit(20).exec(function (err, hotsearchs) {
+                var paths = [], path;
+                transfers.forEach(function (transfer, index) {
+                  if (path != transfer.path) {
+                    paths.push(transfer.path);
+                    path = transfer.path;
+                  }
+                });
+                res.render('frontend/index', {
+                  title: '德淘转运_德淘之家_欧洲购物_欧淘货运德淘网|美速通转运——你身边最好的专业海淘转运公司',
+                  description: "美速通转运网-致力于成为中国最专业的转运公司！本公司位于洛杉矶，主要经营北美到中国大陆的传统国际快递、以及国际电子商务仓储、物流及相关业务，为德淘人士、欧洲购物、欧淘、德淘转运、德淘海外代购公司、以及德淘代购个人提供一个优秀的转运平台。",
+                  keywords: "德淘转运，德淘，欧洲购物,欧淘，德淘之家，德淘网，美速通，德淘攻略",
+                  services: services || [],
+                  docs: docs,
+                  paths: paths,
+                  transfers: transfers,
+                  shows: shows,
+                  slides: slides,
+                  notification: notification || {},
+                  hotsearchs: hotsearchs
                 });
               });
             });
@@ -54,9 +51,7 @@ router.get('/', function (req, res, next) {
         });
       });
     });
-  } else {
-    res.send("服务器升级中，2017年9月16日 21:00 至 2017年9月18日 06:00 期间暂停服务，敬请谅解！");
-  }
+  });
 });
 
 router.get('/service', function (req, res, next) {
