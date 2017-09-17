@@ -510,16 +510,14 @@
 				}
 			});
 			$("*[dir='ltr'] .owl-carousel.carousel-autoplay").owlCarousel({
-				items:5,
-				margin:10,
-				stagePadding: 50,
+				items:1,
 				autoplay: true,
 				autoplayTimeout: 5000,
 				autoplaySpeed: 700,
-				loop: true,
 				dots: true,
+				loop: true,
 				nav: true,
-				navText: true,
+				navText: ["上一页","下一页"],
 				responsive:{
 					479:{
 						items:2
