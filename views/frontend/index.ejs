@@ -461,6 +461,7 @@
               <!-- page-title end -->
               <div class="row">
                 <% services.forEach(function(service, index){ %>
+                <% if (index > 1) { %>
                 <div class="col-md-6">
                   <div class="image-box style-2 mb-20">
                     <div class="overlay-container overlay-visible">
@@ -478,6 +479,7 @@
                     </div>
                   </div>
                 </div>
+                <% } %>
                 <% }) %>
             </div>
             <!-- main end -->
