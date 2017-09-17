@@ -514,6 +514,7 @@
 				autoplay: true,
 				autoplayTimeout: 5000,
 				autoplaySpeed: 700,
+				dots: false,
 				loop: true,
 				nav: true,
 				navText: ["上一页","下一页"],
