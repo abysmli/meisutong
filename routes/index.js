@@ -587,7 +587,7 @@ router.get('/cgi-bin/GInfo.dll', (req, res, next) => {
                 });
               });
             });
-          }, 7000);
+          }, 10000);
         });
       } else {
         res.json(body);
