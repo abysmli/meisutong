@@ -2,6 +2,7 @@ var express = require('express');
 var compression = require('compression');
 var minify = require('express-minify');
 var partials = require('express-partials');
+var request = require('request');
 var session = require('express-session');
 var mongoose = require('mongoose');
 var MongoStore = require('connect-mongo')(session);
@@ -13,6 +14,7 @@ var bodyParser = require('body-parser');
 var flash = require('express-flash');
 var controller = require('./routes/controller');
 var showupload = require('./routes/showupload');
+var Exchange = require('./models/exchange');
 var config = require('config');
 var fileManager = require('express-file-manager');
 
@@ -21,7 +23,7 @@ var index = require('./routes/index');
 var app = express();
 
 mongoose.Promise = require('bluebird');
-mongoose.connect('mongodb://localhost/' + config.get('Customer.dbConfig').dbName, {useMongoClient: true});
+mongoose.connect('mongodb://localhost/' + config.get('Customer.dbConfig').dbName, { useMongoClient: true });
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -77,5 +79,25 @@ app.use(function (err, req, res, next) {
     res.status(err.status || 500);
     res.render('frontend/error');
 });
+
+updateExchange();
+
+function updateExchange() {
+    request({
+        url: "https://v3.exchangerate-api.com/pair/41cdce23988f2b20d5322d97/EUR/CNY",
+        json: true
+    }, function (err, response, data) {
+        if (err) return err;
+        if (data) {
+            if (data.result == "success") {
+                Exchange.create(data, (err, doc) => {
+                    setTimeout(() => {
+                        updateExchange();
+                    }, 1000 * 3600 * 3);
+                });
+            }
+        }
+    });
+}
 
 module.exports = app;

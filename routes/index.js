@@ -10,6 +10,7 @@ var Slide = require('../models/slide');
 var Notiz = require('../models/notification');
 var About = require('../models/about');
 var Search = require('../models/search');
+var Exchange = require('../models/exchange');
 var sendMail = require('../utils/sendMail');
 var EmailSender = new sendMail();
 var allhaha = require('../utils/allhahaAPI');
@@ -315,14 +316,6 @@ router.all('/searchProduct', function (req, res, next) {
   });
 });
 
-router.get('/currencyExchange', function (req, res, next) {
-  request({
-    url: "https://www.exchangerate-api.com/EUR/CNY?k=2d8c6e862f92ff48d10fa915"
-  }, function (err, response, data) {
-    res.send(parseFloat(data).toFixed(4));
-  });
-});
-
 router.post('/track', function (req, res, next) {
   request.post({ url: 'http://de.99mst.com/cgi-bin/GInfo.dll', form: req.body, json: true }, function (err, httpResponse, body) {
     if (body) {
@@ -602,6 +595,12 @@ router.get('/cgi-bin/GInfo.dll', (req, res, next) => {
     } else {
       res.json(body);
     }
+  });
+});
+
+router.get('/currencyExchange', function (req, res, next) {
+  Exchange.find({}).sort({timestamp:-1}).limit(1).exec((err, exchanges)=>{
+    res.send(exchanges[0].rate.toFixed(4));
   });
 });
 
