@@ -12,6 +12,14 @@ b, strong {
     font-weight: bold;
 }
 
+a.service-link {
+    text-decoration: none !important;
+}
+
+a.service-link:hover {
+    text-decoration: none !important;
+}
+
 .blogpost {
     color: black;
 }

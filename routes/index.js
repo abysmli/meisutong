@@ -364,7 +364,7 @@ router.post('/track', function (req, res, next) {
               }
               res.json(body);
             });
-          }, 10000);
+          }, 7000);
         });
       } else {
         res.json(body);
@@ -595,7 +595,7 @@ router.get('/cgi-bin/GInfo.dll', (req, res, next) => {
                 });
               });
             });
-          }, 10000);
+          }, 7000);
         });
       } else {
         res.json(body);
