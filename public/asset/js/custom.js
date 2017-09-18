@@ -9,88 +9,6 @@
  */
 var transfertype = "";
 
-(function ($) {
-	$(document).ready(function () {
-		$.get("/currencyExchange", (exchange) => {
-			$("#exchange").text(exchange);
-		});
-		"use strict";
-
-		$("#tracking-form").submit((e) => {
-			doTrack();
-			return false;
-		});
-
-		// quicklink
-		$(".quickbot").hide();
-		$(".quickbox .wxcode").hide();
-
-		$('.quickbox .quickwx').mouseenter(function () {
-			$(this).find('.wxcode').stop(true, true).fadeIn("slow");
-		}).mouseleave(function () {
-			$(this).find('.wxcode').fadeOut("slow");
-		});
-
-		$(function () {
-			//Detecting screen height  
-			var scrtop = $(window).scrollTop();
-			if (scrtop > 300) {
-				$(".quickbot").show();
-			}
-			//scroll top()   
-			$(".quickbot").click(function () {
-				$('body,html').animate({ scrollTop: 0 }, 300);
-				return false;
-			});
-		});
-
-		$('.quickclose').click(function () {
-			$(".quickbox").slideUp(300);
-			$('.quickclose').hide();
-			$('.quickopen').fadeIn(600);
-			var scrtop = $(window).scrollTop();
-			if (scrtop > 300) {
-				$(".quickbot").show();
-			} else {
-				$(".quickbot").hide();
-			}
-		});
-		$('.quickopen').click(function () {
-			$(".quickbox").slideDown(300);
-			$('.quickclose').fadeIn(600);
-			$('.quickopen').hide();
-			var scrtop = $(window).scrollTop();
-			if (scrtop > 300) {
-				$(".quickbot").show();
-			} else {
-				$(".quickbot").hide();
-			}
-		});
-
-		//scroll()   
-		$(window).scroll(function () {
-			if ($('.quickopen').css("display") !== "block") {
-				if ($(window).scrollTop() > 300) {
-					$(".quickbox .quickbot").fadeIn(500);
-					$(".quickclose").fadeIn();
-				} else {
-					$(".quickbox .quickbot").fadeOut(500);
-					$(".quickclose").hide();
-					$(".quickclose").fadeIn();
-				}
-			} else {
-				if ($(window).scrollTop() > 300) {
-					$(".quickon .quickbot").fadeIn(500);
-
-				} else {
-					$(".quickon .quickbot").fadeOut(500);
-				}
-			}
-		});
-	}); // End document ready
-})(this.jQuery);
-
-
 function setTrack(type) {
 	transfertype = type;
 	$("#transfer-type").text(type == "MST" ? "美速通速运" : type == "Euro" ? "欧洲段物流" : "国内段物流");
@@ -116,7 +34,7 @@ function doTrack() {
 				'ntype': "10010000",
 				'cp': '65001'
 			},
-			success: (data) => {
+			success: function (data) {
 				var statusCode = {
 					'-9': '错误',
 					'-5': '错误',
@@ -180,7 +98,7 @@ function doTrack() {
 							'                    <th>日期</th>' +
 							'                </tr>' +
 							'            </thead>' +
-							'            <% data.trackingEventList.forEach((event, index)=>{ %>' +
+							'            <% data.trackingEventList.forEach(function(event, index){ %>' +
 							'            <tr>' +
 							'                <td><%= event.place %></td>' +
 							'                <td><%= event.details %></td>' +
@@ -201,7 +119,7 @@ function doTrack() {
 							'                <th>详情</th>' +
 							'            </tr>' +
 							'        </thead>' +
-							'        <% data.ChinaPart.info.origin_info.trackinfo.forEach((event, index)=>{ %>' +
+							'        <% data.ChinaPart.info.origin_info.trackinfo.forEach(function(event, index) { %>' +
 							'        <tr>' +
 							'            <td><%= event.StatusDescription %></td>' +
 							'            <td><%= event.Date %></td>' +
@@ -264,3 +182,83 @@ function doTrack() {
 	}
 
 }
+
+$(document).ready(function () {
+	$.get("/currencyExchange", function(exchange) {
+		$("#exchange").text(exchange);
+	});
+	"use strict";
+
+	$("#tracking-form").submit(function(e) {
+		doTrack();
+		return false;
+	});
+
+	// quicklink
+	$(".quickbot").hide();
+	$(".quickbox .wxcode").hide();
+
+	$('.quickbox .quickwx').mouseenter(function () {
+		$(this).find('.wxcode').stop(true, true).fadeIn("slow");
+	}).mouseleave(function () {
+		$(this).find('.wxcode').fadeOut("slow");
+	});
+
+	$(function () {
+		//Detecting screen height  
+		var scrtop = $(window).scrollTop();
+		if (scrtop > 300) {
+			$(".quickbot").show();
+		}
+		//scroll top()   
+		$(".quickbot").click(function () {
+			$('body,html').animate({ scrollTop: 0 }, 300);
+			return false;
+		});
+	});
+
+	$('.quickclose').click(function () {
+		$(".quickbox").slideUp(300);
+		$('.quickclose').hide();
+		$('.quickopen').fadeIn(600);
+		var scrtop = $(window).scrollTop();
+		if (scrtop > 300) {
+			$(".quickbot").show();
+		} else {
+			$(".quickbot").hide();
+		}
+	});
+	$('.quickopen').click(function () {
+		$(".quickbox").slideDown(300);
+		$('.quickclose').fadeIn(600);
+		$('.quickopen').hide();
+		var scrtop = $(window).scrollTop();
+		if (scrtop > 300) {
+			$(".quickbot").show();
+		} else {
+			$(".quickbot").hide();
+		}
+	});
+
+	//scroll()   
+	$(window).scroll(function () {
+		if ($('.quickopen').css("display") !== "block") {
+			if ($(window).scrollTop() > 300) {
+				$(".quickbox .quickbot").fadeIn(500);
+				$(".quickclose").fadeIn();
+			} else {
+				$(".quickbox .quickbot").fadeOut(500);
+				$(".quickclose").hide();
+				$(".quickclose").fadeIn();
+			}
+		} else {
+			if ($(window).scrollTop() > 300) {
+				$(".quickon .quickbot").fadeIn(500);
+
+			} else {
+				$(".quickon .quickbot").fadeOut(500);
+			}
+		}
+	});
+});
+
