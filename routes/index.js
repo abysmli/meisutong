@@ -352,15 +352,19 @@ router.post('/track', function (req, res, next) {
               url: 'http://chaoxun-international.com:3000/Request-Transfer-Tracking', json: true, body: body.ChinaPart
             }, function (err, httpResponse, _body) {
               console.log(_body);
-              if (_body.data.origin_info) {
-                if (_body.data.origin_info.trackinfo) {
-                  _body.data.origin_info.trackinfo.reverse()
-                  body.ChinaPart.info = _body.data;
+              if (_body) {
+                if (_body.data) {
+                  if (_body.data.origin_info) {
+                    if (_body.data.origin_info.trackinfo) {
+                      _body.data.origin_info.trackinfo.reverse()
+                      body.ChinaPart.info = _body.data;
+                    }
+                  }
                 }
               }
               res.json(body);
             });
-          }, 7000);
+          }, 10000);
         });
       } else {
         res.json(body);
@@ -554,10 +558,14 @@ router.get('/cgi-bin/GInfo.dll', (req, res, next) => {
               url: 'http://chaoxun-international.com:3000/Request-Transfer-Tracking', json: true, body: body.ChinaPart
             }, function (err, httpResponse, _body) {
               console.log(_body);
-              if (_body.data.origin_info) {
-                if (_body.data.origin_info.trackinfo) {
-                  _body.data.origin_info.trackinfo.reverse()
-                  body.ChinaPart.info = _body.data;
+              if (_body) {
+                if (_body.data) {
+                  if (_body.data.origin_info) {
+                    if (_body.data.origin_info.trackinfo) {
+                      _body.data.origin_info.trackinfo.reverse()
+                      body.ChinaPart.info = _body.data;
+                    }
+                  }
                 }
               }
               Service.find({}).sort({ updated_at: 1 }).exec(function (err, services) {
@@ -599,7 +607,7 @@ router.get('/cgi-bin/GInfo.dll', (req, res, next) => {
 });
 
 router.get('/currencyExchange', function (req, res, next) {
-  Exchange.find({}).sort({timestamp:-1}).limit(1).exec((err, exchanges)=>{
+  Exchange.find({}).sort({ timestamp: -1 }).limit(1).exec((err, exchanges) => {
     res.send(exchanges[0].rate.toFixed(4));
   });
 });

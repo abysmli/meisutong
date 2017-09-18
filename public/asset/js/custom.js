@@ -154,6 +154,7 @@ function doTrack() {
 				$("#YQContainer").html(template({ data: data }));
 			},
 			error: function (xhr, status, error) {
+				$("#YQContainer").html('<div class="container alert alert-danger"><h4>包裹查询失败，请稍后再试。</h4></div>');
 				console.log(xhr.status);
 				console.log(xhr.responseText);
 			},
