@@ -65,9 +65,11 @@
     <h3>排列次序</h3>
     <ul id="sortable" class="list-group">
         <% shows.forEach(function(show, index) { %>
+            <% if(show.active) { %>
             <li class="list-group-item" id="<%= show._id %>"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>
                 <%= show.title %>
             </li>
+            <% } %>
         <% }) %>
     </ul>
 </div>

@@ -53,9 +53,11 @@
     <h3>排列次序</h3>
     <ul id="sortable" class="list-group">
         <% searchs.forEach(function(search, index) { %>
+            <% if(search.active) { %>
             <li class="list-group-item" id="<%= search._id %>"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>
                 <%= search.query %>
             </li>
+            <% } %>
         <% }) %>
     </ul>
 </div>
