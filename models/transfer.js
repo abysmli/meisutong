@@ -7,6 +7,7 @@ var TransferSchema = new mongoose.Schema({
     path: String,
     description: String,
     content: String,
+    sort:Number,
     updated_at: { type: Date, default: Date.now }
 });
 

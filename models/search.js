@@ -4,6 +4,7 @@ mongoose.createConnection('mongodb://localhost/' + config.get('Customer.dbConfig
 
 var SearchSchema = new mongoose.Schema({
     query: String,
+    sort: Number,
     times: { type: Number, default: 0 },
     active: { type: Boolean, default: false },
     updated_at: { type: Date, default: Date.now }

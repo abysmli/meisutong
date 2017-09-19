@@ -13,6 +13,7 @@ var ShopTutorialSchema = new mongoose.Schema({
     ProgramId: String,
     ShortURL: String,
     Tutorial: String,
+    sort:Number,
 	updated_at: { type: Date, default: Date.now }
 });
 

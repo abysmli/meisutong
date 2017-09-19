@@ -23,7 +23,7 @@ router.get('/', auth, function (req, res, next) {
 });
 
 router.get('/notification', auth, function (req, res, next) {
-    Notiz.findOne({}).sort({ updated_at: -1 }).exec(function (err, notification) {
+    Notiz.findOne({}).sort({ sort: 1 }).exec(function (err, notification) {
         if (err) next(err);
         else {
             res.render('controller/notification', {
@@ -47,7 +47,7 @@ router.post('/notification', auth, function (req, res, next) {
 });
 
 router.get('/about', auth, function (req, res, next) {
-    About.findOne({}).sort({ updated_at: -1 }).exec(function (err, about) {
+    About.findOne({}).exec(function (err, about) {
         if (err) next(err);
         else {
             res.render('controller/about', {
@@ -70,7 +70,7 @@ router.post('/about', auth, function (req, res, next) {
 });
 
 router.get('/service', auth, function (req, res, next) {
-    Service.find({}).sort({ updated_at: -1 }).exec(function (err, services) {
+    Service.find({}).sort({ sort: 1 }).exec(function (err, services) {
         res.render('controller/service', {
             layout: 'controller/layout',
             title: '服务管理',
@@ -134,8 +134,20 @@ router.get('/service/remove', auth, function (req, res, next) {
     });
 });
 
+router.post('/service-sort', auth, function (req, res, next) {
+    var sorts = JSON.parse(req.body.data);
+    sorts.forEach((sort, index) => {
+        Service.findOneAndUpdate({ _id: sort.id }, { sort: sort.sort }, function (err, doc) {
+            if (err) {
+                return res.json({ status: "failed" });
+            }
+        });
+    });
+    res.json({ status: "success" });
+});
+
 router.get('/doc', auth, function (req, res, next) {
-    Doc.find({}).sort({ updated_at: -1 }).exec(function (err, docs) {
+    Doc.find({}).sort({ sort: 1 }).exec(function (err, docs) {
         res.render('controller/doc', {
             layout: 'controller/layout',
             title: '操作指南',
@@ -196,11 +208,23 @@ router.get('/doc/remove', auth, function (req, res, next) {
     });
 });
 
+router.post('/doc-sort', auth, function (req, res, next) {
+    var sorts = JSON.parse(req.body.data);
+    sorts.forEach((sort, index) => {
+        Doc.findOneAndUpdate({ _id: sort.id }, { sort: sort.sort }, function (err, doc) {
+            if (err) {
+                return res.json({ status: "failed" });
+            }
+        });
+    });
+    res.json({ status: "success" });
+});
+
 router.get('/shoptutorial', auth, function (req, res, next) {
     Allhaha.getShops((err, shops) => {
         if (!err) {
             req.session.shops = shops;
-            ShopTutorial.find({}).sort({ updated_at: -1 }).exec((err, shoptutorials) => {
+            ShopTutorial.find({}).sort({ sort: 1 }).exec((err, shoptutorials) => {
                 if (err) return next(err);
                 shops.forEach((shop, index) => {
                     for (let shoptutorial of shoptutorials) {
@@ -285,6 +309,18 @@ router.get('/shoptutorial/remove', auth, function (req, res, next) {
     });
 });
 
+router.post('/shoptutorial-sort', auth, function (req, res, next) {
+    var sorts = JSON.parse(req.body.data);
+    sorts.forEach((sort, index) => {
+        ShopTutorial.findOneAndUpdate({ _id: sort.id }, { sort: sort.sort }, function (err, doc) {
+            if (err) {
+                return res.json({ status: "failed" });
+            }
+        });
+    });
+    res.json({ status: "success" });
+});
+
 router.get('/shopRate', auth, function (req, res, next) {
     Allhaha.getProgramRate(req.query.ProgramId, (err, rates) => {
         res.render('controller/shoprate', {
@@ -296,7 +332,7 @@ router.get('/shopRate', auth, function (req, res, next) {
 });
 
 router.get('/transfer', auth, function (req, res, next) {
-    Transfer.find({}).sort({ updated_at: -1 }).exec(function (err, transfers) {
+    Transfer.find({}).sort({ sort: 1 }).exec(function (err, transfers) {
         res.render('controller/transfer', {
             layout: 'controller/layout',
             title: '转运路线',
@@ -357,8 +393,20 @@ router.get('/transfer/remove', auth, function (req, res, next) {
     });
 });
 
+router.post('/transfer-sort', auth, function (req, res, next) {
+    var sorts = JSON.parse(req.body.data);
+    sorts.forEach((sort, index) => {
+        Transfer.findOneAndUpdate({ _id: sort.id }, { sort: sort.sort }, function (err, doc) {
+            if (err) {
+                return res.json({ status: "failed" });
+            }
+        });
+    });
+    res.json({ status: "success" });
+});
+
 router.get('/show', auth, function (req, res, next) {
-    Show.find({}).sort({ updated_at: -1 }).exec(function (err, shows) {
+    Show.find({}).sort({ sort: 1 }).exec(function (err, shows) {
         res.render('controller/show', {
             layout: 'controller/layout',
             title: '买家秀',
@@ -432,8 +480,20 @@ router.get('/show/active', auth, function (req, res, next) {
     });
 });
 
+router.post('/show-sort', auth, function (req, res, next) {
+    var sorts = JSON.parse(req.body.data);
+    sorts.forEach((sort, index) => {
+        Show.findOneAndUpdate({ _id: sort.id }, { sort: sort.sort }, function (err, doc) {
+            if (err) {
+                return res.json({ status: "failed" });
+            }
+        });
+    });
+    res.json({ status: "success" });
+});
+
 router.get('/hotsearch', auth, function (req, res, next) {
-    Search.find({}).sort({times: -1}).exec(function (err, searchs) {
+    Search.find({}).sort({ sort: 1 }).exec(function (err, searchs) {
         if (err) next(err);
         else {
             res.render('controller/hotsearch', {
@@ -464,8 +524,20 @@ router.get('/hotsearch/active', auth, function (req, res, next) {
     });
 });
 
+router.post('/hotsearch-sort', auth, function (req, res, next) {
+    var sorts = JSON.parse(req.body.data);
+    sorts.forEach((sort, index) => {
+        Search.findOneAndUpdate({ _id: sort.id }, { sort: sort.sort }, function (err, doc) {
+            if (err) {
+                return res.json({ status: "failed" });
+            }
+        });
+    });
+    res.json({ status: "success" });
+});
+
 router.get('/slide', auth, function (req, res, next) {
-    Slide.find({}).sort({ updated_at: -1 }).exec(function (err, slides) {
+    Slide.find({}).sort({ sort: 1 }).exec(function (err, slides) {
         res.render('controller/slide', {
             layout: 'controller/layout',
             title: '首页轮播',
@@ -563,6 +635,18 @@ router.get('/slide/remove', auth, function (req, res, next) {
             return res.redirect('/controller/slide');
         }
     });
+});
+
+router.post('/slide-sort', auth, function (req, res, next) {
+    var sorts = JSON.parse(req.body.data);
+    sorts.forEach((sort, index) => {
+        Slide.findOneAndUpdate({ _id: sort.id }, { sort: sort.sort }, function (err, doc) {
+            if (err) {
+                return res.json({ status: "failed" });
+            }
+        });
+    });
+    res.json({ status: "success" });
 });
 
 module.exports = router;

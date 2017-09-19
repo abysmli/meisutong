@@ -12,6 +12,7 @@ var ShowSchema = new mongoose.Schema({
         type: Boolean,
         default: false
     },
+    sort:Number,
     updated_at: { type: Date, default: Date.now }
 });
 

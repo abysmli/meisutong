@@ -7,6 +7,7 @@ var ServiceSchema = new mongoose.Schema({
     description: String,
     content: String,
     img: String,
+    sort:Number,
     updated_at: { type: Date, default: Date.now }
 });
 

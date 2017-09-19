@@ -62,6 +62,7 @@
                     <th>分类</th>
                     <th>连接</th>
                     <th>商量数量</th>
+                    <th>排列顺序</th>
                     <th>写入时间</th>
                     <th>操作</th>
                 </tr>
@@ -73,6 +74,7 @@
                     <th>分类</th>
                     <th>连接</th>
                     <th>商量数量</th>
+                    <th>排列顺序</th>
                     <th>写入时间</th>
                     <th>操作</th>
                 </tr>
@@ -96,6 +98,9 @@
                             <%= shoptutorial.ProductCount %>
                         </td>
                         <td>
+                            <%= shoptutorial.sort + 1 %>
+                        </td>
+                        <td>
                             <%= (new Date(shoptutorial.updated_at)).toLocaleString("en-US", {timeZone: "Asia/Shanghai"}) %>
                         </td>
                         <td>
@@ -107,6 +112,19 @@
                 <% }) %>
             </tbody>
         </table>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-4">
+        <h3>排列次序</h3>
+        <ul id="sortable" class="list-group">
+            <% shoptutorials.forEach(function(shoptutorial, index) { %>
+                <li class="list-group-item" id="<%= shoptutorial._id %>"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>
+                    <%= shoptutorial.ShopTitle %>
+                </li>
+            <% }) %>
+        </ul>
     </div>
 </div>
 
@@ -127,6 +145,48 @@
             ],
             stateSave: true,
         });
+        $("#sortable").sortable({
+            placeholder: "ui-state-highlight",
+            update: function (event, ui) {
+                var sortedIDs = $("#sortable").sortable("toArray");
+                var data = [];
+                sortedIDs.forEach(function (sortid, index) {
+                    data.push({ id: sortid, sort: index });
+                });
+                sendAjax('/controller/shoptutorial-sort', { data: JSON.stringify(data) }, function (result) {
+                    if (result.status == "success") {
+                        $.notify({
+                            message: '成功更新排列顺序！'
+                        }, {
+                                type: 'success',
+                                placement: {
+                                    from: "top",
+                                    align: "center"
+                                },
+                                animate: {
+                                    enter: 'animated fadeInDown',
+                                    exit: 'animated fadeOutUp'
+                                },
+                            });
+                    } else {
+                        $.notify({
+                            message: '更新排列顺序失败！'
+                        }, {
+                                type: 'danger',
+                                placement: {
+                                    from: "top",
+                                    align: "center"
+                                },
+                                animate: {
+                                    enter: 'animated fadeInDown',
+                                    exit: 'animated fadeOutUp'
+                                },
+                            });
+                    }
+                });
+            }
+        });
+        $("#sortable").disableSelection();
     });
 
 </script>

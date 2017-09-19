@@ -6,6 +6,7 @@ var SlideSchema = new mongoose.Schema({
     title: String,
     description: String,
     img: String,
+    sort:Number,
     updated_at: { type: Date, default: Date.now }
 });
 

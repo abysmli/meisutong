@@ -2,51 +2,68 @@
     <h1><%= title %> <small> | 共计 <%= transfers.length %> 个转运路线</small></h1>
     <a class="btn btn-warning btn-sm" href="/controller/transfer/add">添加一个转运路线</a>
 </div>
-<table id="transfer_table" class="table table-striped table-bordered table-hover" cellspacing="0" width="100%">
-    <thead>
-        <tr>
-            <th>标题</th>
-            <th>路线</th>
-            <th>说明</th>
-            <th>添加时间</th>
-            <th>操作</th>
-        </tr>
-    </thead>
-    <tfoot>
-        <tr>
-            <th>标题</th>
-            <th>路线</th>
-            <th>说明</th>
-            <th>添加时间</th>
-            <th>操作</th>
-        </tr>
-    </tfoot>
-    <tbody>
-        <% transfers.forEach(function(transfer, index) { %>
+<div class="col-md-9">
+    <table id="transfer_table" class="table table-striped table-bordered table-hover" cellspacing="0" width="100%">
+        <thead>
             <tr>
-                <td>
-                    <%= transfer.title %>
-                </td>
-                <td>
-                    <%= transfer.path %>
-                </td>
-                <td>
-                    <%= transfer.description %>
-                </td>
-                <td>
-                    <%= (new Date(transfer.updated_at)).toLocaleString("en-US", {timeZone: "Asia/Shanghai"}) %>
-                </td>
-                <td>
-                    <a type="button" class="btn btn-default" href="/controller/transfer/edit?id=<%= transfer._id %>"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a>
-                    <a type="button" class="btn btn-default" href="/controller/transfer/remove?id=<%= transfer._id %>"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a>
-                </td>
+                <th>标题</th>
+                <th>路线</th>
+                <th>说明</th>
+                <th>排列顺序</th>
+                <th>添加时间</th>
+                <th>操作</th>
             </tr>
+        </thead>
+        <tfoot>
+            <tr>
+                <th>标题</th>
+                <th>路线</th>
+                <th>说明</th>
+                <th>排列顺序</th>
+                <th>添加时间</th>
+                <th>操作</th>
+            </tr>
+        </tfoot>
+        <tbody>
+            <% transfers.forEach(function(transfer, index) { %>
+                <tr>
+                    <td>
+                        <%= transfer.title %>
+                    </td>
+                    <td>
+                        <%= transfer.path %>
+                    </td>
+                    <td>
+                        <%= transfer.description %>
+                    </td>
+                    <td>
+                        <%= transfer.sort + 1 %>
+                    </td>
+                    <td>
+                        <%= (new Date(transfer.updated_at)).toLocaleString("en-US", {timeZone: "Asia/Shanghai"}) %>
+                    </td>
+                    <td>
+                        <a type="button" class="btn btn-default" href="/controller/transfer/edit?id=<%= transfer._id %>"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a>
+                        <a type="button" class="btn btn-default" href="/controller/transfer/remove?id=<%= transfer._id %>"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a>
+                    </td>
+                </tr>
+            <% }) %>
+        </tbody>
+    </table>
+</div>
+<div class="col-md-3">
+    <h3>排列次序</h3>
+    <ul id="sortable" class="list-group">
+        <% transfers.forEach(function(transfer, index) { %>
+            <li class="list-group-item" id="<%= transfer._id %>"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>
+                <%= transfer.title %> <span class="glyphicon glyphicon-chevron-right"></span> <%= transfer.path %>
+            </li>
         <% }) %>
-    </tbody>
-</table>
+    </ul>
+</div>
 
 <script>
-    $(transferument).ready(function () {
+    $(document).ready(function () {
         $("#transfer_page").addClass("active");
         var dt = $('#transfer_table').DataTable({
             lengthMenu: [
@@ -55,5 +72,47 @@
             ],
             stateSave: true,
         });
+        $("#sortable").sortable({
+            placeholder: "ui-state-highlight",
+            update: function (event, ui) {
+                var sortedIDs = $("#sortable").sortable("toArray");
+                var data = [];
+                sortedIDs.forEach(function (sortid, index) {
+                    data.push({ id: sortid, sort: index });
+                });
+                sendAjax('/controller/transfer-sort', { data: JSON.stringify(data) }, function (result) {
+                    if (result.status == "success") {
+                        $.notify({
+                            message: '成功更新排列顺序！'
+                        }, {
+                                type: 'success',
+                                placement: {
+                                    from: "top",
+                                    align: "center"
+                                },
+                                animate: {
+                                    enter: 'animated fadeInDown',
+                                    exit: 'animated fadeOutUp'
+                                },
+                            });
+                    } else {
+                        $.notify({
+                            message: '更新排列顺序失败！'
+                        }, {
+                                type: 'danger',
+                                placement: {
+                                    from: "top",
+                                    align: "center"
+                                },
+                                animate: {
+                                    enter: 'animated fadeInDown',
+                                    exit: 'animated fadeOutUp'
+                                },
+                            });
+                    }
+                });
+            }
+        });
+        $("#sortable").disableSelection();
     });
 </script>

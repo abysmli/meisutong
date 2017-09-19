@@ -6,6 +6,7 @@ var DocSchema = new mongoose.Schema({
     title: String,
     description: String,
     content: String,
+    sort: Number,
     updated_at: { type: Date, default: Date.now }
 });
 

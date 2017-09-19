@@ -19,13 +19,13 @@ var TrackingmoreAPIKey = "464031ea-ff09-4a31-8ec7-b07e99d5ecee";
 
 /* GET home page. */
 router.get('/', function (req, res, next) {
-  Service.find({}).sort({ updated_at: 1 }).exec(function (err, services) {
-    Doc.find({}).sort({ updated_at: -1 }).exec(function (err, docs) {
-      Transfer.find({}).sort({ updated_at: -1 }).exec(function (err, transfers) {
-        Show.find({ active: true }).sort({ updated_at: -1 }).exec(function (err, shows) {
-          Slide.find({}).sort({ updated_at: -1 }).exec(function (err, slides) {
-            Notiz.findOne({}).sort({ updated_at: -1 }).exec(function (err, notification) {
-              Search.find({ active: true }).sort({ times: -1 }).limit(20).exec(function (err, hotsearchs) {
+  Service.find({}).sort({ sort: 1 }).exec(function (err, services) {
+    Doc.find({}).sort({ sort: 1 }).exec(function (err, docs) {
+      Transfer.find({}).sort({ sort: 1 }).exec(function (err, transfers) {
+        Show.find({ active: true }).sort({ sort: 1 }).exec(function (err, shows) {
+          Slide.find({}).sort({ sort: 1 }).exec(function (err, slides) {
+            Notiz.findOne({}).sort({ sort: 1 }).exec(function (err, notification) {
+              Search.find({ active: true }).sort({ sort: 1 }).limit(20).exec(function (err, hotsearchs) {
                 var paths = [], path;
                 transfers.forEach(function (transfer, index) {
                   if (path != transfer.path) {
@@ -57,10 +57,10 @@ router.get('/', function (req, res, next) {
 
 router.get('/service', function (req, res, next) {
   Service.findById(req.query.id, function (err, service) {
-    Service.find({}).sort({ updated_at: 1 }).exec(function (err, services) {
-      Doc.find({}).sort({ updated_at: -1 }).exec(function (err, docs) {
-        Transfer.find({}).sort({ updated_at: -1 }).exec(function (err, transfers) {
-          Search.find({ active: true }).sort({ times: -1 }).limit(20).exec(function (err, hotsearchs) {
+    Service.find({}).sort({ sort: 1 }).exec(function (err, services) {
+      Doc.find({}).sort({ sort: 1 }).exec(function (err, docs) {
+        Transfer.find({}).sort({ sort: 1 }).exec(function (err, transfers) {
+          Search.find({ active: true }).sort({ sort: 1 }).limit(20).exec(function (err, hotsearchs) {
             var paths = [], path;
             transfers.forEach(function (transfer, index) {
               if (path != transfer.path) {
@@ -87,9 +87,9 @@ router.get('/service', function (req, res, next) {
 
 router.get('/doc', function (req, res, next) {
   Doc.findById(req.query.id, function (err, doc) {
-    Doc.find({}).sort({ updated_at: -1 }).exec(function (err, docs) {
-      Transfer.find({}).sort({ updated_at: -1 }).exec(function (err, transfers) {
-        Search.find({ active: true }).sort({ times: -1 }).limit(20).exec(function (err, hotsearchs) {
+    Doc.find({}).sort({ sort: 1 }).exec(function (err, docs) {
+      Transfer.find({}).sort({ sort: 1 }).exec(function (err, transfers) {
+        Search.find({ active: true }).sort({ sort: 1 }).limit(20).exec(function (err, hotsearchs) {
           var paths = [], path;
           transfers.forEach(function (transfer, index) {
             if (path != transfer.path) {
@@ -115,9 +115,9 @@ router.get('/doc', function (req, res, next) {
 
 router.get('/transfer', function (req, res, next) {
   Transfer.findById(req.query.id, function (err, transfer) {
-    Doc.find({}).sort({ updated_at: -1 }).exec(function (err, docs) {
-      Transfer.find({}).sort({ updated_at: -1 }).exec(function (err, transfers) {
-        Search.find({ active: true }).sort({ times: -1 }).limit(20).exec(function (err, hotsearchs) {
+    Doc.find({}).sort({ sort: 1 }).exec(function (err, docs) {
+      Transfer.find({}).sort({ sort: 1 }).exec(function (err, transfers) {
+        Search.find({ active: true }).sort({ sort: 1 }).limit(20).exec(function (err, hotsearchs) {
           var paths = [], path;
           transfers.forEach(function (transfer, index) {
             if (path != transfer.path) {
@@ -144,9 +144,9 @@ router.get('/transfer', function (req, res, next) {
 router.get('/shoptutorial', function (req, res, next) {
   if (req.query.id) {
     ShopTutorial.findById(req.query.id, function (err, shoptutorial) {
-      Doc.find({}).sort({ updated_at: -1 }).exec(function (err, docs) {
-        Transfer.find({}).sort({ updated_at: -1 }).exec(function (err, transfers) {
-          Search.find({ active: true }).sort({ times: -1 }).limit(20).exec(function (err, hotsearchs) {
+      Doc.find({}).sort({ sort: 1 }).exec(function (err, docs) {
+        Transfer.find({}).sort({ sort: 1 }).exec(function (err, transfers) {
+          Search.find({ active: true }).sort({ sort: 1 }).limit(20).exec(function (err, hotsearchs) {
             var paths = [], path;
             transfers.forEach(function (transfer, index) {
               if (path != transfer.path) {
@@ -169,10 +169,10 @@ router.get('/shoptutorial', function (req, res, next) {
       });
     });
   } else {
-    Doc.find({}).sort({ updated_at: -1 }).exec(function (err, docs) {
-      Transfer.find({}).sort({ updated_at: -1 }).exec(function (err, transfers) {
-        ShopTutorial.find({}).sort({ updated_at: -1 }).exec(function (err, shoptutorials) {
-          Search.find({ active: true }).sort({ times: -1 }).limit(20).exec(function (err, hotsearchs) {
+    Doc.find({}).sort({ sort: 1 }).exec(function (err, docs) {
+      Transfer.find({}).sort({ sort: 1 }).exec(function (err, transfers) {
+        ShopTutorial.find({}).sort({ sort: 1 }).exec(function (err, shoptutorials) {
+          Search.find({ active: true }).sort({ sort: 1 }).limit(20).exec(function (err, hotsearchs) {
             let paths = [], path, categorys = [], category;
             transfers.forEach(function (transfer, index) {
               if (path != transfer.path) {
@@ -205,10 +205,10 @@ router.get('/shoptutorial', function (req, res, next) {
 });
 
 router.get('/aboutus', function (req, res, next) {
-  Doc.find({}).sort({ updated_at: -1 }).exec(function (err, docs) {
-    Transfer.find({}).sort({ updated_at: -1 }).exec(function (err, transfers) {
-      Search.find({ active: true }).sort({ times: -1 }).limit(20).exec(function (err, hotsearchs) {
-        About.findOne({}).sort({ updated_at: -1 }).exec(function (err, about) {
+  Doc.find({}).sort({ sort: 1 }).exec(function (err, docs) {
+    Transfer.find({}).sort({ sort: 1 }).exec(function (err, transfers) {
+      Search.find({ active: true }).sort({ sort: 1 }).limit(20).exec(function (err, hotsearchs) {
+        About.findOne({}).exec(function (err, about) {
           if (err) next(err);
           else {
             var paths = [], path;
@@ -236,10 +236,10 @@ router.get('/aboutus', function (req, res, next) {
 });
 
 router.get('/login', function (req, res, next) {
-  Service.find({}).sort({ updated_at: 1 }).exec(function (err, services) {
-    Doc.find({}).sort({ updated_at: -1 }).exec(function (err, docs) {
-      Transfer.find({}).sort({ updated_at: -1 }).exec(function (err, transfers) {
-        Search.find({ active: true }).sort({ times: -1 }).limit(20).exec(function (err, hotsearchs) {
+  Service.find({}).sort({ sort: 1 }).exec(function (err, services) {
+    Doc.find({}).sort({ sort: 1 }).exec(function (err, docs) {
+      Transfer.find({}).sort({ sort: 1 }).exec(function (err, transfers) {
+        Search.find({ active: true }).sort({ sort: 1 }).limit(20).exec(function (err, hotsearchs) {
           var paths = [], path;
           transfers.forEach(function (transfer, index) {
             if (path != transfer.path) {
@@ -275,9 +275,9 @@ router.get('/comingsoon', function (req, res, next) {
 
 router.all('/searchProduct', function (req, res, next) {
   let keywords = req.body.search || req.query.search;
-  Doc.find({}).sort({ updated_at: -1 }).exec(function (err, docs) {
-    Transfer.find({}).sort({ updated_at: -1 }).exec(function (err, transfers) {
-      Search.find({ active: true }).sort({ times: -1 }).limit(20).exec(function (err, hotsearchs) {
+  Doc.find({}).sort({ sort: 1 }).exec(function (err, docs) {
+    Transfer.find({}).sort({ sort: 1 }).exec(function (err, transfers) {
+      Search.find({ active: true }).sort({ sort: 1 }).limit(20).exec(function (err, hotsearchs) {
         Allhaha.searchProduct(keywords, (err, products) => {
           if (err) next(err);
           else {
@@ -376,9 +376,9 @@ router.post('/track', function (req, res, next) {
 });
 
 router.get('/contactus', function (req, res, next) {
-  Doc.find({}).sort({ updated_at: -1 }).exec(function (err, docs) {
-    Transfer.find({}).sort({ updated_at: -1 }).exec(function (err, transfers) {
-      Search.find({ active: true }).sort({ times: -1 }).limit(20).exec(function (err, hotsearchs) {
+  Doc.find({}).sort({ sort: 1 }).exec(function (err, docs) {
+    Transfer.find({}).sort({ sort: 1 }).exec(function (err, transfers) {
+      Search.find({ active: true }).sort({ sort: 1 }).limit(20).exec(function (err, hotsearchs) {
         if (err) next(err);
         else {
           var paths = [], path;
@@ -568,10 +568,10 @@ router.get('/cgi-bin/GInfo.dll', (req, res, next) => {
                   }
                 }
               }
-              Service.find({}).sort({ updated_at: 1 }).exec(function (err, services) {
-                Doc.find({}).sort({ updated_at: -1 }).exec(function (err, docs) {
-                  Transfer.find({}).sort({ updated_at: -1 }).exec(function (err, transfers) {
-                    Search.find({ active: true }).sort({ times: -1 }).limit(20).exec(function (err, hotsearchs) {
+              Service.find({}).sort({ sort: 1 }).exec(function (err, services) {
+                Doc.find({}).sort({ sort: 1 }).exec(function (err, docs) {
+                  Transfer.find({}).sort({ sort: 1 }).exec(function (err, transfers) {
+                    Search.find({ active: true }).sort({ sort: 1 }).limit(20).exec(function (err, hotsearchs) {
                       var paths = [], path;
                       transfers.forEach(function (transfer, index) {
                         if (path != transfer.path) {
