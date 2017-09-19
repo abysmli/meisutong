@@ -24,7 +24,7 @@ router.get('/', function (req, res, next) {
       Transfer.find({}).sort({ sort: 1 }).exec(function (err, transfers) {
         Show.find({ active: true }).sort({ sort: 1 }).exec(function (err, shows) {
           Slide.find({}).sort({ sort: 1 }).exec(function (err, slides) {
-            Notiz.findOne({}).sort({ sort: 1 }).exec(function (err, notification) {
+            Notiz.findOne({}).sort({ updated_at: -1 }).exec(function (err, notification) {
               Search.find({ active: true }).sort({ sort: 1 }).limit(20).exec(function (err, hotsearchs) {
                 var paths = [], path;
                 transfers.forEach(function (transfer, index) {
