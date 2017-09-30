@@ -11,6 +11,7 @@ var Notiz = require('../models/notification');
 var About = require('../models/about');
 var Search = require('../models/search');
 var Exchange = require('../models/exchange');
+var Track = require('../models/track');
 var sendMail = require('../utils/sendMail');
 var EmailSender = new sendMail();
 var allhaha = require('../utils/allhahaAPI');
@@ -320,7 +321,9 @@ router.post('/track', function (req, res, next) {
   request.post({ url: 'http://de.99mst.com/cgi-bin/GInfo.dll', form: req.body, json: true }, function (err, httpResponse, body) {
     if (body) {
       if (body.ReturnValue == '100') {
-        let trackingnumber = body.Response_Info.transNbr;
+        console.log("GInfo: ");
+        console.log(body);
+        let trackingnumber = body.Response_Info.transNbr || body.Response_Info.Number_t;
         let code, carrier;
         if (trackingnumber.length == 13) {
           code = 'china-post';
@@ -343,14 +346,12 @@ router.post('/track', function (req, res, next) {
           code: code,
           carrier: carrier
         };
-        request.post({
-          url: 'http://chaoxun-international.com:3000/Request-Transfer-Post', json: true, body: body.ChinaPart
-        }, function (err, httpResponse, responseBody) {
-          console.log(responseBody);
-          setTimeout(() => {
+        Track.findOne({ trackingnumber: trackingnumber }, function (err, track) {
+          if (track) {
             request.post({
               url: 'http://chaoxun-international.com:3000/Request-Transfer-Tracking', json: true, body: body.ChinaPart
             }, function (err, httpResponse, _body) {
+              console.log("Transfer-Tracking (Local): ");
               console.log(_body);
               if (_body) {
                 if (_body.data) {
@@ -364,7 +365,40 @@ router.post('/track', function (req, res, next) {
               }
               res.json(body);
             });
-          }, 7000);
+          } else {
+            request.post({
+              url: 'http://chaoxun-international.com:3000/Request-Transfer-Post', json: true, body: body.ChinaPart
+            }, function (err, httpResponse, responseBody) {
+              console.log("Transfer-Post: ");
+              console.log(responseBody);
+              if (responseBody) {
+                if (responseBody.meta) {
+                  if (responseBody.meta.code === 200 || responseBody.meta.code == 4016) {
+                    Track.create(body.ChinaPart, (err, doc) => { });
+                  }
+                }
+              }
+              setTimeout(() => {
+                request.post({
+                  url: 'http://chaoxun-international.com:3000/Request-Transfer-Tracking', json: true, body: body.ChinaPart
+                }, function (err, httpResponse, _body) {
+                  console.log("Transfer-Tracking: ");
+                  console.log(_body);
+                  if (_body) {
+                    if (_body.data) {
+                      if (_body.data.origin_info) {
+                        if (_body.data.origin_info.trackinfo) {
+                          _body.data.origin_info.trackinfo.reverse()
+                          body.ChinaPart.info = _body.data;
+                        }
+                      }
+                    }
+                  }
+                  res.json(body);
+                });
+              }, 7000);
+            });
+          }
         });
       } else {
         res.json(body);
@@ -525,8 +559,10 @@ router.get('/cgi-bin/GInfo.dll', (req, res, next) => {
         '10': '错误',
       }
       if (body.ReturnValue == '100') {
+        console.log("GInfo: ");
+        console.log(body);
         body.Response_Info.statusDetails = statusCode[body.Response_Info.status];
-        let trackingnumber = body.Response_Info.transNbr;
+        let trackingnumber = body.Response_Info.transNbr || body.Response_Info.Number_t;
         let code, carrier;
         if (trackingnumber.length == 13) {
           code = 'china-post';
@@ -549,14 +585,12 @@ router.get('/cgi-bin/GInfo.dll', (req, res, next) => {
           code: code,
           carrier: carrier
         };
-        request.post({
-          url: 'http://chaoxun-international.com:3000/Request-Transfer-Post', json: true, body: body.ChinaPart
-        }, function (err, httpResponse, responseBody) {
-          console.log(responseBody);
-          setTimeout(() => {
+        Track.findOne({ trackingnumber: trackingnumber }, function (err, track) {
+          if (track) {
             request.post({
               url: 'http://chaoxun-international.com:3000/Request-Transfer-Tracking', json: true, body: body.ChinaPart
             }, function (err, httpResponse, _body) {
+              console.log("Transfer-Tracking (Local): ");
               console.log(_body);
               if (_body) {
                 if (_body.data) {
@@ -595,7 +629,65 @@ router.get('/cgi-bin/GInfo.dll', (req, res, next) => {
                 });
               });
             });
-          }, 7000);
+          } else {
+            request.post({
+              url: 'http://chaoxun-international.com:3000/Request-Transfer-Post', json: true, body: body.ChinaPart
+            }, function (err, httpResponse, responseBody) {
+              console.log("Transfer-Post: ");
+              console.log(responseBody);
+              if (responseBody) {
+                if (responseBody.meta) {
+                  if (responseBody.meta.code === 200 || responseBody.meta.code == 4016) {
+                    Track.create(body.ChinaPart, (err, doc) => { });
+                  }
+                }
+              }
+              setTimeout(() => {
+                request.post({
+                  url: 'http://chaoxun-international.com:3000/Request-Transfer-Tracking', json: true, body: body.ChinaPart
+                }, function (err, httpResponse, _body) {
+                  console.log("Transfer-Tracking: ");
+                  console.log(_body);
+                  if (_body) {
+                    if (_body.data) {
+                      if (_body.data.origin_info) {
+                        if (_body.data.origin_info.trackinfo) {
+                          _body.data.origin_info.trackinfo.reverse()
+                          body.ChinaPart.info = _body.data;
+                        }
+                      }
+                    }
+                  }
+                  Service.find({}).sort({ sort: 1 }).exec(function (err, services) {
+                    Doc.find({}).sort({ sort: 1 }).exec(function (err, docs) {
+                      Transfer.find({}).sort({ sort: 1 }).exec(function (err, transfers) {
+                        Search.find({ active: true }).sort({ sort: 1 }).limit(20).exec(function (err, hotsearchs) {
+                          var paths = [], path;
+                          transfers.forEach(function (transfer, index) {
+                            if (path != transfer.path) {
+                              paths.push(transfer.path);
+                              path = transfer.path;
+                            }
+                          });
+                          res.render('frontend/tracking', {
+                            title: "物流追踪",
+                            description: "美速通转运网-致力于成为中国最专业的转运公司！本公司位于洛杉矶，主要经营北美到中国大陆的传统国际快递、以及国际电子商务仓储、物流及相关业务，为德淘人士、欧洲购物、欧淘、德淘转运、德淘海外代购公司、以及德淘代购个人提供一个优秀的转运平台。",
+                            keywords: "德淘转运，德淘，欧洲购物,欧淘，德淘之家，德淘网，美速通，德淘攻略",
+                            data: body,
+                            services: services,
+                            docs: docs,
+                            paths: paths,
+                            transfers: transfers,
+                            hotsearchs: hotsearchs,
+                          });
+                        });
+                      });
+                    });
+                  });
+                });
+              }, 7000);
+            });
+          }
         });
       } else {
         res.json(body);
