@@ -9,6 +9,14 @@
  */
 var transfertype = "";
 
+function AmazonConvert() {
+	let url = $("#amazon-url").val() + "&tag=allhaha-21&subid=meisutong";
+	window.open(url, '_blank');
+	// $('#amazon-iframe').attr('src', url);
+	// $('#amazonModal').modal('show');
+	// $('#amazon-iframe').load(url);
+}
+
 function setTrack(type) {
 	transfertype = type;
 	$("#transfer-type").text(type == "MST" ? "美速通速运" : type == "Euro" ? "欧洲段物流" : "国内段物流");
@@ -185,12 +193,12 @@ function doTrack() {
 }
 
 $(document).ready(function () {
-	$.get("/currencyExchange", function(exchange) {
+	$.get("/currencyExchange", function (exchange) {
 		$("#exchange").text(exchange);
 	});
 	"use strict";
 
-	$("#tracking-form").submit(function(e) {
+	$("#tracking-form").submit(function (e) {
 		doTrack();
 		return false;
 	});
